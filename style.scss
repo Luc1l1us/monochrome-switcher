@@ -18,3 +18,31 @@ window.Bar {
     margin: 2px;
   }
 }
+
+window.Box {
+  border: 1px solid rgba(255,255,255,0.5);
+  padding-top: 950px;
+  padding-right: 300px;
+  margin-top: 30px;
+  margin-right: 20px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.5);
+  color: #ffffff;
+  font-weight: bold;
+
+  > ChatHeadFrame {
+    border-radius: 8px;
+    margin: 2px;
+  }
+
+  > centerbox {
+    background: transparent;
+    border-radius: 10px;
+    margin: 8px;
+  }
+
+  button {
+    border-radius: 8px;
+    margin: 2px;
+  }
+}
