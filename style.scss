@@ -2,27 +2,8 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
-window.Bar {
-  background: transparent;
-  color: $fg-color;
-  font-weight: bold;
-
-  > centerbox {
-    background: $bg-color;
-    border-radius: 10px;
-    margin: 8px;
-  }
-
-  button {
-    border-radius: 8px;
-    margin: 2px;
-  }
-}
-
 window.Box {
   border: 1px solid rgba(255,255,255,0.5);
-  padding-top: 950px;
-  padding-right: 300px;
   margin-top: 30px;
   margin-right: 20px;
   border-radius: 8px;
@@ -30,16 +11,24 @@ window.Box {
   color: #ffffff;
   font-weight: bold;
 
-  > ChatHeadFrame {
-    border-radius: 8px;
-    margin: 2px;
+  box.ChatHeadFrame {
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 300px 20px;
+    margin: 10px;
   }
 
-  > centerbox {
-    background: transparent;
-    border-radius: 10px;
-    margin: 8px;
+  box.TitleFrame {
+    padding: 10px 20px 10px;
+    border: 1px solid rgba(255,255,255,0.5);
+    margin: 10px 10px 0 0;
   }
+
+  box.ChatFrame {
+    border: 1px solid rgba(255,255,255,0.5);
+    margin: 10px 10px 10px 0;
+    padding: 20px 300px 900px 20px;
+  }
+
 
   button {
     border-radius: 8px;

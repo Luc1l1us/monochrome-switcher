@@ -16,20 +16,20 @@ export default function Panel(gdkmonitor: Gdk.Monitor) {
       anchor={RIGHT}
       application={app}
     >
-      <box cssName="centerbox">
-        <box cssName="ChatHeadFrame">
-          {label}
+      <box>
+      <box class="ChatHeadFrame">
+        CHFrame
+      </box>
+      <box
+          orientation={Gtk.Orientation.VERTICAL}
+          class="MainChatFrame">
+        <box class="TitleFrame">
+          ChatTitleFrame
         </box>
-        <button>
-          <label label="Welcome to AGS!" />
-        </button>
-        <box $type="center" />
-        <menubutton $type="end" hexpand halign={Gtk.Align.CENTER}>
-          <label label={label} />
-          <popover>
-            <Gtk.Calendar />
-          </popover>
-        </menubutton>
+        <box class="ChatFrame">
+          ChatFrame
+        </box>
+      </box>
       </box>
     </window>
   )
