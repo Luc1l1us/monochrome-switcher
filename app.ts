@@ -1,12 +1,12 @@
 import app from "ags/gtk4/app"
 import style from "./style.scss"
 import Bar from "./widget/Bar"
-import Panel from "./widget/Panel"
+import Dashboard from "./widget/Dashboard"
 
 app.start({
   css: style,
   main() {
     //app.get_monitors().map(Bar)
-    app.get_monitors().map(Panel)
+    app.get_monitors().map(Dashboard)
   },
 })

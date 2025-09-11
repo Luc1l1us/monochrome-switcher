@@ -3,32 +3,103 @@ $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
 window.Box {
+  font-family: JetBrains Mono;
   border: 1px solid rgba(255,255,255,0.5);
   margin-top: 30px;
   margin-right: 20px;
   border-radius: 8px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   color: #ffffff;
   font-weight: bold;
 
-  box.ChatHeadFrame {
+// ChatHeadFrame
+  box.ChatHead {
     border: 1px solid rgba(255,255,255,0.5);
-    padding: 300px 20px;
     margin: 10px;
   }
 
+  box.ChatHeadTitle {
+    margin: 10px;
+    font-size: x-large;
+    padding: 10px 100px;
+  }
+
+  box.UpperSelection {
+    padding-bottom: 600px;
+
+  }
+
+  box.UpperSelection, box.LowerSelection {
+    padding: 50px;
+  }
+
+  box.UpperSelection > box {
+    padding: 10px 5px;
+  }
+
+  box.LowerSelection > box {
+    padding: 10px 5px;
+  }
+
+  box.UpperSelection > box:hover, box.LowerSelection > box:hover {
+    border-radius: 5px;
+    background: #535353;
+  }
+
+//Avatar Frame and Additions
+  box.AvatarFrame{
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 0 100px 100px 0;
+  }
+
+  box.AvatarPlaceholder {
+    margin: 0 0 0 10px;
+  }
+
+  box.Logout, box.Add {
+    margin: 0 10px 10px 10px;
+    padding: 0 100px 50px 0;
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+
+//Title Frame
   box.TitleFrame {
+    color: #404040;
     padding: 10px 20px 10px;
     border: 1px solid rgba(255,255,255,0.5);
     margin: 10px 10px 0 0;
   }
 
+//ChatFrame
   box.ChatFrame {
     border: 1px solid rgba(255,255,255,0.5);
     margin: 10px 10px 10px 0;
-    padding: 20px 300px 900px 20px;
+    padding: 0px 30px 350px 20px;
   }
 
+  box.Title {
+    margin-top: 30px;
+    font-size: xx-large;
+  }
+
+  box.SubTitle {
+    font-size: large;
+  }
+
+  box.FirstCardColumn, box.SecondCardColumn {
+    margin-top: 40px;
+  }
+
+  box.SecondCardColumn {
+    margin-left: 10px;
+  }
+
+  box.FirstCard, box.SecondCard, box.ThirdCard {
+    padding: 80px 60px;
+    margin-top: 30px;
+    border-radius: 5px;
+    background: #383838;
+  }
 
   button {
     border-radius: 8px;
