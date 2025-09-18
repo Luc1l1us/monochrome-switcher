@@ -4,7 +4,7 @@ import { execAsync } from "ags/process"
 
 export default function Dashboard(gdkmonitor: Gdk.Monitor) {
   const {RIGHT} = Astal.WindowAnchor
-  const label = "TEST"
+  const house_icon = './icons/house-icon.png'
 
   return (
   <window
@@ -29,12 +29,24 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
               <box class="UpperSelection"
                 orientation={Gtk.Orientation.VERTICAL}>
                 <box>
+                  <image
+                    file="/home/Dizzy/monochrome-switcher/widget/icons/house-icon.png"
+                    pixelSize={25}
+                    class="house-icon"/>
                   Home
                 </box>
                 <box>
+                  <image
+                    file="/home/Dizzy/monochrome-switcher/widget/icons/profile-selection.png"
+                    pixelSize={23}
+                    class="house-icon"/>
                   AI Selection
                 </box>
                 <box>
+                  <image
+                    file="/home/Dizzy/monochrome-switcher/widget/icons/history.png"
+                    pixelSize={25}
+                    class="house-icon"/>
                   History
                 </box>
               </box>
@@ -55,15 +67,34 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
           </box>
           <box class="AvatarPlaceholder">
             <box class="AvatarFrame">
-              AvatarFrame
+              <box class="Avatar">
+                <image
+                  file="/home/Dizzy/monochrome-switcher/widget/icons/ProfilePic.png"
+                  class="ProfilePic"
+                  pixelSize={70}
+                />
+              </box>
+              <box class="NameBoxes"
+              orientation={Gtk.Orientation.VERTICAL}>
+                <box class="Name">
+                  Dizzy
+                </box>
+                <box>
+                  dummyemail@mono.com
+                </box>
+              </box>
             </box>
             <box class="AdditionalFrames"
               orientation={Gtk.Orientation.VERTICAL}>
               <box class="Logout">
-                Logout
+                <image
+                  pixelSize={40}
+                  file="/home/Dizzy/monochrome-switcher/widget/icons/logout.png"/>
               </box>
               <box class="Add">
-                Add
+                <image
+                  pixelSize={40}
+                  file="/home/Dizzy/monochrome-switcher/widget/icons/add.png"/>
               </box>
             </box>
           </box>
