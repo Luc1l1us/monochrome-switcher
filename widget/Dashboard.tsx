@@ -4,7 +4,6 @@ import { execAsync } from "ags/process"
 
 export default function Dashboard(gdkmonitor: Gdk.Monitor) {
   const {RIGHT} = Astal.WindowAnchor
-  const house_icon = './icons/house-icon.png'
 
   return (
   <window
@@ -120,18 +119,45 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
         <box class="Columns">
           <box class="FirstCardColumn"
             orientation={Gtk.Orientation.VERTICAL}>
-              <box class="FirstCard">
-                Start a New Multi-Agent
+              <box class="FirstCard"
+                orientation={Gtk.Orientation.VERTICAL}>
+                  <box class="ImageContainer">
+                    <image
+                      file="/home/Dizzy/monochrome-switcher/widget/icons/ai_agent.png"
+                      pixelSize={80}
+                    />
+                  </box>
+                  <box class="TitleContainer">
+                      Start a New Multi-Agent
+                  </box>
               </box>
-              <box class="SecondCard">
-                Continue Where I left off
+              <box class="SecondCard"
+                orientation={Gtk.Orientation.VERTICAL}>
+                  <box class="ImageContainer">
+                    <image
+                      file="/home/Dizzy/monochrome-switcher/widget/icons/file_open.png"
+                      pixelSize={50}
+                    />
+                  </box>
+                  <box class="TitleContainer">
+                      Continue Where I Left Off
+                  </box>
               </box>
           </box>
 
           <box class="SecondCardColumn"
             orientation={Gtk.Orientation.VERTICAL}>
-              <box class="ThirdCard">
-                Use a Template
+              <box class="ThirdCard"
+                orientation={Gtk.Orientation.VERTICAL}>
+                  <box class="ImageContainer">
+                    <image
+                      file="/home/Dizzy/monochrome-switcher/widget/icons/file.png"
+                      pixelSize={50}
+                    />
+                  </box>
+                  <box class="TitleContainer">
+                      Use a Template
+                  </box>
               </box>
           </box>
         </box>
