@@ -21,7 +21,6 @@ window.Box {
   box.ChatHeadTitle {
     margin: 10px;
     font-size: x-large;
-    padding: 10px 100px;
   }
 
   .house-icon {
@@ -29,21 +28,17 @@ window.Box {
   }
 
   box.UpperSelection {
-    padding-bottom: 600px;
     margin-bottom: 200px;
 
   }
 
   box.UpperSelection, box.LowerSelection {
-    padding: 50px;
   }
 
   box.UpperSelection > box {
-    padding: 10px 5px;
   }
 
   box.LowerSelection > box {
-    padding: 10px 5px;
   }
 
   box.UpperSelection > box:hover, box.LowerSelection > box:hover {
@@ -54,22 +49,18 @@ window.Box {
 //Avatar Frame and Additions
   box.AvatarFrame{
     border: 1px solid rgba(255,255,255,0.5);
-    padding: 0 30px 20px 0;
   }
 
   box.Avatar {
     background: #404040;
-    padding: 15px 15px;
     margin: 10px;
   }
 
   box.NameBoxes {
     margin: 10px;
-    padding: 10px;
   }
 
   box.Name {
-    padding-bottom: 30px;
   }
 
 
@@ -79,7 +70,6 @@ window.Box {
 
   box.Logout, box.Add {
     margin: 0 10px 10px 10px;
-    padding: 0 50px 50px 0;
     border: 1px solid rgba(255,255,255,0.5);
   }
 
@@ -90,7 +80,6 @@ window.Box {
 //Title Frame
   box.TitleFrame {
     color: #404040;
-    padding: 10px 20px 10px;
     border: 1px solid rgba(255,255,255,0.5);
     margin: 10px 10px 0 0;
   }
@@ -99,7 +88,6 @@ window.Box {
   box.ChatFrame {
     border: 1px solid rgba(255,255,255,0.5);
     margin: 10px 10px 10px 0;
-    padding: 0px 30px 350px 20px;
   }
 
   box.Title {
@@ -120,10 +108,13 @@ window.Box {
   }
 
   box.FirstCard, box.SecondCard, box.ThirdCard {
-    padding: 80px 60px;
     margin-top: 30px;
     border-radius: 5px;
     background: #383838;
+  }
+
+  box.FirstCard:hover, box.SecondCard:hover, box.ThirdCard:hover {
+    background: #545454;
   }
 
   button {
