@@ -27,26 +27,38 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
                 orientation={Gtk.Orientation.VERTICAL}>
               <box class="UpperSelection"
                 orientation={Gtk.Orientation.VERTICAL}>
-                <box>
-                  <image
-                    file="/home/Dizzy/monochrome-switcher/widget/icons/house-icon.png"
-                    pixelSize={25}
-                    class="house-icon"/>
-                  Home
+                <box class="Selection">
+                  <box class="Selector">
+                  </box>
+                  <box>
+                    <image
+                      file="/home/Dizzy/monochrome-switcher/widget/icons/house-icon.png"
+                      pixelSize={25}
+                      class="house-icon"/>
+                    Home
+                  </box>
                 </box>
-                <box>
-                  <image
-                    file="/home/Dizzy/monochrome-switcher/widget/icons/profile-selection.png"
-                    pixelSize={23}
-                    class="house-icon"/>
-                  AI Selection
+                <box class="Selection">
+                  <box class="Selector">
+                  </box>
+                  <box>
+                    <image
+                      file="/home/Dizzy/monochrome-switcher/widget/icons/profile-selection.png"
+                      pixelSize={23}
+                      class="house-icon"/>
+                    AI Selection
+                  </box>
                 </box>
-                <box>
-                  <image
-                    file="/home/Dizzy/monochrome-switcher/widget/icons/history.png"
-                    pixelSize={25}
-                    class="house-icon"/>
-                  History
+                <box class="Selection">
+                  <box class="Selector">
+                  </box>
+                  <box>
+                    <image
+                      file="/home/Dizzy/monochrome-switcher/widget/icons/history.png"
+                      pixelSize={25}
+                      class="house-icon"/>
+                    History
+                  </box>
                 </box>
               </box>
               
