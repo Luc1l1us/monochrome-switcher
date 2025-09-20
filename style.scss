@@ -27,6 +27,22 @@ window.Box {
     margin-right: 5px;
   }
 
+  box.Selection:not(.selected) box.Selector {
+    opacity: 0;
+  }
+
+  box.Selection:hover box.Selector {
+    opacity: 1;
+    transition: min-height 0.3s ease, opacity 0.2s ease;
+  }
+
+  box.Selector {
+    border-radius: 2px;
+    margin: 0 0 0 5px;
+    padding: 6px 3px;
+    background: #ffffff;
+  }
+
   box.UpperSelection {
     margin-bottom: 200px;
 
