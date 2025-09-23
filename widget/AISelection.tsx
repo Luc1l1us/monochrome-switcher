@@ -28,24 +28,24 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
               <box class="UpperSelection"
                 orientation={Gtk.Orientation.VERTICAL}>
                 <button class="Selection">
-                  <box class="Selector">
-                  </box>
                   <box>
                     <image
                       file="/home/Dizzy/monochrome-switcher/widget/icons/house-icon.png"
                       pixelSize={25}
-                      class="upper-icon"/>
+                      class="house-icon"/>
                     Home
                   </box>
                 </button>
-                <button class="Selection">
+                <button 
+                  class="Selection"
+                  onClicked={AISelection}>
                   <box class="Selector">
                   </box>
                   <box>
                     <image
                       file="/home/Dizzy/monochrome-switcher/widget/icons/profile-selection.png"
                       pixelSize={23}
-                      class="upper-icon"/>
+                      class="house-icon"/>
                     AI Selection
                   </box>
                 </button>
@@ -56,7 +56,7 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
                     <image
                       file="/home/Dizzy/monochrome-switcher/widget/icons/history.png"
                       pixelSize={25}
-                      class="upper-icon"/>
+                      class="house-icon"/>
                     History
                   </box>
                 </button>
