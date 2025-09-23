@@ -23,15 +23,18 @@ window.Box {
     font-size: x-large;
   }
 
-  .house-icon {
+  .upper-icon {
     margin-right: 5px;
   }
 
-  box.Selection:not(.selected) box.Selector {
+  button.Selection {
+  }
+
+  button.Selection:not(.selected) button.Selector {
     opacity: 0;
   }
 
-  box.Selection:hover box.Selector {
+  button.Selection:hover button.Selector {
     opacity: 1;
     transition: min-height 0.3s ease, opacity 0.2s ease;
   }
@@ -45,7 +48,6 @@ window.Box {
 
   box.UpperSelection {
     margin-bottom: 200px;
-
   }
 
   box.UpperSelection, box.LowerSelection {
