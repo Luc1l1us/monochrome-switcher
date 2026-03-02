@@ -4,6 +4,7 @@ import { execAsync } from "ags/process"
 
 export default function Dashboard(gdkmonitor: Gdk.Monitor) {
   const {RIGHT} = Astal.WindowAnchor
+
   return (
   <window
       visible
@@ -22,39 +23,19 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
             <box class="ChatHeadTitle">
               MonoSwitch
             </box>
-            <stack 
-              $={(self) => (self.visibleChildName = "child2")}
-              class="ChatHeadSelection">
+            <box class="ChatHeadSelection"
+                orientation={Gtk.Orientation.VERTICAL}>
               <box class="UpperSelection"
                 orientation={Gtk.Orientation.VERTICAL}>
-                <button class="Selection">
-                  <box class="Selector">
-                  </box>
-                  <child $type="named" name="child1" />
-                  <child $type="named" name="child2" />
-                </button>
-                <button class="Selection">
-                  <box class="Selector">
+                <Gtk.Stack hhomogeneous=TRUE>
+                  <box>
+                    <label label="HOME"/>
                   </box>
                   <box>
-                    <image
-                      file="/home/Dizzy/monochrome-switcher/widget/icons/profile-selection.png"
-                      pixelSize={23}
-                      class="upper-icon"/>
-                    AI Selection
+                    <label label="SETTINGS"/>
                   </box>
-                </button>
-                <button class="Selection">
-                  <box class="Selector">
-                  </box>
-                  <box>
-                    <image
-                      file="/home/Dizzy/monochrome-switcher/widget/icons/history.png"
-                      pixelSize={25}
-                      class="upper-icon"/>
-                    History
-                  </box>
-                </button>
+
+                </Gtk.Stack>
               </box>
               
               <box class="LowerSelection"
@@ -69,7 +50,7 @@ export default function Dashboard(gdkmonitor: Gdk.Monitor) {
                   FAQ
                 </box>
               </box>
-            </stack>
+            </box>
           </box>
           <box class="AvatarPlaceholder">
             <box class="AvatarFrame">
