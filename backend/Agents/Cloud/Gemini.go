@@ -26,6 +26,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Change this line here and change the text to the one that the user wrote in the UI of switcher
 	result, err := client.Models.GenerateContent(
 		ctx, "gemini-3-flash-preview", genai.Text("Explain how AI works in a few words"), nil,
 	)
