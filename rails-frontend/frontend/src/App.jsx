@@ -3,6 +3,12 @@ import logo from './assets/images/logo-universal.png';
 import './App.css';
 import {Greet} from "../wailsjs/go/main/App";
 
+async function submitPrompt() {
+    const prompt = document.getElementId("input").value;
+    const response = await SendPrompt(prompt);
+    console.log(response);
+}
+
 function App() {
     const [resultText, setResultText] = useState("Please enter your name below 👇");
     const [name, setName] = useState('');

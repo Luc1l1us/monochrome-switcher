@@ -25,7 +25,7 @@ cd rails-frontend
 wails dev
 ```
 
-<p> To run Aylur's GTK Shell: </p>
+<p> To run Aylur's GTK Shell (AGS): </p>
 
 ```
 forgot
