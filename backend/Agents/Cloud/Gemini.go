@@ -1,4 +1,4 @@
-package main
+package Cloud
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"google.golang.org/genai"
 )
 
-func main() {
+func CallLLM() {
 	doterr := godotenv.Load()
 
 	if doterr != nil {
