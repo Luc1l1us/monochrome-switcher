@@ -10,7 +10,7 @@ import (
 	"google.golang.org/genai"
 )
 
-func CallLLM() {
+func CallLLM(prompt string) {
 	doterr := godotenv.Load()
 
 	if doterr != nil {
@@ -28,7 +28,7 @@ func CallLLM() {
 
 	// Change this line here and change the text to the one that the user wrote in the UI of switcher
 	result, err := client.Models.GenerateContent(
-		ctx, "gemini-3-flash-preview", genai.Text("Explain how AI works in a few words"), nil,
+		ctx, "gemini-3-flash-preview", genai.Text(prompt), nil,
 	)
 
 	if err != nil {
