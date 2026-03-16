@@ -4,22 +4,15 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"os"
 
-	"github.com/joho/godotenv"
 	"google.golang.org/genai"
 )
 
-func CallLLM(prompt string) {
-	doterr := godotenv.Load()
-
-	if doterr != nil {
-		log.Fatal("Error loading .env file")
-	}
+func CallLLM(prompt string, apikey string, err error) {
 
 	ctx := context.Background()
 	client, err := genai.NewClient(ctx, &genai.ClientConfig{
-		APIKey:  os.Getenv("GEMINI_API_KEY"),
+		APIKey:  apikey,
 		Backend: genai.BackendGeminiAPI,
 	})
 	if err != nil {

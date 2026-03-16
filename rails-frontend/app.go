@@ -1,7 +1,6 @@
 package main
 
 import (
-	"backend/provider.go/Agents/Cloud"
 	"context"
 	"fmt"
 )
@@ -23,7 +22,7 @@ func (a *App) startup(ctx context.Context) {
 }
 
 func (a *App) SendPrompt(prompt string) (string, error) {
-	return Cloud.CallLLM(prompt)
+	return Cloud.CallLLM()
 }
 
 // Greet returns a greeting for the given name
