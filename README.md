@@ -12,6 +12,7 @@
 ### Installation
 
 <p> Clone the repository: </p>
+
 ```
 git clone https://github.com/Luc1l1us/monochrome-switcher.git
 ```
