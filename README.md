@@ -41,9 +41,10 @@ go run .
 
 ### Inputting API Keys
 
-<p> To manually input API Keys, create an .env file in the Cloud folder and add the following: </p>
+<p> To manually input API Keys, create an .env file in the Backend folder and add the following: </p>
 
 ```
+For Gemini
 GEMINI_API_KEY = [insert api token here]
 and much more
 ```
