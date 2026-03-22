@@ -28,9 +28,16 @@ func EnterPrompt() string {
 	return cleanInput
 }
 
+func whichLLM(LLM string, prompt string, apikey string, err error) {
+	if LLM == "Gemini" {
+		Cloud.CallGemini(prompt, apikey, err)
+	}
+}
+
 func main() {
 	userprompt := EnterPrompt()
 	doterr := godotenv.Load()
+	LLM := "Gemini"
 
 	if doterr != nil {
 		log.Fatal("Error loading .env file")
@@ -39,5 +46,5 @@ func main() {
 	//Get API Key
 	apikey := os.Getenv("GEMINI_API_KEY")
 
-	Cloud.CallLLM(userprompt, apikey, doterr)
+	whichLLM(LLM, userprompt, apikey, doterr)
 }

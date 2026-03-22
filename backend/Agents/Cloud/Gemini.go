@@ -8,7 +8,7 @@ import (
 	"google.golang.org/genai"
 )
 
-func CallLLM(prompt string, apikey string, err error) {
+func CallGemini(prompt string, apikey string, err error) {
 
 	ctx := context.Background()
 	client, err := genai.NewClient(ctx, &genai.ClientConfig{
