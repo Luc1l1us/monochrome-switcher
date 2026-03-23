@@ -31,12 +31,16 @@ func EnterPrompt() string {
 func whichLLM(LLM string, prompt string, apikey string, err error) {
 	if LLM == "Gemini" {
 		Cloud.CallGemini(prompt, apikey, err)
+	} else if LLM == "Local" {
+		Local.callLocal(prompt)
 	}
 }
 
 func main() {
 	userprompt := EnterPrompt()
 	doterr := godotenv.Load()
+
+	//make a func that would set LLM to Gemini if the anchor or switch is set to Gemini
 	LLM := "Gemini"
 
 	if doterr != nil {
