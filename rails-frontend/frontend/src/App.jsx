@@ -19,6 +19,11 @@ function App() {
         Greet(name).then(updateResultText);
     }
 
+    // This function would send the prompt to either Cloud or Local LLMs
+    function sendprompt() {
+
+    }
+
     return (
         <div id="App">
             <div id='fborder'>
