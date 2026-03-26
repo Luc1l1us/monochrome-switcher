@@ -12,6 +12,12 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// func to receive prompt from frontend
+func receivePrompt(receivedPrompt string) string {
+	prompt := receivedPrompt
+	return prompt
+}
+
 func EnterPrompt() string {
 	scanner := bufio.NewReader(os.Stdin)
 
@@ -32,6 +38,7 @@ func whichLLM(LLM string, prompt string, apikey string, err error) {
 	if LLM == "Gemini" {
 		Cloud.CallGemini(prompt, apikey, err)
 	} else if LLM == "Local" {
+		//fix this for later
 		Local.callLocal(prompt)
 	}
 }

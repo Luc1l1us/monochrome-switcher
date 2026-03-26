@@ -1,5 +1,6 @@
 package main
 
+//probably the concurrent functions go here?
 func check_online() {
 
 }
