@@ -29,7 +29,7 @@ wails dev
 <p> To run Aylur's GTK Shell (AGS): </p>
 
 ```
-forgot
+ags run
 ```
 
 <p> To run backend: </p>
