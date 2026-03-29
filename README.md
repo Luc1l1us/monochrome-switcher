@@ -24,7 +24,7 @@ cd install-scripts
 bash install.sh
 ```
 
-If it does not work, try chmo:
+If it does not work, try chmod:
 
 ```
 chmod +x install.sh
@@ -79,13 +79,7 @@ and much more
 ### Tech Stack
 
 ```
-
 Aylur's GTK Shell
 Wails
 GOlang
-
-```
-
-```
-
 ```

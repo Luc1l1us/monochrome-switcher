@@ -2,6 +2,7 @@ import {useState} from 'react';
 import logo from './assets/images/logo-universal.png';
 import './App.css';
 import {Greet} from "../wailsjs/go/main/App";
+import SelectDemo from './aiselection';
 
 async function submitPrompt() {
     const prompt = document.getElementId("input").value;
@@ -23,7 +24,7 @@ function App() {
 
     // This function would send the prompt to either Cloud or Local LLMs
     // This function should send a string to the backen
-    function sendprompt() {
+    function sendPromptnAgent() {
 
     }
 
@@ -35,6 +36,9 @@ function App() {
                 <div id="input" className="input-box">
                     <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
                     <button className="btn" onClick={greet}>Greet</button>
+                </div>
+                <div>
+                    <SelectDemo/>
                 </div>
                 <div id="input" className="input-box">
                     <input id="name" className="input" autoComplete="off" name="prompt" type="text"/>

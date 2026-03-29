@@ -1,11 +1,8 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
 	"log"
 	"os"
-	"strings"
 
 	"backend/provider.go/Agents/Cloud"
 
@@ -13,11 +10,12 @@ import (
 )
 
 // func to receive prompt from frontend
-func receivePrompt(receivedPrompt string) string {
+func receivePrompt(receivedPrompt string, receivedAgent string) string {
 	prompt := receivedPrompt
 	return prompt
 }
 
+/*
 func EnterPrompt() string {
 	scanner := bufio.NewReader(os.Stdin)
 
@@ -33,6 +31,7 @@ func EnterPrompt() string {
 	cleanInput := strings.TrimSpace(input)
 	return cleanInput
 }
+*/
 
 func whichLLM(LLM string, prompt string, apikey string, err error) {
 	if LLM == "Gemini" {
@@ -44,11 +43,15 @@ func whichLLM(LLM string, prompt string, apikey string, err error) {
 }
 
 func main() {
-	userprompt := EnterPrompt()
+	//replace these variables with real names of AI/Agents
+	agent := ""
+	promptreceive := ""
+	userprompt := receivePrompt(promptreceive, agent)
+	//userprompt := EnterPrompt()
 	doterr := godotenv.Load()
 
 	//make a func that would set LLM to Gemini if the anchor or switch is set to Gemini
-	LLM := "Gemini"
+	LLM := agent
 
 	if doterr != nil {
 		log.Fatal("Error loading .env file")
@@ -57,5 +60,6 @@ func main() {
 	//Get API Key
 	apikey := os.Getenv("GEMINI_API_KEY")
 
+	//call LLMDecider func or whichLLM
 	whichLLM(LLM, userprompt, apikey, doterr)
 }
