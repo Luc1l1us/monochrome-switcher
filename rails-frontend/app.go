@@ -1,7 +1,6 @@
 package main
 
 import (
-	"backend/provider.go"
 	"context"
 	"fmt"
 )
@@ -22,8 +21,8 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-func (a *App) SendPrompt(prompt string) (string, error) {
-	return main.
+func (a *App) SendPrompt(prompt string) string {
+	return fmt.Sprintf("Hello user, Here is your prompt: %s", prompt)
 }
 
 // Greet returns a greeting for the given name
