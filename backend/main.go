@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"os"
 
 	"backend/provider.go/Agents/Cloud"
+
+	"google.golang.org/genai"
 
 	"github.com/joho/godotenv"
 )
@@ -43,6 +47,8 @@ func whichLLM(LLM string, prompt string, apikey string, err error) {
 }
 
 func main() {
+	ctx := context.Background()
+
 	//replace these variables with real names of AI/Agents
 	agent := ""
 	promptreceive := ""
@@ -57,8 +63,28 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	//Get API Key
-	apikey := os.Getenv("GEMINI_API_KEY")
+	// Create Gemini Client
+	geminiClient, err := genai.NewClient(ctx, &genai.ClientConfig{
+		APIKey:  os.Getenv("GEMINI_API_KEY"),
+		Backend: genai.BackendGeminiAPI,
+	})
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	//Initialize Gemini Client
+	//
+	gemini := &agents.Gemini{
+		Client: geminiClient,
+	}
+
+	providers := map[string]Provider{
+		"gemini": gemini,
+	}
+
+	response, err := providers["gemini"].Generate("hello!")
+	fmt.Println(response)
 
 	//call LLMDecider func or whichLLM
 	whichLLM(LLM, userprompt, apikey, doterr)

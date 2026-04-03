@@ -8,22 +8,17 @@ import (
 )
 
 type Gemini struct {
-	APIKey string
+	Client *genai.Client
 }
 
 func (g *Gemini) Generate(prompt string) (string, error) {
 	ctx := context.Background()
 
-	client, err := genai.NewClient(ctx, &genai.ClientConfig{
-		APIKey:  g.APIKey,
-		Backend: genai.BackendGeminiAPI,
-	})
-	if err != nil {
-		return "", err
-	}
-
-	result, err := client.Models.GenerateContent(
-		ctx, "gemini-3-flash-preview", genai.Text(prompt), nil,
+	result, err := g.Client.Models.GenerateContent(
+		ctx,
+		"gemini-3-flash-preview",
+		genai.Text(prompt),
+		nil,
 	)
 
 	if err != nil {
@@ -31,10 +26,9 @@ func (g *Gemini) Generate(prompt string) (string, error) {
 	}
 
 	if result == nil {
-		return "", fmt.Errorf("Empty response from Gemini")
+		return "", fmt.Errorf("Empty Response")
 	}
 
-	//fmt.Println(result.Text())
 	return result.Text(), err
 }
 
