@@ -3,12 +3,42 @@ package Cloud
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"google.golang.org/genai"
 )
 
-func CallGemini(prompt string, apikey string, err error) {
+type Gemini struct {
+	APIKey string
+}
+
+func (g *Gemini) Generate(prompt string) (string, error) {
+	ctx := context.Background()
+
+	client, err := genai.NewClient(ctx, &genai.ClientConfig{
+		APIKey:  g.APIKey,
+		Backend: genai.BackendGeminiAPI,
+	})
+	if err != nil {
+		return "", err
+	}
+
+	result, err := client.Models.GenerateContent(
+		ctx, "gemini-3-flash-preview", genai.Text(prompt), nil,
+	)
+
+	if err != nil {
+		return "", err
+	}
+
+	if result == nil {
+		return "", fmt.Errorf("Empty response from Gemini")
+	}
+
+	//fmt.Println(result.Text())
+	return result.Text(), err
+}
+
+/* func CallGemini(prompt string, apikey string, err error) {
 
 	ctx := context.Background()
 	client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -29,4 +59,4 @@ func CallGemini(prompt string, apikey string, err error) {
 	}
 
 	fmt.Println(result.Text())
-}
+} */
