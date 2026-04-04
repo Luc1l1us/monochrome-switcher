@@ -1,15 +1,15 @@
-package config
+package Config
 
 import (
+	"backend/Agents/Cloud"
+	"backend/core"
 	"context"
 	"os"
-
-	"backend/provider.go/Agents/Cloud"
 
 	"google.golang.org/genai"
 )
 
-func InitProviders() map[string]Provider {
+func InitProviders() map[string]core.Provider {
 	ctx := context.Background()
 
 	geminiClient, _ := genai.NewClient(ctx, &genai.ClientConfig{
@@ -17,7 +17,7 @@ func InitProviders() map[string]Provider {
 		Backend: genai.BackendGeminiAPI,
 	})
 
-	return map[string]Provider{
+	return map[string]core.Provider{
 		"gemini": &Cloud.Gemini{
 			Client: geminiClient,
 		},

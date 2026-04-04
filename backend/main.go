@@ -6,7 +6,8 @@ import (
 	"log"
 	"os"
 
-	"backend/provider.go/Agents/Cloud"
+	"backend/Agents/Cloud"
+	"backend/core"
 
 	"google.golang.org/genai"
 
@@ -37,27 +38,28 @@ func EnterPrompt() string {
 }
 */
 
-func whichLLM(LLM string, prompt string, apikey string, err error) {
+/* func whichLLM(LLM string, prompt string, apikey string, err error) {
 	if LLM == "Gemini" {
 		Cloud.CallGemini(prompt, apikey, err)
 	} else if LLM == "Local" {
 		//fix this for later
 		Local.callLocal(prompt)
 	}
-}
+} */
 
 func main() {
 	ctx := context.Background()
 
 	//replace these variables with real names of AI/Agents
-	agent := ""
-	promptreceive := ""
-	userprompt := receivePrompt(promptreceive, agent)
+	//agent := ""
+	//promptreceive := ""
+	//userprompt := receivePrompt(promptreceive, agent)
 	//userprompt := EnterPrompt()
+
 	doterr := godotenv.Load()
 
 	//make a func that would set LLM to Gemini if the anchor or switch is set to Gemini
-	LLM := agent
+	//LLM := agent
 
 	if doterr != nil {
 		log.Fatal("Error loading .env file")
@@ -74,12 +76,11 @@ func main() {
 	}
 
 	//Initialize Gemini Client
-	//
-	gemini := &agents.Gemini{
+	gemini := &Cloud.Gemini{
 		Client: geminiClient,
 	}
 
-	providers := map[string]Provider{
+	providers := map[string]core.Provider{
 		"gemini": gemini,
 	}
 
@@ -87,5 +88,5 @@ func main() {
 	fmt.Println(response)
 
 	//call LLMDecider func or whichLLM
-	whichLLM(LLM, userprompt, apikey, doterr)
+	//whichLLM(LLM, userprompt, apikey, doterr)
 }
