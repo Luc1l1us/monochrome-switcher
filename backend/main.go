@@ -52,7 +52,7 @@ func main() {
 
 	//replace these variables with real names of AI/Agents
 	//agent := ""
-	//promptreceive := ""
+	promptreceive := "Sample prompt"
 	//userprompt := receivePrompt(promptreceive, agent)
 	//userprompt := EnterPrompt()
 
@@ -84,7 +84,7 @@ func main() {
 		"gemini": gemini,
 	}
 
-	response, err := providers["gemini"].Generate("hello!")
+	response, err := providers["gemini"].Generate(promptreceive)
 	fmt.Println(response)
 
 	//call LLMDecider func or whichLLM
