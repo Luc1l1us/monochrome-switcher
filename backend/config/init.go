@@ -4,6 +4,7 @@ import (
 	"backend/Agents/Cloud"
 	"backend/core"
 	"context"
+	"log"
 	"os"
 
 	"google.golang.org/genai"
@@ -12,10 +13,14 @@ import (
 func InitProviders() map[string]core.Provider {
 	ctx := context.Background()
 
-	geminiClient, _ := genai.NewClient(ctx, &genai.ClientConfig{
+	geminiClient, err := genai.NewClient(ctx, &genai.ClientConfig{
 		APIKey:  os.Getenv("GEMINI_API_KEY"),
 		Backend: genai.BackendGeminiAPI,
 	})
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return map[string]core.Provider{
 		"gemini": &Cloud.Gemini{
