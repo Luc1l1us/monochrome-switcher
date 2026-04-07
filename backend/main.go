@@ -1,15 +1,17 @@
 package main
 
 import (
-	"context"
+	//"context"
 	"fmt"
 	"log"
-	"os"
 
-	"backend/Agents/Cloud"
-	"backend/core"
+	//"os"
 
-	"google.golang.org/genai"
+	//"backend/Agents/Cloud"
+	//"backend/core"
+	"backend/Config"
+
+	//"google.golang.org/genai"
 
 	"github.com/joho/godotenv"
 )
@@ -48,11 +50,11 @@ func EnterPrompt() string {
 } */
 
 func main() {
-	ctx := context.Background()
+	//ctx := context.Background()
 
 	//replace these variables with real names of AI/Agents
 	//agent := ""
-	promptreceive := "Sample prompt"
+	promptreceive := "Hello, I am testing out something. Can you list out the things or statements that I had sent in this thread?"
 	//userprompt := receivePrompt(promptreceive, agent)
 	//userprompt := EnterPrompt()
 
@@ -66,25 +68,32 @@ func main() {
 	}
 
 	// Create Gemini Client
-	geminiClient, err := genai.NewClient(ctx, &genai.ClientConfig{
-		APIKey:  os.Getenv("GEMINI_API_KEY"),
-		Backend: genai.BackendGeminiAPI,
-	})
+	//geminiClient, err := genai.NewClient(ctx, &genai.ClientConfig{
+	//	APIKey:  os.Getenv("GEMINI_API_KEY"),
+	//	Backend: genai.BackendGeminiAPI,
+	//})
+
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+
+	//Initialize Gemini Client
+	//gemini := &Cloud.Gemini{
+	//	Client: geminiClient,
+	//}
+
+	//providers := map[string]core.Provider{
+	//	"gemini": gemini,
+	//}
+
+	providers := Config.InitProviders()
+
+	response, err := providers["gemini"].Generate(promptreceive)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	//Initialize Gemini Client
-	gemini := &Cloud.Gemini{
-		Client: geminiClient,
-	}
-
-	providers := map[string]core.Provider{
-		"gemini": gemini,
-	}
-
-	response, err := providers["gemini"].Generate(promptreceive)
 	fmt.Println(response)
 
 	//call LLMDecider func or whichLLM
