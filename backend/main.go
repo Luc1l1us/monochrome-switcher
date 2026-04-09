@@ -9,7 +9,7 @@ import (
 
 	//"backend/Agents/Cloud"
 	//"backend/core"
-	"backend/Config"
+	"backend/config"
 
 	//"google.golang.org/genai"
 
@@ -86,9 +86,13 @@ func main() {
 	//	"gemini": gemini,
 	//}
 
-	providers := Config.InitProviders()
+	providers := config.InitProviders()
 
-	response, err := providers["gemini"].Generate(promptreceive)
+	//use Gemini
+	//response, err := providers["gemini"].Generate(promptreceive)
+
+	//use chatGPT
+	response, err := providers["chatgpt"].Generate(promptreceive)
 
 	if err != nil {
 		log.Fatal(err)
