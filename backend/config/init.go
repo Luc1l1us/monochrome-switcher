@@ -7,8 +7,12 @@ import (
 	"log"
 	"os"
 
+	"github.com/anthropics/anthropic-sdk-go"
+	anthropicOption "github.com/anthropics/anthropic-sdk-go/option"
+
 	"github.com/openai/openai-go/v3"
-	"github.com/openai/openai-go/v3/option"
+	openaiOption "github.com/openai/openai-go/v3/option"
+
 	"google.golang.org/genai"
 )
 
@@ -27,10 +31,18 @@ func InitProviders() map[string]core.Provider {
 
 	//ChatGPT Client Initialization
 	chatgptClient := openai.NewClient(
-		option.WithAPIKey(os.Getenv("OPENAI_API_KEY")),
+		openaiOption.WithAPIKey(os.Getenv("OPENAI_API_KEY")),
+	)
+
+	//Claude Client Initialization
+	claudeClient := anthropic.NewClient(
+		anthropicOption.WithAPIKey(os.Getenv("ANTHROPIC_API_KEY")),
 	)
 
 	return map[string]core.Provider{
+		"claude": &Cloud.Claude{
+			Client: &claudeClient,
+		},
 		"chatgpt": &Cloud.ChatGPT{
 			Client: &chatgptClient,
 		},

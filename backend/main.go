@@ -54,7 +54,7 @@ func main() {
 
 	//replace these variables with real names of AI/Agents
 	//agent := ""
-	promptreceive := "Hello, I am testing out something. Can you list out the things or statements that I had sent in this thread?"
+	promptreceive := "Hello, I am testing out something."
 	//userprompt := receivePrompt(promptreceive, agent)
 	//userprompt := EnterPrompt()
 
@@ -92,7 +92,10 @@ func main() {
 	//response, err := providers["gemini"].Generate(promptreceive)
 
 	//use chatGPT
-	response, err := providers["chatgpt"].Generate(promptreceive)
+	//response, err := providers["chatgpt"].Generate(promptreceive)
+
+	//use Claude
+	response, err := providers["claude"].Generate(promptreceive)
 
 	if err != nil {
 		log.Fatal(err)

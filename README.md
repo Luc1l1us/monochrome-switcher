@@ -64,9 +64,23 @@ go run .
 <p> To manually input API Keys, create an .env file in the Backend folder and add the following: </p>
 
 ```
-For Gemini
 GEMINI_API_KEY = [insert api token here]
+OPENAI_API_KEY = [insert api token here]
+ANTHROPIC_API_KEY = [insert api token here]
 and much more
+```
+
+### AI/Agents to add
+
+```
+(x) Gemini
+(x) ChatGPT
+(x) Claude
+Perplexity
+DeepSeek
+Grok
+Synthesia
+Ollama
 ```
 
 ### Tech Stack
