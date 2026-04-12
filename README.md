@@ -83,6 +83,14 @@ Synthesia
 Ollama
 ```
 
+### Goals
+
+```
+Connect frontend to backend
+Finish frontend
+Concurrency
+```
+
 ### Tech Stack
 
 ```
