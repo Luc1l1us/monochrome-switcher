@@ -16,7 +16,11 @@ function App() {
     const updateName = (e) => setName(e.target.value);
     const updateResultText = (result) => setResultText(result);
 
+
+    const [resultText2, setResultText2] = useState("Please enter your prompt"); 
     const [prompt, setPrompt] = useState('');
+    const updatePrompt = (e) => setPrompt(e.target.value);
+    const updateResultText2 = (prompt) => setResultText2(prompt);
 
     function greet() {
         Greet(name).then(updateResultText);
@@ -25,7 +29,7 @@ function App() {
     // This function would send the prompt to either Cloud or Local LLMs
     // This function should send a string to the backen
     function sendPromptnAgent() {
-        SendPrompt(prompt).then(setPrompt);
+        SendPrompt(prompt).then(updateResultText2);
     }
 
     return (
@@ -40,8 +44,9 @@ function App() {
                 <div>
                     <SelectDemo/>
                 </div>
+                <div id="prompt" className="prompt">{resultText2}</div>
                 <div id="input" className="input-box">
-                    <input id="name" className="input" autoComplete="off" name="prompt" type="text"/>
+                    <input id="name" className="input" autoComplete="off" name="prompt" type="text" onChange={updatePrompt}/>
                     <button className="btn" onClick={sendPromptnAgent}>Send</button>
                 </div>
             </div>
