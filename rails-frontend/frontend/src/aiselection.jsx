@@ -1,4 +1,6 @@
-import { Select } from 'radix-ui';
+import * as Select from "@radix-ui/react-select";
+import classnames from "classnames";
+import React from "react";
 import {
 	CheckIcon,
 	ChevronDownIcon,
