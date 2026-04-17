@@ -1,5 +1,6 @@
 package main
 
+//TODO import does not work again, try to fix later
 import (
 	"context"
 	"fmt"
@@ -21,7 +22,9 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-func (a *App) SendPrompt(prompt string) string {
+// TODO still needs to receive agent string here
+func (a *App) SendPrompt(prompt string, recagent string) string {
+	executable.receivedPrompt(prompt, recagent)
 	return fmt.Sprintf("Hello user, Here is your prompt: %s", prompt)
 }
 
