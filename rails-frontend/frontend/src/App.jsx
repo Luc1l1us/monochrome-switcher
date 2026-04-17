@@ -16,7 +16,7 @@ function App() {
     const updateName = (e) => setName(e.target.value);
     const updateResultText = (result) => setResultText(result);
 
-
+    //trying out sending text
     const [resultText2, setResultText2] = useState("Please enter your prompt"); 
     const [prompt, setPrompt] = useState('');
     const updatePrompt = (e) => setPrompt(e.target.value);
@@ -35,7 +35,7 @@ function App() {
     return (
         <div id="App">
             <div id='fborder'>
-                <img src={logo} id="logo" alt="logo"/>
+                {/* <img src={logo} id="logo" alt="logo"/> */}
                 <div id="result" className="result">{resultText}</div>
                 <div id="input" className="input-box">
                     <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
