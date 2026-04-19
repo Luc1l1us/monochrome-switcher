@@ -1,10 +1,10 @@
 package config
 
 import (
-	"backend/Agents/Cloud"
-	"backend/core"
 	"context"
 	"log"
+	"monochrome-switcher/backend/Agents/Cloud"
+	"monochrome-switcher/backend/core"
 	"os"
 
 	"github.com/anthropics/anthropic-sdk-go"

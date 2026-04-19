@@ -1,3 +1,4 @@
+// IGNORE THIS FILE
 package executable
 
 import (
