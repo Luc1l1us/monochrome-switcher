@@ -3,11 +3,11 @@ package main
 //TODO import does not work again, try to fix later
 // it is because it is from a separate folder, try to fix this later
 import (
-	//"backend/services"
-	//"backend/core"
-	//"backend/config"
 	"context"
 	"fmt"
+	"monochrome-switcher/backend/config"
+	"monochrome-switcher/backend/core"
+	"monochrome-switcher/backend/services"
 )
 
 // App struct

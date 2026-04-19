@@ -5,7 +5,7 @@ import (
 	"fmt"
 	//"log"
 	//"backend/config"
-	"backend/core"
+	"monochrome-switcher/backend/core"
 	//"github.com/joho/godotenv"
 )
 
