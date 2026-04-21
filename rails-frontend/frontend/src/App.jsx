@@ -29,18 +29,20 @@ function App() {
     // This function would send the prompt to either Cloud or Local LLMs
     // This function should send a string to the backen
     function sendPromptnAgent() {
-        SendPrompt(prompt).then(updateResultText2);
+        SendPrompt(prompt, "gemini").then(updateResultText2);
     }
 
     return (
         <div id="App">
             <div id='fborder'>
+                {/* Original Content/ Placeholder */}
                 {/* <img src={logo} id="logo" alt="logo"/> */}
-                <div id="result" className="result">{resultText}</div>
+                {/*<div id="result" className="result">{resultText}</div>
                 <div id="input" className="input-box">
                     <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
                     <button className="btn" onClick={greet}>Greet</button>
-                </div>
+                </div> */}
+                {/* need to attach selectdemo to input */}
                 <div>
                     <SelectDemo/>
                 </div>
