@@ -5,11 +5,11 @@ import (
 	"log"
 	"monochrome-switcher/backend/Agents/Cloud"
 	"monochrome-switcher/backend/core"
-	"monochrome-switcher/backend/services"
 	"os"
 
 	"github.com/anthropics/anthropic-sdk-go"
 	anthropicOption "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/joho/godotenv"
 
 	"github.com/openai/openai-go/v3"
 	openaiOption "github.com/openai/openai-go/v3/option"
@@ -18,9 +18,14 @@ import (
 )
 
 func InitProviders() map[string]core.Provider {
-	ctx := context.Background()
 
-	services.LoadDotEnv()
+	dotenv := godotenv.Load("../backend/.env")
+
+	if dotenv != nil {
+		log.Println("Warning: .env not loaded")
+	}
+
+	ctx := context.Background()
 
 	//Gemini Client Initialization
 	geminiClient, err := genai.NewClient(ctx, &genai.ClientConfig{
