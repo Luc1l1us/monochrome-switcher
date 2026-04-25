@@ -7,8 +7,8 @@ import {
 	ChevronUpIcon,
 } from "@radix-ui/react-icons";
 
-const SelectDemo = () => (
-    <Select.Root>
+const SelectDemo = ({value, onSelectValue}) => (
+    <Select.Root value={value} onSelectValue={onSelectValue}>
 		<Select.Trigger className="SelectTrigger" aria-label="Food">
 			<Select.Value placeholder="Select a fruit…" />
 			<Select.Icon className="SelectIcon">

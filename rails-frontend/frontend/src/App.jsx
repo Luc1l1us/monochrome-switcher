@@ -22,6 +22,9 @@ function App() {
     const updatePrompt = (e) => setPrompt(e.target.value);
     const updateResultText2 = (prompt) => setResultText2(prompt);
 
+    //get value from selectdemo
+    const [selected, setSelected] = useState("");
+
     function greet() {
         Greet(name).then(updateResultText);
     }
@@ -29,7 +32,7 @@ function App() {
     // This function would send the prompt to either Cloud or Local LLMs
     // This function should send a string to the backen
     function sendPromptnAgent() {
-        SendPrompt(prompt, "gemini").then(updateResultText2);
+        SendPrompt(prompt, selected).then(updateResultText2);
     }
 
     return (
@@ -44,7 +47,7 @@ function App() {
                 </div> */}
                 {/* need to attach selectdemo to input */}
                 <div>
-                    <SelectDemo/>
+                    <SelectDemo value={selected} onSelectValue={setSelected}/> 
                 </div>
                 <div id="prompt" className="prompt">{resultText2}</div>
                 <div id="input" className="input-box">
