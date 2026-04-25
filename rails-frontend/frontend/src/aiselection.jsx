@@ -7,10 +7,13 @@ import {
 	ChevronUpIcon,
 } from "@radix-ui/react-icons";
 
+const [resultText2, setResultText2] = useState("Please select an AI/Agent");
+
+//need to replace these values with AI/Agents
 const SelectDemo = ({value, onSelectValue}) => (
     <Select.Root value={value} onSelectValue={onSelectValue}>
 		<Select.Trigger className="SelectTrigger" aria-label="Food">
-			<Select.Value placeholder="Select a fruit…" />
+			<Select.Value placeholder={resultText2} />
 			<Select.Icon className="SelectIcon">
 				<ChevronDownIcon />
 			</Select.Icon>
@@ -22,35 +25,17 @@ const SelectDemo = ({value, onSelectValue}) => (
 				</Select.ScrollUpButton>
 				<Select.Viewport className="SelectViewport">
 					<Select.Group>
-						<Select.Label className="SelectLabel">Fruits</Select.Label>
-						<SelectItem value="apple">Apple</SelectItem>
-						<SelectItem value="banana">Banana</SelectItem>
-						<SelectItem value="blueberry">Blueberry</SelectItem>
-						<SelectItem value="grapes">Grapes</SelectItem>
-						<SelectItem value="pineapple">Pineapple</SelectItem>
+						<Select.Label className="SelectLabel">Cloud AI</Select.Label>
+						<SelectItem value="claude">Claude</SelectItem>
+						<SelectItem value="chatgpt">ChatGPT</SelectItem>
+						<SelectItem value="gemini">Gemini</SelectItem>
 					</Select.Group>
 
 					<Select.Separator className="SelectSeparator" />
 
 					<Select.Group>
-						<Select.Label className="SelectLabel">Vegetables</Select.Label>
-						<SelectItem value="aubergine">Aubergine</SelectItem>
-						<SelectItem value="broccoli">Broccoli</SelectItem>
-						<SelectItem value="carrot" disabled>
-							Carrot
-						</SelectItem>
-						<SelectItem value="courgette">Courgette</SelectItem>
-						<SelectItem value="leek">Leek</SelectItem>
-					</Select.Group>
-
-					<Select.Separator className="SelectSeparator" />
-
-					<Select.Group>
-						<Select.Label className="SelectLabel">Meat</Select.Label>
-						<SelectItem value="beef">Beef</SelectItem>
-						<SelectItem value="chicken">Chicken</SelectItem>
-						<SelectItem value="lamb">Lamb</SelectItem>
-						<SelectItem value="pork">Pork</SelectItem>
+						<Select.Label className="SelectLabel">Local AI</Select.Label>
+						<SelectItem value="aubergine">Ollama</SelectItem>
 					</Select.Group>
 				</Select.Viewport>
 				<Select.ScrollDownButton className="SelectScrollButton">
