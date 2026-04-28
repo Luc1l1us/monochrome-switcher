@@ -47,7 +47,7 @@ function App() {
                 </div> */}
                 {/* need to attach selectdemo to input */}
                 <div>
-                    <SelectDemo value={selected} onSelectValue={setSelected}/> 
+                    <SelectDemo/> 
                 </div>
                 <div id="prompt" className="prompt">{resultText2}</div>
                 <div id="input" className="input-box">
