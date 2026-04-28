@@ -35,6 +35,15 @@ function App() {
         SendPrompt(prompt, selected).then(updateResultText2);
     }
 
+    function printingfuncs(text, ai) {
+        console.log("input:", text);
+        console.log("AI:", ai);
+    }
+
+    function testingfuncs() {
+        printingfuncs(prompt, selected);
+    }
+
     return (
         <div id="App">
             <div id='fborder'>
@@ -47,13 +56,14 @@ function App() {
                 </div> */}
                 {/* need to attach selectdemo to input */}
                 <div>
-                    <SelectDemo/> 
+                    <SelectDemo onValueChange={setSelected}/> 
                 </div>
                 <div id="prompt" className="prompt">{resultText2}</div>
                 <div id="input" className="input-box">
                     <input id="name" className="input" autoComplete="off" name="prompt" type="text" onChange={updatePrompt}/>
                     <button className="btn" onClick={sendPromptnAgent}>Send</button>
-                </div>
+{/*                     <button className="btn" onClick={testingfuncs}>Send</button>
+ */}                </div>
             </div>
         </div>
     )

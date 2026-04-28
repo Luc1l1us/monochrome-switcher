@@ -8,8 +8,8 @@ import {
 } from "@radix-ui/react-icons";
 import "./style.css";
 
-const SelectDemo = ({value, onSelectValue}) => (
-	<Select.Root value={value} onSelectValue={onSelectValue}>
+const SelectDemo = ({onValueChange}) => (
+	<Select.Root onValueChange={onValueChange}>
 		<Select.Trigger className="SelectTrigger" aria-label="Food">
 			<Select.Value placeholder="Select an AI/Agent" />
 			<Select.Icon className="SelectIcon">
