@@ -1,19 +1,17 @@
+import * as React from "react";
 import * as Select from "@radix-ui/react-select";
 import classnames from "classnames";
-import React from "react";
 import {
 	CheckIcon,
 	ChevronDownIcon,
 	ChevronUpIcon,
 } from "@radix-ui/react-icons";
+import "./style.css";
 
-const [resultText2, setResultText2] = useState("Please select an AI/Agent");
-
-//need to replace these values with AI/Agents
 const SelectDemo = ({value, onSelectValue}) => (
-    <Select.Root value={value} onSelectValue={onSelectValue}>
+	<Select.Root value={value} onSelectValue={onSelectValue}>
 		<Select.Trigger className="SelectTrigger" aria-label="Food">
-			<Select.Value placeholder={resultText2} />
+			<Select.Value placeholder="Select an AI/Agent" />
 			<Select.Icon className="SelectIcon">
 				<ChevronDownIcon />
 			</Select.Icon>
@@ -29,13 +27,30 @@ const SelectDemo = ({value, onSelectValue}) => (
 						<SelectItem value="claude">Claude</SelectItem>
 						<SelectItem value="chatgpt">ChatGPT</SelectItem>
 						<SelectItem value="gemini">Gemini</SelectItem>
+						<SelectItem value="placeholder">placeholder</SelectItem>
+						<SelectItem value="placeholder">placeholder</SelectItem>
 					</Select.Group>
 
 					<Select.Separator className="SelectSeparator" />
 
 					<Select.Group>
 						<Select.Label className="SelectLabel">Local AI</Select.Label>
-						<SelectItem value="aubergine">Ollama</SelectItem>
+						<SelectItem value="ollama">Ollama</SelectItem>
+						<SelectItem value="placeholder">placeholder</SelectItem>
+						<SelectItem value="carrot" disabled>
+							disabled placeholder
+						</SelectItem>
+						<SelectItem value="placeholder">placeholder</SelectItem>
+					</Select.Group>
+
+					<Select.Separator className="SelectSeparator" />
+
+					<Select.Group>
+						<Select.Label className="SelectLabel">placeholder</Select.Label>
+						<SelectItem value="placeholder">placeholder</SelectItem>
+						<SelectItem value="placeholder">placeholder</SelectItem>
+						<SelectItem value="placeholder">placeholder</SelectItem>
+						<SelectItem value="placeholder">placeholder</SelectItem>
 					</Select.Group>
 				</Select.Viewport>
 				<Select.ScrollDownButton className="SelectScrollButton">
@@ -44,7 +59,7 @@ const SelectDemo = ({value, onSelectValue}) => (
 			</Select.Content>
 		</Select.Portal>
 	</Select.Root>
-)
+);
 
 const SelectItem = React.forwardRef(
 	({ children, className, ...props }, forwardedRef) => {
