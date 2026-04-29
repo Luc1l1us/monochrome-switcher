@@ -17,7 +17,7 @@ function App() {
     const updateResultText = (result) => setResultText(result);
 
     //trying out sending text
-    const [resultText2, setResultText2] = useState("Please enter your prompt"); 
+    const [resultText2, setResultText2] = useState(""); 
     const [prompt, setPrompt] = useState('');
     const updatePrompt = (e) => setPrompt(e.target.value);
     const updateResultText2 = (prompt) => setResultText2(prompt);
@@ -55,15 +55,20 @@ function App() {
                     <button className="btn" onClick={greet}>Greet</button>
                 </div> */}
                 {/* need to attach selectdemo to input */}
-                <div>
+                <div id="Select">
                     <SelectDemo onValueChange={setSelected}/> 
                 </div>
-                <div id="prompt" className="prompt">{resultText2}</div>
+                {/* MAKE THIS STATIC AND THAT IS EASY */}
+                <div id="prompt" className="prompt">Please enter your prompt: </div>
                 <div id="input" className="input-box">
                     <input id="name" className="input" autoComplete="off" name="prompt" type="text" onChange={updatePrompt}/>
                     <button className="btn" onClick={sendPromptnAgent}>Send</button>
 {/*                     <button className="btn" onClick={testingfuncs}>Send</button>
- */}                </div>
+*/}                </div>
+                {/* THIS SHOULD BE EMPTY AT FIRST THEN BOOM OUTPUT */}
+                <div id="OutputBox">
+                    {resultText2}
+                </div>
             </div>
         </div>
     )

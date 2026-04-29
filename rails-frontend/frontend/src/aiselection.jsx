@@ -24,8 +24,8 @@ const SelectDemo = ({onValueChange}) => (
 				<Select.Viewport className="SelectViewport">
 					<Select.Group>
 						<Select.Label className="SelectLabel">Cloud AI</Select.Label>
-						<SelectItem value="claude">Claude</SelectItem>
-						<SelectItem value="chatgpt">ChatGPT</SelectItem>
+						<SelectItem value="claude" disabled>!Claude</SelectItem>
+						<SelectItem value="chatgpt" disabled>!ChatGPT</SelectItem>
 						<SelectItem value="gemini">Gemini</SelectItem>
 						<SelectItem value="placeholder">placeholder</SelectItem>
 						<SelectItem value="placeholder">placeholder</SelectItem>
