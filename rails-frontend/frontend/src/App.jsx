@@ -46,28 +46,50 @@ function App() {
 
     return (
         <div id="App">
-            <div id='fborder'>
-                {/* Original Content/ Placeholder */}
-                {/* <img src={logo} id="logo" alt="logo"/> */}
-                {/*<div id="result" className="result">{resultText}</div>
-                <div id="input" className="input-box">
-                    <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-                    <button className="btn" onClick={greet}>Greet</button>
-                </div> */}
-                {/* need to attach selectdemo to input */}
-                <div id="Select">
-                    <SelectDemo onValueChange={setSelected}/> 
+            <div className='container'>
+                <div id="firstcolumn">
+                    MonoSwitch
+                    <div className='Nav-buttons'>
+                        <div className='Home'>
+                            Home
+                        </div>
+                        <div className='AiSelection'>
+                            AI Selection
+                        </div>
+                        <div className='History'>
+                            History
+                        </div>
+                    </div>
+                    <div className='bottom-nav'>
+                        <div className='Settings'>
+                            Settings
+                        </div>
+                        <div className='About'>
+                            About
+                        </div>
+                        <div className='FAQ'>
+                            FAQ
+                        </div>
+
+                    </div>
                 </div>
-                {/* MAKE THIS STATIC AND THAT IS EASY */}
-                <div id="prompt" className="prompt">Please enter your prompt: </div>
-                <div id="input" className="input-box">
-                    <input id="name" className="input" autoComplete="off" name="prompt" type="text" onChange={updatePrompt}/>
-                    <button className="btn" onClick={sendPromptnAgent}>Send</button>
-{/*                     <button className="btn" onClick={testingfuncs}>Send</button>
-*/}                </div>
-                {/* THIS SHOULD BE EMPTY AT FIRST THEN BOOM OUTPUT */}
-                <div id="OutputBox">
-                    {resultText2}
+                <div id="secondcolumn">
+                    <div id='Title'>
+                        Dashboard
+                    </div>
+                    <div id='content'>
+                        <div id="Select">
+                            <SelectDemo onValueChange={setSelected}/> 
+                        </div>
+                        <div id="prompt" className="prompt">Please enter your prompt: </div>
+                        <div id="input" className="input-box">
+                            <input id="name" className="input" autoComplete="off" name="prompt" type="text" onChange={updatePrompt}/>
+                            <button className="btn" onClick={sendPromptnAgent}>Send</button>
+                        </div>
+                        <div id="OutputBox">
+                            {resultText2}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
