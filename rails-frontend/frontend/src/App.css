@@ -2,6 +2,7 @@
   --primary-color: rgba(30, 30, 30, 1);
   --border-color: rgba(64, 64, 64, 1);
   --accent-color: rgba(53, 53, 53, 1);
+  --accent-hover-color: rgba(83, 84, 84, 1);
   --text-color: rgba(151, 151, 151, 1);
   --lighter-text-color: rgba(189, 189, 189, 1);
 }
@@ -21,19 +22,26 @@
   justify-content: flex-start;
 }
 
+/* make this scalable soon */
 #firstcolumn {
-  padding: 50px;
+  padding: 20px 40px 150px 40px;
+  margin: 15px;
 }
 
 #firstcolumn,
 #Title,
-#content {
-  margin: 20px;
+#content,
+#avatar {
   border: 4px solid var(--border-color);
 }
 
+#Title,
+#content {
+  margin: 15px 0px 15px 0;
+}
+
 #Title {
-  padding-left: 10px;
+  padding: 10px 0 10px 10px;
   display: flex;
   justify-content: flex-start;
   color: var(--text-color);
@@ -42,23 +50,30 @@
 #content {
   display: flex;
   flex-flow: column nowrap;
-  padding-right: 470px;
+  padding: 0 200px 75px 0;
 }
 
-.Nav-buttons,
+.top-nav,
 .bottom-nav {
   margin-top: 30px;
   text-align: left;
 }
 
 .bottom-nav {
-  align-self: flex-end;
+  margin-top: 300px;
 }
 
-.Home,
-.AiSelection,
-.History {
+#nav-button {
   margin-bottom: 10px;
+  padding: 0 10px 0 10px;
+}
+
+#nav-button:hover {
+  background: var(--accent-hover-color);
+}
+
+.content-title {
+  margin-top: 20px;
 }
 
 #Select {
