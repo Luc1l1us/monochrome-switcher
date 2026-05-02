@@ -49,35 +49,40 @@ function App() {
             <div className='container'>
                 <div id="firstcolumn">
                     MonoSwitch
-                    <div className='Nav-buttons'>
-                        <div className='Home'>
+                    <div className='top-nav'>
+                        <div id="nav-button">
                             Home
                         </div>
-                        <div className='AiSelection'>
+                        <div id="nav-button">
                             AI Selection
                         </div>
-                        <div className='History'>
+                        <div id="nav-button">
                             History
                         </div>
                     </div>
                     <div className='bottom-nav'>
-                        <div className='Settings'>
+                        <div id="nav-button">
                             Settings
                         </div>
-                        <div className='About'>
+                        <div id="nav-button">
                             About
                         </div>
-                        <div className='FAQ'>
+                        <div id="nav-button">
                             FAQ
                         </div>
-
                     </div>
+                    {/* should be avatar frame here */}
                 </div>
                 <div id="secondcolumn">
                     <div id='Title'>
                         Dashboard
                     </div>
                     <div id='content'>
+                        <div className='content-title'>
+                            <h1>
+                                What would you like to do today?
+                            </h1>
+                        </div>
                         <div id="Select">
                             <SelectDemo onValueChange={setSelected}/> 
                         </div>
