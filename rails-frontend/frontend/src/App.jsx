@@ -47,31 +47,35 @@ function App() {
     return (
         <div id="App">
             <div className='container'>
-                <div id="firstcolumn">
-                    MonoSwitch
-                    <div className='top-nav'>
-                        <div id="nav-button">
-                            Home
+                <div id="firstcolumn-container">
+                    <div id='navi'>
+                        MonoSwitch
+                        <div className='top-nav'>
+                            <div id="nav-button">
+                                Home
+                            </div>
+                            <div id="nav-button">
+                                AI Selection
+                            </div>
+                            <div id="nav-button">
+                                History
+                            </div>
                         </div>
-                        <div id="nav-button">
-                            AI Selection
-                        </div>
-                        <div id="nav-button">
-                            History
+                        <div className='bottom-nav'>
+                            <div id="nav-button">
+                                Settings
+                            </div>
+                            <div id="nav-button">
+                                About
+                            </div>
+                            <div id="nav-button">
+                                FAQ
+                            </div>
                         </div>
                     </div>
-                    <div className='bottom-nav'>
-                        <div id="nav-button">
-                            Settings
-                        </div>
-                        <div id="nav-button">
-                            About
-                        </div>
-                        <div id="nav-button">
-                            FAQ
-                        </div>
+                    <div id='avatar'>
+                        TEST
                     </div>
-                    {/* should be avatar frame here */}
                 </div>
                 <div id="secondcolumn">
                     <div id='Title'>

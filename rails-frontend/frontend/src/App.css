@@ -22,13 +22,15 @@
   justify-content: flex-start;
 }
 
-/* make this scalable soon */
-#firstcolumn {
-  padding: 20px 40px 150px 40px;
-  margin: 15px;
+#firstcolumn-container {
+  margin: 15px 10px 20px 20px;
 }
 
-#firstcolumn,
+#avatar {
+  margin-top: 20px;
+}
+
+#navi,
 #Title,
 #content,
 #avatar {
