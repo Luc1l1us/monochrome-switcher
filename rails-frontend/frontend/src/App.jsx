@@ -83,9 +83,9 @@ function App() {
                     </div>
                     <div id='content'>
                         <div className='content-title'>
-                            <h1>
+                            <h2>
                                 What would you like to do today?
-                            </h1>
+                            </h2>
                         </div>
                         <div id="Select">
                             <SelectDemo onValueChange={setSelected}/> 
