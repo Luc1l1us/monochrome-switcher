@@ -22,13 +22,19 @@
   justify-content: flex-start;
 }
 
-/* make this scalable soon */
-#firstcolumn {
-  padding: 20px 40px 150px 40px;
-  margin: 15px;
+#firstcolumn-container {
+  margin: 15px 10px 20px 20px;
 }
 
-#firstcolumn,
+#navi {
+  padding: 20px 50px 0 50px;
+}
+
+#avatar {
+  margin-top: 20px;
+}
+
+#navi,
 #Title,
 #content,
 #avatar {
@@ -50,7 +56,7 @@
 #content {
   display: flex;
   flex-flow: column nowrap;
-  padding: 0 200px 75px 0;
+  justify-content: center;
 }
 
 .top-nav,
