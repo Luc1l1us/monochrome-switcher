@@ -1,11 +1,4 @@
-:root {
-  --primary-color: rgba(30, 30, 30, 1);
-  --border-color: rgba(64, 64, 64, 1);
-  --accent-color: rgba(53, 53, 53, 1);
-  --accent-hover-color: rgba(83, 84, 84, 1);
-  --text-color: rgba(151, 151, 151, 1);
-  --lighter-text-color: rgba(189, 189, 189, 1);
-}
+@import url("style.css");
 
 #app {
   text-align: center;
@@ -31,7 +24,7 @@
 }
 
 #avatar {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 #navi,
@@ -83,13 +76,7 @@
 }
 
 #Select {
-  margin-top: 50px;
-}
-
-.result {
-  height: 20px;
-  line-height: 20px;
-  margin: 1.5rem auto;
+  margin-top: 40px;
 }
 
 .prompt {
@@ -136,6 +123,6 @@
 }
 
 #OutputBox {
-  margin-top: 200px;
+  margin-top: 65px;
   margin-bottom: 200px;
 }

@@ -90,13 +90,13 @@ function App() {
                         <div id="Select">
                             <SelectDemo onValueChange={setSelected}/> 
                         </div>
+                        <div id="OutputBox">
+                            {resultText2}
+                        </div>
                         <div id="prompt" className="prompt">Please enter your prompt: </div>
                         <div id="input" className="input-box">
                             <input id="name" className="input" autoComplete="off" name="prompt" type="text" onChange={updatePrompt}/>
                             <button className="btn" onClick={sendPromptnAgent}>Send</button>
-                        </div>
-                        <div id="OutputBox">
-                            {resultText2}
                         </div>
                     </div>
                 </div>
