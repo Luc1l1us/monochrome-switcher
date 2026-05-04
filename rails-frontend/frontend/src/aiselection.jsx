@@ -7,6 +7,9 @@ import {
 	ChevronUpIcon,
 } from "@radix-ui/react-icons";
 import "./style.css";
+import geminiIcon from "./assets/images/gemini_icon.png"
+import chatgptIcon from "./assets/images/chatgpt_icon.png"
+import claudeIcon from "./assets/images/claude_icon.png"
 
 const SelectDemo = ({onValueChange}) => (
 	<Select.Root onValueChange={onValueChange}>
@@ -24,9 +27,9 @@ const SelectDemo = ({onValueChange}) => (
 				<Select.Viewport className="SelectViewport">
 					<Select.Group>
 						<Select.Label className="SelectLabel">Cloud AI</Select.Label>
-						<SelectItem value="claude" disabled>!Claude</SelectItem>
-						<SelectItem value="chatgpt" disabled>!ChatGPT</SelectItem>
-						<SelectItem value="gemini">Gemini</SelectItem>
+						<SelectItem value="claude" disabled> <img id="claude-icon" src={claudeIcon}/> !Claude</SelectItem>
+						<SelectItem value="chatgpt" disabled> <img id="chatgpt-icon" src={chatgptIcon}/> !ChatGPT</SelectItem>
+						<SelectItem value="gemini"> <img id="gemini-icon" src={geminiIcon}/>  Gemini</SelectItem>
 						<SelectItem value="placeholder">placeholder</SelectItem>
 						<SelectItem value="placeholder">placeholder</SelectItem>
 					</Select.Group>
