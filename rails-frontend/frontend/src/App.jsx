@@ -3,6 +3,7 @@ import logo from './assets/images/logo-universal.png';
 import './App.css';
 import {Greet, SendPrompt} from "../wailsjs/go/main/App";
 import SelectDemo from './aiselection';
+import {EnterIcon} from "@radix-ui/react-icons";
 
 async function submitPrompt() {
     const prompt = document.getElementId("input").value;
@@ -94,10 +95,10 @@ function App() {
                             {resultText2}
                         </div>
                         <div id="prompt" className="prompt">Please enter your prompt: </div>
-                        <div id="input" className="input-box">
-                            <input id="name" className="input" autoComplete="off" name="prompt" type="text" onChange={updatePrompt}/>
-                            <button className="btn" onClick={sendPromptnAgent}>Send</button>
-                        </div>
+                    </div>
+                    <div id="user-input" className="input-box">
+                        <input id="name" className="input" autoComplete="off" placeholder={`Message ${selected}`} name="prompt" type="text" onChange={updatePrompt}/>
+                        <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>
                     </div>
                 </div>
             </div>
