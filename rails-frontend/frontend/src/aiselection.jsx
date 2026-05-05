@@ -7,9 +7,9 @@ import {
 	ChevronUpIcon,
 } from "@radix-ui/react-icons";
 import "./style.css";
-import geminiIcon from "./assets/images/gemini_icon.png"
-import chatgptIcon from "./assets/images/chatgpt_icon.png"
-import claudeIcon from "./assets/images/claude_icon.png"
+import geminiIcon from "../../../icons/gemini_icon.png"
+import chatgptIcon from "../../../icons/chatgpt_icon.png"
+import claudeIcon from "../../../icons/claude_icon.png"
 
 const SelectDemo = ({onValueChange}) => (
 	<Select.Root onValueChange={onValueChange}>
