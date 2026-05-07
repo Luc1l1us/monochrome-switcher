@@ -26,7 +26,8 @@
 #Title,
 #content,
 #avatar,
-#user-input {
+#user-input,
+#Selector-container {
   border: 4px solid var(--border-color);
 }
 
@@ -59,20 +60,38 @@
 }
 
 #nav-button {
+  position: relative;
   margin-bottom: 10px;
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 18px;
+}
+
+#nav-button::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 6px;
+  height: 110%;
+
+  background: var(--vert-bar);
+
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 #nav-button:hover {
+  border-radius: 2px;
   background: var(--accent-hover-color);
+}
+
+#nav-button:hover::before {
+  opacity: 1;
 }
 
 .content-title {
   margin-top: 20px;
-}
-
-#Select {
-  margin-top: 40px;
 }
 
 #OutputBox {

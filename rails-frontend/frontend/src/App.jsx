@@ -82,14 +82,14 @@ function App() {
                     <div id='Title'>
                         Dashboard
                     </div>
+                    <div id='Selector-container'>
+                        <SelectDemo onValueChange={setSelected}/> 
+                    </div>
                     <div id='content'>
                         <div className='content-title'>
                             <h2>
                                 What would you like to do today?
                             </h2>
-                        </div>
-                        <div id="Select">
-                            <SelectDemo onValueChange={setSelected}/> 
                         </div>
                         <div id="OutputBox">
                             {resultText2}

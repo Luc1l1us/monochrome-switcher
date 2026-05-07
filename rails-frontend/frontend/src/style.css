@@ -10,6 +10,7 @@
   --lighter-accent-color: rgba(55, 55, 55, 1);
   --accent-hover-color: rgba(83, 84, 84, 1);
   --text-color: rgba(151, 151, 151, 1);
+  --vert-bar: rgba(169, 170, 169, 1);
   --lighter-text-color: rgba(189, 189, 189, 1);
 }
 
@@ -53,16 +54,14 @@ body {
 
 /* SelectDemo CSS */
 .SelectTrigger {
-  border-radius: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 15px;
-  font-size: 13px;
   line-height: 1;
   height: 35px;
   gap: 5px;
-  background-color: var(--border-color);
+  padding: 0 150px 0 150px;
+  background-color: var(--primary-color-darker);
   color: var(--lighter-text-color);
 }
 .SelectTrigger:hover {
@@ -77,6 +76,7 @@ body {
 }
 
 .SelectContent {
+  align-self: center;
   overflow: hidden;
   background-color: var(--lighter-accent-color);
   border-radius: 6px;
@@ -101,6 +101,7 @@ body {
   position: relative;
   user-select: none;
 }
+
 .SelectItem[data-disabled] {
   color: var(--mauve-8);
   pointer-events: none;
@@ -138,8 +139,8 @@ body {
   align-items: center;
   justify-content: center;
   height: 25px;
-  background-color: var(--primary-color);
-  color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: var(--text-color);
   cursor: default;
 }
 
