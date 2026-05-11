@@ -44,6 +44,7 @@
 }
 
 #content {
+  padding: 0 50px 20px 50px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -78,13 +79,28 @@
   transition: opacity 0.2s ease;
 }
 
-.nav-button:hover {
+.nav-button:hover,
+.card:hover {
   border-radius: 2px;
   background: var(--accent-hover-color);
 }
 
 .nav-button:hover::before {
   opacity: 1;
+}
+
+/* Content Cards here */
+#content-cards {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.card {
+  border-radius: 2px;
+  padding: 25px;
+  background: var(--accent-color);
 }
 
 .content-title {
