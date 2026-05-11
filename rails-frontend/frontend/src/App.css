@@ -59,13 +59,13 @@
   margin-top: 300px;
 }
 
-#nav-button {
+.nav-button {
   position: relative;
   margin-bottom: 10px;
   padding: 0 10px 0 18px;
 }
 
-#nav-button::before {
+.nav-button::before {
   content: "";
   position: absolute;
   left: 1px;
@@ -78,12 +78,12 @@
   transition: opacity 0.2s ease;
 }
 
-#nav-button:hover {
+.nav-button:hover {
   border-radius: 2px;
   background: var(--accent-hover-color);
 }
 
-#nav-button:hover::before {
+.nav-button:hover::before {
   opacity: 1;
 }
 
