@@ -2,6 +2,7 @@ import {useState} from 'react';
 import logo from './assets/images/logo-universal.png';
 import './App.css';
 import {Greet, SendPrompt} from "../wailsjs/go/main/App";
+import NavBar from './components/NavBar';
 import SelectDemo from './aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
 
@@ -48,36 +49,7 @@ function App() {
     return (
         <div id="App">
             <div className='container'>
-                <div id="firstcolumn-container">
-                    <div id='navi'>
-                        MonoSwitch
-                        <div className='top-nav'>
-                            <div id="nav-button">
-                                Home
-                            </div>
-                            <div id="nav-button">
-                                AI Selection
-                            </div>
-                            <div id="nav-button">
-                                History
-                            </div>
-                        </div>
-                        <div className='bottom-nav'>
-                            <div id="nav-button">
-                                Settings
-                            </div>
-                            <div id="nav-button">
-                                About
-                            </div>
-                            <div id="nav-button">
-                                FAQ
-                            </div>
-                        </div>
-                    </div>
-                    <div id='avatar'>
-                        TEST
-                    </div>
-                </div>
+                <NavBar />
                 <div id="secondcolumn">
                     <div id='Title'>
                         Dashboard
@@ -94,15 +66,31 @@ function App() {
                                 Select one of the cards below to continue.
                             </h3>
                         </div>
+                        <div id='content-cards'>
+                            <div className='card'>
+                                Start a new multi-agent chat
+                            </div>
+                            <div className='card'>
+                                Use a template
+                            </div>
+                            <div className='card'>
+                                Continue where I left off
+                            </div>
+                        </div>
+                        {/* AI Agent stuff starts here / it should not be here */}
+                        {/*
                         <div id="OutputBox">
                             {resultText2}
                         </div>
                         <div id="prompt" className="prompt">Please enter your prompt: </div>
+                        */}
                     </div>
+                        {/*
                     <div id="user-input" className="input-box">
                         <input id="name" className="input" autoComplete="off" placeholder={`Message ${selected}`} name="prompt" type="text" onChange={updatePrompt}/>
                         <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>
                     </div>
+                        */}
                 </div>
             </div>
         </div>
