@@ -90,6 +90,9 @@ function App() {
                             <h2>
                                 What would you like to do today?
                             </h2>
+                            <h3>
+                                Select one of the cards below to continue.
+                            </h3>
                         </div>
                         <div id="OutputBox">
                             {resultText2}

@@ -71,12 +71,9 @@
   left: 1px;
   top: 50%;
   transform: translateY(-50%);
-
   width: 6px;
   height: 110%;
-
   background: var(--vert-bar);
-
   opacity: 0;
   transition: opacity 0.2s ease;
 }
