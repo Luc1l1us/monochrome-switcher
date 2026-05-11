@@ -94,15 +94,20 @@ function App() {
                                 Select one of the cards below to continue.
                             </h3>
                         </div>
+                        {/* AI Agent stuff starts here / it should not be here / enclosed*/}
+                        {/*
                         <div id="OutputBox">
                             {resultText2}
                         </div>
                         <div id="prompt" className="prompt">Please enter your prompt: </div>
+                        */}
                     </div>
+                        {/*
                     <div id="user-input" className="input-box">
                         <input id="name" className="input" autoComplete="off" placeholder={`Message ${selected}`} name="prompt" type="text" onChange={updatePrompt}/>
                         <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>
                     </div>
+                        */}
                 </div>
             </div>
         </div>
