@@ -1,19 +1,19 @@
 
-export default function NavBar() {
+export default function NavBar({setSelectedPanel}) {
     return (
         <div id="firstcolumn-container">
             <div id='navi'>
                 MonoSwitch
                 <div className='top-nav'>
-                    <div className="nav-button">
+                    <button className="nav-button" onClick={() => setSelectedPanel("home")}>
                         Home
-                    </div>
-                    <div className="nav-button">
+                    </button>
+                    <button className="nav-button" onClick={() => setSelectedPanel("aiselection")}>
                         AI Selection
-                    </div>
-                    <div className="nav-button">
+                    </button>
+                    <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
-                    </div>
+                    </button>
                 </div>
                 <div className='bottom-nav'>
                     <div className="nav-button">

@@ -4,6 +4,13 @@
   text-align: center;
 }
 
+h2 {
+  margin-bottom: 0;
+}
+h3 {
+  margin-top: 0;
+}
+
 .container {
   display: flex;
   flex-flow: row nowrap;
@@ -50,6 +57,11 @@
   justify-content: center;
 }
 
+.top-nav {
+  display: flex;
+  flex-flow: column wrap;
+}
+
 .top-nav,
 .bottom-nav {
   margin-top: 30px;
@@ -61,6 +73,9 @@
 }
 
 .nav-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
   position: relative;
   margin-bottom: 10px;
   padding: 0 10px 0 18px;
