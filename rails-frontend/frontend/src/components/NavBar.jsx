@@ -16,15 +16,15 @@ export default function NavBar({setSelectedPanel}) {
                     </button>
                 </div>
                 <div className='bottom-nav'>
-                    <div className="nav-button">
+                    <button className="nav-button" onClick={() => setSelectedPanel("settings")}>
                         Settings
-                    </div>
-                    <div className="nav-button">
+                    </button>
+                    <button className="nav-button" onClick={() => setSelectedPanel("about")}>
                         About
-                    </div>
-                    <div className="nav-button">
+                    </button>
+                    <button className="nav-button" onClick={() => setSelectedPanel("faq")}>
                         FAQ
-                    </div>
+                    </button>
                 </div>
             </div>
             <div id='avatar'>

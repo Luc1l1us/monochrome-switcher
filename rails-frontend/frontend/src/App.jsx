@@ -4,6 +4,8 @@ import './App.css';
 import {Greet, SendPrompt} from "../wailsjs/go/main/App";
 import NavBar from './components/NavBar';
 import SelectDemo from './aiselection';
+import Settings from './Settings';
+import Home from './Home';
 import {EnterIcon} from "@radix-ui/react-icons";
 
 async function submitPrompt() {
@@ -13,6 +15,7 @@ async function submitPrompt() {
 }
 
 function App() {
+    // delete this as this is unused
     const [resultText, setResultText] = useState("Please enter your name below 👇");
     const [name, setName] = useState('');
     const updateName = (e) => setName(e.target.value);
@@ -23,6 +26,9 @@ function App() {
     const [prompt, setPrompt] = useState('');
     const updatePrompt = (e) => setPrompt(e.target.value);
     const updateResultText2 = (prompt) => setResultText2(prompt);
+
+    //switching views
+    const [selectedPanel, setSelectedPanel] = useState("home")
 
     //get value from selectdemo
     const [selected, setSelected] = useState("");
@@ -37,46 +43,23 @@ function App() {
         SendPrompt(prompt, selected).then(updateResultText2);
     }
 
-    function printingfuncs(text, ai) {
-        console.log("input:", text);
-        console.log("AI:", ai);
-    }
-
-    function testingfuncs() {
-        printingfuncs(prompt, selected);
-    }
-
     return (
         <div id="App">
             <div className='container'>
-                <NavBar />
+                <NavBar setSelectedPanel={setSelectedPanel} />
+                {/* NavBar views here 
+                        {selectedPanel = "settings" &&  }
+                        */}
                 <div id="secondcolumn">
                     <div id='Title'>
                         Dashboard
                     </div>
                     <div id='Selector-container'>
-                        <SelectDemo onValueChange={setSelected}/> 
+                        <SelectDemo onValueChange={setSelected}/>
                     </div>
                     <div id='content'>
-                        <div className='content-title'>
-                            <h2>
-                                What would you like to do today?
-                            </h2>
-                            <h3>
-                                Select one of the cards below to continue.
-                            </h3>
-                        </div>
-                        <div id='content-cards'>
-                            <div className='card'>
-                                Start a new multi-agent chat
-                            </div>
-                            <div className='card'>
-                                Use a template
-                            </div>
-                            <div className='card'>
-                                Continue where I left off
-                            </div>
-                        </div>
+                        {selectedPanel === "home" && <Home />}
+                        {selectedPanel === "settings" &&  <Settings />}
                         {/* AI Agent stuff starts here / it should not be here */}
                         {/*
                         <div id="OutputBox">
