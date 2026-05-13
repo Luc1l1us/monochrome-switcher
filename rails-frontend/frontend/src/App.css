@@ -57,7 +57,8 @@ h3 {
   justify-content: center;
 }
 
-.top-nav {
+.top-nav,
+.bottom-nav {
   display: flex;
   flex-flow: column wrap;
 }
@@ -84,11 +85,11 @@ h3 {
 .nav-button::before {
   content: "";
   position: absolute;
-  left: 1px;
+  left: -5px;
   top: 50%;
   transform: translateY(-50%);
   width: 6px;
-  height: 110%;
+  height: 130%;
   background: var(--vert-bar);
   opacity: 0;
   transition: opacity 0.2s ease;
