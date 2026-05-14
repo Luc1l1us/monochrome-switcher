@@ -1,13 +1,10 @@
-import NavBar from './components/NavBar';
-
-
-export default function Settings() {
+export default function FAQ() {
     return (
-        <div id="settings">
+        <div id="home">
             <div id='Title'>
-                Settings
+                FAQ
             </div>
-            <div id='settings-content'>
+            <div id='home-content'>
                 <div className="content-title">
                     <h2>
                         What would you like to do today?

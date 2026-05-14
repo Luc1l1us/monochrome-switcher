@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import SelectDemo from './aiselection';
+import SelectDemo from '../aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
-import {Greet, SendPrompt} from "../wailsjs/go/main/App";
+import {Greet, SendPrompt} from "../../wailsjs/go/main/App";
 
 export default function AISelectionScreen() {
 
