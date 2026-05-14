@@ -2,9 +2,7 @@ import {useState} from 'react';
 import logo from './assets/images/logo-universal.png';
 import './App.css';
 import NavBar from './components/NavBar';
-import Settings from './Settings';
-import Home from './Home';
-import AISelectionScreen from './AISelectionScreen';
+import { About, AISelectionScreen, FAQ, History, Home, Settings } from './views';
 
 function App() {
     //switching views
@@ -19,6 +17,9 @@ function App() {
                         {selectedPanel === "home" && <Home />}
                         {selectedPanel === "settings" &&  <Settings />}
                         {selectedPanel === "aiselection" &&  <AISelectionScreen />}
+                        {selectedPanel === "history" &&  <History />}
+                        {selectedPanel === "about" &&  <About />}
+                        {selectedPanel === "faq" &&  <FAQ />}
                     </div>
                 </div>
             </div>
