@@ -7,6 +7,7 @@
   --main-font: "JetBrains Mono";
   --primary-color-darker: rgba(6, 6, 6, 1);
   --primary-color: rgba(30, 30, 30, 1);
+  --primary-color-lighter: rgba(31, 31, 31, 1);
   --border-color: rgba(64, 64, 64, 1);
   --accent-color: rgba(53, 53, 53, 1);
   --lighter-accent-color: rgba(55, 55, 55, 1);

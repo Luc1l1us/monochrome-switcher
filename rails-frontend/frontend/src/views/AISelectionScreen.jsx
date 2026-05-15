@@ -2,15 +2,19 @@ import {useState} from 'react';
 import SelectDemo from '../components/aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
 import {Greet, SendPrompt} from "../../wailsjs/go/main/App";
+import * as icons from "../../../../icons"
 
 export default function AISelectionScreen() {
 
     const [resultText2, setResultText2] = useState(''); 
     const [prompt, setPrompt] = useState('');
+    const [submittedPrompt, setsubmittedPrompt] = useState('');
+    const [selected, setSelected] = useState('');
+    
     const updatePrompt = (e) => setPrompt(e.target.value);
     const updateResultText2 = (prompt) => setResultText2(prompt);
-    const [selected, setSelected] = useState('');
 
+    // This is unused / can be ommited later
     async function submitPrompt() {
         const prompt = document.getElementId("input").value;
         const response = await SendPrompt(prompt);
@@ -18,9 +22,13 @@ export default function AISelectionScreen() {
     }
 
     function sendPromptnAgent() {
-        SendPrompt(prompt, selected).then(updateResultText2);
+        setsubmittedPrompt(prompt);
+
+        SendPrompt(prompt, selected)
+            .then(updateResultText2);
+
+        setPrompt('');
     }
-    
 
     return (
         <div id="aiselection">
@@ -33,12 +41,30 @@ export default function AISelectionScreen() {
                 </div>
                 <div id='Messenger-container'>
                     <div id="prompt" className="prompt">Please enter your prompt: </div>
+                    {/* we might need to make this a separate component */}
                     <div id="OutputBox">
-                        {resultText2}
+                        <div id="user-prompt-container">
+                            <div className='text'>
+                                {submittedPrompt}
+                            </div>
+                            <div className='avatar'>
+                                {/* THIS IS PLACEHOLDER FOR NOW */}
+                                <img src={icons.userdefaultIcon}></img>
+                            </div>
+                        </div>
+                        <div id="ai-response">
+                            <div className='avatar'>
+                                {/* we need to get the user's selection here and make it replace the img src*/}
+                                <img src={icons[selected]}></img>
+                            </div>
+                            <div className='text'>
+                                {resultText2}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="user-input" className="input-box">
-                    <input id="name" className="input" autoComplete="off" placeholder={`Message ${selected}`} name="prompt" type="text" onChange={updatePrompt}/>
+                    <input id="name" className="input" value={prompt} autoComplete="off" placeholder={`Message ${selected}`} name="prompt" type="text" onChange={updatePrompt}/>
                     <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>
                 </div>
             </div>
