@@ -4,7 +4,8 @@
   text-align: center;
 }
 
-button {
+button,
+input {
   font-family: var(--main-font);
 }
 
@@ -137,6 +138,10 @@ h3 {
   margin: 20px 0 15px 0;
 }
 
+#Selector-container {
+  margin-bottom: 10px;
+}
+
 #OutputBox {
   margin-top: 65px;
   margin-bottom: 200px;
@@ -187,4 +192,60 @@ h3 {
 .input-box .input:focus {
   border: none;
   background-color: var(--primary-color-darker);
+}
+
+/* Settings stuff here */
+#ai-models {
+  display: flex;
+  column-gap: 50px;
+}
+
+#first-column,
+#second-column {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.agent {
+  display: flex;
+  column-gap: 10px;
+}
+
+.agent-image img {
+  width: 50px;
+  height: 50px;
+  background-color: var(--lighter-accent-color);
+}
+
+.agent-text {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+}
+
+.agent-text a:visited,
+a:link,
+a:link:active,
+a:visited:active {
+  color: white;
+  text-decoration: none;
+}
+
+.agent-text a:link:hover,
+a:link:active:hover,
+a:visited:active:hover,
+a:visited:hover {
+  color: var(--text-color);
+}
+
+.api-key {
+  border: none;
+  outline: none;
+  height: 30px;
+  line-height: 30px;
+  background-color: var(--border-color);
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-color);
 }
