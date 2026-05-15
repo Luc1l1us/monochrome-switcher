@@ -3,9 +3,7 @@ import * as Select from "@radix-ui/react-select";
 import classnames from "classnames";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import "../style.css";
-import geminiIcon from "../../../../icons/gemini_icon.png"
-import chatgptIcon from "../../../../icons/chatgpt_icon.png"
-import claudeIcon from "../../../../icons/claude_icon.png"
+import * as icons from "../../../../icons"
 
 const SelectDemo = ({onValueChange}) => (
 	<Select.Root onValueChange={onValueChange}>
@@ -23,9 +21,9 @@ const SelectDemo = ({onValueChange}) => (
 				<Select.Viewport className="SelectViewport">
 					<Select.Group>
 						<Select.Label className="SelectLabel">Cloud AI</Select.Label>
-						<SelectItem value="claude" disabled> <img id="claude-icon" src={claudeIcon}/> !Claude</SelectItem>
-						<SelectItem value="chatgpt" disabled> <img id="chatgpt-icon" src={chatgptIcon}/> !ChatGPT</SelectItem>
-						<SelectItem value="gemini"> <img id="gemini-icon" src={geminiIcon}/>  Gemini</SelectItem>
+						<SelectItem value="claude" disabled> <img id="claude-icon" src={icons.claudeIcon}/> !Claude</SelectItem>
+						<SelectItem value="chatgpt" disabled> <img id="chatgpt-icon" src={icons.chatgptIcon}/> !ChatGPT</SelectItem>
+						<SelectItem value="gemini"> <img id="gemini-icon" src={icons.geminiIcon}/>  Gemini</SelectItem>
 						<SelectItem value="placeholder">placeholder</SelectItem>
 						<SelectItem value="placeholder">placeholder</SelectItem>
 					</Select.Group>
