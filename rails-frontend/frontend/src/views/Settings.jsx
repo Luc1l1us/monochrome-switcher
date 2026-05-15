@@ -24,9 +24,11 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={claudeIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <div className="agent-title">
-                                    Claude
-                                </div>
+                                <a href="">
+                                    <div className="agent-title">
+                                        Claude
+                                    </div>
+                                </a>
                                 <div className="agent-key">
                                     <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
                                 </div>
@@ -37,9 +39,11 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={chatgptIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <div className="agent-title">
-                                    ChatGPT
-                                </div>
+                                <a href="">
+                                    <div className="agent-title">
+                                        ChatGPT
+                                    </div>
+                                </a>
                                 <div className="agent-key">
                                     <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
                                 </div>
@@ -50,9 +54,11 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={geminiIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <div className="agent-title">
-                                    Gemini
-                                </div>
+                                <a href="">
+                                    <div className="agent-title">
+                                        Gemini
+                                    </div>
+                                </a>
                                 <div className="agent-key">
                                     <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
                                 </div>
@@ -68,9 +74,11 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={claudeIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <div className="agent-title">
-                                    Perplexity
-                                </div>
+                                <a href="">
+                                    <div className="agent-title">
+                                        Perplexity
+                                    </div>
+                                </a>
                                 <div className="agent-key">
                                     <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
                                 </div>
@@ -82,9 +90,11 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={claudeIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <div className="agent-title">
-                                    DeepSeek
-                                </div>
+                                <a href="">
+                                    <div className="agent-title">
+                                        DeepSeek
+                                    </div>
+                                </a>
                                 <div className="agent-key">
                                     <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
                                 </div>

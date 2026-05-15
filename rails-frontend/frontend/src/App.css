@@ -225,6 +225,21 @@ h3 {
   align-items: flex-start;
 }
 
+.agent-text a:visited,
+a:link,
+a:link:active,
+a:visited:active {
+  color: white;
+  text-decoration: none;
+}
+
+.agent-text a:link:hover,
+a:link:active:hover,
+a:visited:active:hover,
+a:visited:hover {
+  color: var(--text-color);
+}
+
 .api-key {
   border: none;
   outline: none;
