@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import SelectDemo from '../aiselection';
+import SelectDemo from '../components/aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
 import {Greet, SendPrompt} from "../../wailsjs/go/main/App";
 

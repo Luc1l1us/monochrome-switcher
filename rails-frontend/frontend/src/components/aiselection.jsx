@@ -1,15 +1,11 @@
 import * as React from "react";
 import * as Select from "@radix-ui/react-select";
 import classnames from "classnames";
-import {
-	CheckIcon,
-	ChevronDownIcon,
-	ChevronUpIcon,
-} from "@radix-ui/react-icons";
-import "./style.css";
-import geminiIcon from "../../../icons/gemini_icon.png"
-import chatgptIcon from "../../../icons/chatgpt_icon.png"
-import claudeIcon from "../../../icons/claude_icon.png"
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
+import "../style.css";
+import geminiIcon from "../../../../icons/gemini_icon.png"
+import chatgptIcon from "../../../../icons/chatgpt_icon.png"
+import claudeIcon from "../../../../icons/claude_icon.png"
 
 const SelectDemo = ({onValueChange}) => (
 	<Select.Root onValueChange={onValueChange}>
