@@ -14,13 +14,6 @@ export default function AISelectionScreen() {
     const updatePrompt = (e) => setPrompt(e.target.value);
     const updateResultText2 = (prompt) => setResultText2(prompt);
 
-    // This is unused / can be ommited later
-    async function submitPrompt() {
-        const prompt = document.getElementId("input").value;
-        const response = await SendPrompt(prompt);
-        console.log(response);
-    }
-
     function sendPromptnAgent() {
         setsubmittedPrompt(prompt);
 
@@ -54,7 +47,6 @@ export default function AISelectionScreen() {
                         </div>
                         <div id="ai-response">
                             <div className='avatar'>
-                                {/* we need to get the user's selection here and make it replace the img src*/}
                                 <img src={icons[selected]}></img>
                             </div>
                             <div className='text'>
