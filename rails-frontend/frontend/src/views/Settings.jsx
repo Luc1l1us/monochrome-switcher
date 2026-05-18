@@ -24,7 +24,7 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={claudeIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <a href="">
+                                <a href="https://platform.claude.com/settings/keys">
                                     <div className="agent-title">
                                         Claude
                                     </div>
@@ -39,7 +39,7 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={chatgptIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <a href="">
+                                <a href="https://openai.com/api/">
                                     <div className="agent-title">
                                         ChatGPT
                                     </div>
@@ -54,7 +54,7 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={geminiIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <a href="">
+                                <a href="https://ai.google.dev/gemini-api/docs">
                                     <div className="agent-title">
                                         Gemini
                                     </div>
@@ -74,7 +74,7 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={claudeIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <a href="">
+                                <a href="https://console.perplexity.ai/">
                                     <div className="agent-title">
                                         Perplexity
                                     </div>
@@ -90,7 +90,7 @@ export default function Settings() {
                                 <img id="gemini-api-image" src={claudeIcon}></img>
                             </div>
                             <div className="agent-text">
-                                <a href="">
+                                <a href="https://platform.deepseek.com/api_keys">
                                     <div className="agent-title">
                                         DeepSeek
                                     </div>

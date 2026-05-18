@@ -8,7 +8,7 @@ export default function NavBar({setSelectedPanel}) {
                     <button className="nav-button" onClick={() => setSelectedPanel("home")}>
                         Home
                     </button>
-                    <button className="nav-button" onClick={() => setSelectedPanel("aiselection")}>
+                    <button className="nav-button" onClick={() => setSelectedPanel("singleagent")}>
                         AI Selection
                     </button>
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
