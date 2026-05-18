@@ -19,8 +19,6 @@ export default function AISelectionScreen() {
 
         SendPrompt(prompt, selected)
             .then(updateResultText2);
-
-        setPrompt('');
     }
 
     return (
