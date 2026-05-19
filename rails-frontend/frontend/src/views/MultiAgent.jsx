@@ -1,8 +1,30 @@
+import {useState} from 'react';
+import SelectDemo from '../components/aiselection';
+import {EnterIcon} from "@radix-ui/react-icons";
+import {Greet, SendPrompt} from "../../wailsjs/go/main/App";
+import * as icons from "../../../../icons"
+
 export default function MultiAgent() {
+
+    const [resultText2, setResultText2] = useState(''); 
+    const [prompt, setPrompt] = useState('');
+    const [submittedPrompt, setsubmittedPrompt] = useState('');
+    const [selected, setSelected] = useState('');
+    
+    const updatePrompt = (e) => setPrompt(e.target.value);
+    const updateResultText2 = (prompt) => setResultText2(prompt);
+
+    function sendPromptnAgent() {
+        setsubmittedPrompt(prompt);
+
+        SendPrompt(prompt, selected)
+            .then(updateResultText2);
+    }
+
     return (
         <div id="aiselection">
             <div id='Title'>
-                AI Selection
+                Multi-Agent Selection
             </div>
             <div id='aiselection-content'>
                 <div id='Selector-container'>
