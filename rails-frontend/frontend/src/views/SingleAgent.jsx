@@ -3,8 +3,9 @@ import SelectDemo from '../components/aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
 import {Greet, SendPrompt} from "../../wailsjs/go/main/App";
 import * as icons from "../../../../icons"
+import {MultiAgent} from '../views';
 
-export default function AISelectionScreen() {
+export default function AISelectionScreen({setSelectedPanel}) {
 
     const [resultText2, setResultText2] = useState(''); 
     const [prompt, setPrompt] = useState('');
@@ -27,8 +28,13 @@ export default function AISelectionScreen() {
                 AI Selection
             </div>
             <div id='aiselection-content'>
-                <div id='Selector-container'>
-                    <SelectDemo onValueChange={setSelected}/>
+                <div id='selection-row'>
+                    <div id='Selector-container'>
+                        <SelectDemo onValueChange={setSelected}/>
+                    </div>
+                    <button id='multi-agent-button' onClick={() => setSelectedPanel("multiagent")}>
+                        +
+                    </button>
                 </div>
                 <div id='Messenger-container'>
                     <div id="prompt" className="prompt">Please enter your prompt: </div>

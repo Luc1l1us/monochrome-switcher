@@ -2,7 +2,7 @@ import {useState} from 'react';
 import logo from './assets/images/logo-universal.png';
 import './App.css';
 import NavBar from './components/NavBar';
-import { About, SingleAgent, FAQ, History, Home, Settings } from './views';
+import { About, SingleAgent, MultiAgent, FAQ, History, Home, Settings } from './views';
 
 function App() {
     //switching views
@@ -16,7 +16,8 @@ function App() {
                     <div id='content'>
                         {selectedPanel === "home" && <Home />}
                         {selectedPanel === "settings" &&  <Settings />}
-                        {selectedPanel === "singleagent" &&  <SingleAgent />}
+                        {selectedPanel === "singleagent" &&  <SingleAgent setSelectedPanel={setSelectedPanel}/>}
+                        {selectedPanel === "multiagent" &&  <MultiAgent />}
                         {selectedPanel === "history" &&  <History />}
                         {selectedPanel === "about" &&  <About />}
                         {selectedPanel === "faq" &&  <FAQ />}
