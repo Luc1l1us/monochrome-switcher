@@ -154,7 +154,7 @@ h3 {
 
 #user-input {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -170,6 +170,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: flex-end;
 }
 
 .input-box .btn:hover {
@@ -177,6 +178,7 @@ h3 {
 }
 
 .input-box .input {
+  flex-grow: 2;
   margin-left: 5px;
   border: none;
   border-radius: 3px;
