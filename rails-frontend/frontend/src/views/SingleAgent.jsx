@@ -15,11 +15,17 @@ export default function AISelectionScreen({setSelectedPanel}) {
     const updatePrompt = (e) => setPrompt(e.target.value);
     const updateResultText2 = (prompt) => setResultText2(prompt);
 
+    // this convo should be a .json file
+    const [convo, setConvo] = useState("");
+
     function sendPromptnAgent() {
         setsubmittedPrompt(prompt);
 
         SendPrompt(prompt, selected)
-            .then(updateResultText2);
+            .then(updateResultText2)
+            .then(() => {
+                setConvo("1");
+            })
     }
 
     return (
@@ -37,26 +43,36 @@ export default function AISelectionScreen({setSelectedPanel}) {
                     </button>
                 </div>
                 <div id='Messenger-container'>
-                    <div id="prompt" className="prompt">Please enter your prompt: </div>
+                    {/* Show this when the convo variable is empty */}
+                    { !convo && (
+                        <div id="prompt" className="prompt">Please enter your prompt: </div>
+                    )}
                     {/* we might need to make this a separate component */}
                     <div id="OutputBox">
-                        <div id="user-prompt-container">
-                            <div className='text'>
-                                {submittedPrompt}
+                        {/* HIDE THE USER PROMPT WHEN THERE IS NO CONVO */}
+                        { convo && (
+                            <div id="user-prompt-container">
+                                <div className='text'>
+                                    {submittedPrompt}
+                                </div>
+                                <div className='avatar'>
+                                    {/* THIS IS PLACEHOLDER FOR NOW */}
+                                    <img src={icons.userdefaultIcon}></img>
+                                </div>
                             </div>
-                            <div className='avatar'>
-                                {/* THIS IS PLACEHOLDER FOR NOW */}
-                                <img src={icons.userdefaultIcon}></img>
+                            )
+                        }
+                        {/* HIDE THE AI PROMPT WHEN THERE IS NO CONVO */}
+                        { convo && (
+                            <div id="ai-response">
+                                <div className='avatar'>
+                                    <img src={icons[selected]}></img>
+                                </div>
+                                <div className='text'>
+                                    {resultText2}
+                                </div>
                             </div>
-                        </div>
-                        <div id="ai-response">
-                            <div className='avatar'>
-                                <img src={icons[selected]}></img>
-                            </div>
-                            <div className='text'>
-                                {resultText2}
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
                 <div id="user-input" className="input-box">
