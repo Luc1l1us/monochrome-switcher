@@ -43,7 +43,10 @@ export default function AISelectionScreen({setSelectedPanel}) {
                     </button>
                 </div>
                 <div id='Messenger-container'>
-                    <div id="prompt" className="prompt">Please enter your prompt: </div>
+                    {/* Show this when the convo variable is empty */}
+                    { !convo && (
+                        <div id="prompt" className="prompt">Please enter your prompt: </div>
+                    )}
                     {/* we might need to make this a separate component */}
                     <div id="OutputBox">
                         {/* HIDE THE USER PROMPT WHEN THERE IS NO CONVO */}

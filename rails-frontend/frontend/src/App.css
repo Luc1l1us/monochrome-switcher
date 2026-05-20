@@ -272,10 +272,14 @@ a:visited:hover {
   flex-flow: column wrap;
   margin-top: 65px;
   margin-bottom: 200px;
+}
+
+#Messenger-container {
   overflow: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
   flex-basis: 66.667%;
+  height: 70vh;
 }
 
 #user-prompt-container {
