@@ -68,7 +68,7 @@ body {
 }
 
 .SelectContent {
-  align-self: center;
+  align-self: flex-start;
   overflow: hidden;
   background-color: var(--lighter-accent-color);
   border-radius: 6px;

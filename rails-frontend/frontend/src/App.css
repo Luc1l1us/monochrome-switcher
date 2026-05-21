@@ -282,6 +282,7 @@ a:visited:hover {
   -ms-overflow-style: none;
   flex-basis: 66.667%;
   height: 70vh;
+  width: 70vh;
 }
 
 #user-prompt-container {
