@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Home({setSelectedPanel}) {
     return (
         <div id="home">
             <div id='Title'>
@@ -14,15 +14,15 @@ export default function Home() {
                     </h3>
                 </div>
                 <div id='content-cards'>
-                    <div className='card'>
+                    <button className='card' onClick={() => setSelectedPanel("multiagent")}>
                         Start a new multi-agent chat
-                    </div>
-                    <div className='card'>
+                    </button>
+                    <button className='card'>
                         Use a template
-                    </div>
-                    <div className='card'>
+                    </button>
+                    <button className='card'>
                         Continue where I left off
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

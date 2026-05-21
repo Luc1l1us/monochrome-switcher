@@ -14,7 +14,7 @@ function App() {
                 <NavBar setSelectedPanel={setSelectedPanel} />
                 <div id="secondcolumn">
                     <div id='content'>
-                        {selectedPanel === "home" && <Home />}
+                        {selectedPanel === "home" && <Home setSelectedPanel={setSelectedPanel}/>}
                         {selectedPanel === "settings" &&  <Settings />}
                         {selectedPanel === "singleagent" &&  <SingleAgent setSelectedPanel={setSelectedPanel}/>}
                         {selectedPanel === "multiagent" &&  <MultiAgent />}
