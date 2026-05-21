@@ -8,6 +8,8 @@ import (
 	"monochrome-switcher/backend/config"
 	"monochrome-switcher/backend/core"
 	"monochrome-switcher/backend/services"
+
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 // App struct
@@ -27,6 +29,17 @@ func NewApp() *App {
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+
+	width := 1024
+	height := 768
+
+	screens, _ := runtime.ScreenGetAll(a.ctx)
+	primary := screens[0]
+
+	x := primary.Size.Width - width
+	y := primary.Size.Height - height
+
+	runtime.WindowSetPosition(a.ctx, x, y)
 }
 
 func (a *App) SendPrompt(prompt string, agent string) string {
