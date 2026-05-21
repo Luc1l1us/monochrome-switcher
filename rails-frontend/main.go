@@ -20,12 +20,15 @@ func main() {
 		Title:     "rails-frontend",
 		Frameless: true,
 		Width:     1024,
+		MaxWidth:  1024,
+		MaxHeight: 768,
 		Height:    768,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
 		BackgroundColour: &options.RGBA{R: 30, G: 30, B: 30, A: 1},
-		OnStartup:        app.startup,
+
+		OnStartup: app.startup,
 		Bind: []interface{}{
 			app,
 		},
