@@ -10,7 +10,7 @@ export default function Settings() {
             </div>
             <div id='settings-content'>
                 <div className="content-title">
-                    <h2>
+                    <h2 className="settings-section-title">
                         API Keys
                     </h2>
                     <h3 className="smol">
@@ -101,7 +101,32 @@ export default function Settings() {
                             </div>
                         </div>
 
+                        <div className="agent">
+                            <div className="agent-image">
+                                <img id="gemini-api-image" src={claudeIcon}></img>
+                            </div>
+                            <div className="agent-text">
+                                <a href="https://platform.deepseek.com/api_keys">
+                                    <div className="agent-title">
+                                        Placeholder
+                                    </div>
+                                </a>
+                                <div className="agent-key">
+                                    <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                {/* ANOTHER SECTION */}
+                <div className="content-title">
+                    <h2 className="settings-section-title">
+                        Preferences
+                    </h2>
+                    <h3 className="smol">
+                        Configure app behavior, interface, and user experience.
+                    </h3>
                 </div>
             </div>
         </div>
