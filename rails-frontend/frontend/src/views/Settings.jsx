@@ -100,22 +100,6 @@ export default function Settings() {
                                 </div>
                             </div>
                         </div>
-
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="gemini-api-image" src={claudeIcon}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://platform.deepseek.com/api_keys">
-                                    <div className="agent-title">
-                                        Placeholder
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -127,6 +111,34 @@ export default function Settings() {
                     <h3 className="smol">
                         Configure app behavior, interface, and user experience.
                     </h3>
+                </div>
+                <div id="preferences">
+                    <div className="preferences-container">
+                        <div className="resize" id="pref">
+                            <div className="pref-text">
+                                Resizable?
+                            </div>
+                            <label className="switch">
+                                <input type="checkbox"></input>
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
+                        <div className="minimizetray" id="pref">
+                            <div className="pref-text">
+                                Minimize to Tray?
+                            </div>
+                            <label className="switch">
+                                <input type="checkbox"></input>
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {/* SAVE BUTTON TO SAVE CHANGES */}
+                <div id="save-button">
+                    <button>
+                        SAVE
+                    </button>
                 </div>
             </div>
         </div>

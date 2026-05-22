@@ -26,6 +26,8 @@ export default function AISelectionScreen({setSelectedPanel}) {
             .then(() => {
                 setConvo("1");
             })
+
+            setPrompt("");
     }
 
     return (
