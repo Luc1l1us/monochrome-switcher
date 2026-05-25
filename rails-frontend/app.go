@@ -58,6 +58,15 @@ func (a *App) SendPrompt(prompt string, agent string) string {
 	return fmt.Sprintf("Hello user, Here is your prompt: %s", prompt)
 } */
 
+// Settings funcs here
+func (a *App) SaveSettings(settings services.Settings) error {
+	return services.SaveSettings(settings)
+}
+
+func (a *App) LoadSettings() (services.Settings, error) {
+	return services.LoadSettings()
+}
+
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)

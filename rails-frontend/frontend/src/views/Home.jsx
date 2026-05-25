@@ -18,10 +18,10 @@ export default function Home({setSelectedPanel}) {
                         Start a new multi-agent chat
                     </button>
                     <button className='card'>
-                        Use a template
+                        Continue Working
                     </button>
                     <button className='card'>
-                        Continue where I left off
+                        Usage Statistics
                     </button>
                 </div>
             </div>

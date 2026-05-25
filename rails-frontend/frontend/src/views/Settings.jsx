@@ -1,8 +1,44 @@
 import geminiIcon from "../../../../icons/gemini_icon.png";
 import chatgptIcon from "../../../../icons/chatgpt_icon.png"
 import claudeIcon from "../../../../icons/claude_icon.png"
+import { SaveSettings, LoadSettings } from "../../wailsjs/go/main/App"
+import { useEffect, useState } from "react";
 
 export default function Settings() {
+    const [settings, setSettings] = useState({
+        resizable: false,
+        minimizetotray: false
+    });
+
+
+
+/*     const handleChange = async (e) => {
+        const value = e.target.checked;
+
+        setResizable(value); 
+        setMinimize(value);
+
+        await SaveSettings({
+            resizable: value,
+            minimizetotray: value
+        });
+    }
+*/
+
+    useEffect(() => {
+        const init = async () => {
+            if (!window.go?.main) {
+                console.warn("Wails not ready yet");
+                return;
+            }
+
+            const settings = await LoadSettings();
+            setSettings(settings);
+        };
+
+        init();
+    }, []);
+
     return (
         <div id="settings">
             <div id='Title'>
@@ -119,7 +155,19 @@ export default function Settings() {
                                 Resizable?
                             </div>
                             <label className="switch">
-                                <input type="checkbox"></input>
+                                <input 
+                                    type="checkbox"
+                                    checked={settings.resizable}
+                                    onChange={async (e) => {
+                                        const updated = {
+                                            ...settings,
+                                            resizable: e.target.checked
+                                        };
+
+                                        setSettings(updated)
+                                        await SaveSettings(updated)
+                                    }}
+                                ></input>
                                 <span className="slider round"></span>
                             </label>
                         </div>
@@ -128,7 +176,19 @@ export default function Settings() {
                                 Minimize to Tray?
                             </div>
                             <label className="switch">
-                                <input type="checkbox"></input>
+                            <input 
+                                    type="checkbox"
+                                    checked={settings.minimizetotray}
+                                    onChange={async (e) => {
+                                            const updated = {
+                                                ...settings,
+                                                minimizetotray: e.target.checked
+                                            };
+
+                                            setSettings(updated);
+                                            await SaveSettings(updated);
+                                        }}
+                                ></input>
                                 <span className="slider round"></span>
                             </label>
                         </div>
