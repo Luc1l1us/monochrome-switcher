@@ -14,38 +14,35 @@ type Settings struct {
 
 // this is not working
 func GetSettingsPath() string {
-	exePath, _ := os.Executable()
-	cwd, _ := os.Getwd()
+	exePath, err := os.UserConfigDir()
+	if err != nil {
+		panic(err)
+	}
 
-	fmt.Println("EXE:", exePath)
-	fmt.Println("CWD:", cwd)
+	appDir := filepath.Join(exePath, "monochrome-switcher")
 
-	dir := filepath.Join(filepath.Dir(exePath), "config")
+	os.MkdirAll(appDir, os.ModePerm)
 
-	fmt.Println("CONFIG DIR:", dir)
-
-	os.MkdirAll(dir, os.ModePerm)
-
-	return filepath.Join(dir, "settings.json")
+	return filepath.Join(appDir, "settings.json")
 }
 
-//var SettingsPath = filepath.Join(".", "settings.json")
-
-var SettingsPath = GetSettingsPath()
-
 func SaveSettings(settings Settings) error {
+	SettingsPath := GetSettingsPath()
+
+	fmt.Println("ABS PATH:", SettingsPath)
+	fmt.Println("SAVE PATH:", SettingsPath)
+
 	data, err := json.MarshalIndent(settings, "", " ")
 	if err != nil {
 		return err
 	}
 
-	fmt.Println("ABS PATH:", SettingsPath)
-	fmt.Println("SAVE PATH:", SettingsPath)
 	return os.WriteFile(SettingsPath, data, 0644)
 }
 
 func LoadSettings() (Settings, error) {
 	var settings Settings
+	SettingsPath := GetSettingsPath()
 
 	file, err := os.ReadFile(SettingsPath)
 	if err != nil {
