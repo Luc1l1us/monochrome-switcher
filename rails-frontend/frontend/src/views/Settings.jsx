@@ -10,21 +10,6 @@ export default function Settings() {
         minimizetotray: false
     });
 
-
-
-/*     const handleChange = async (e) => {
-        const value = e.target.checked;
-
-        setResizable(value); 
-        setMinimize(value);
-
-        await SaveSettings({
-            resizable: value,
-            minimizetotray: value
-        });
-    }
-*/
-
     useEffect(() => {
         const init = async () => {
             if (!window.go?.main) {
@@ -38,6 +23,15 @@ export default function Settings() {
 
         init();
     }, []);
+
+    const handleCheckboxChange = (e) => {
+        const {name, checked} = e.target
+
+        setSettings(prev => ({
+            ...prev,
+            [name]: checked
+        }))
+    }
 
     return (
         <div id="settings">
@@ -158,14 +152,11 @@ export default function Settings() {
                                 <input 
                                     type="checkbox"
                                     checked={settings.resizable}
-                                    onChange={async (e) => {
-                                        const updated = {
-                                            ...settings,
+                                    onChange={(e) => {
+                                        setSettings(prev => ({
+                                            ...prev,
                                             resizable: e.target.checked
-                                        };
-
-                                        setSettings(updated)
-                                        await SaveSettings(updated)
+                                        }))
                                     }}
                                 ></input>
                                 <span className="slider round"></span>
@@ -179,15 +170,12 @@ export default function Settings() {
                             <input 
                                     type="checkbox"
                                     checked={settings.minimizetotray}
-                                    onChange={async (e) => {
-                                            const updated = {
-                                                ...settings,
-                                                minimizetotray: e.target.checked
-                                            };
-
-                                            setSettings(updated);
-                                            await SaveSettings(updated);
-                                        }}
+                                    onChange={(e) => {
+                                        setSettings(prev => ({
+                                            ...prev,
+                                            minimizetotray: e.target.checked
+                                        }))
+                                    }}
                                 ></input>
                                 <span className="slider round"></span>
                             </label>
@@ -196,7 +184,11 @@ export default function Settings() {
                 </div>
                 {/* SAVE BUTTON TO SAVE CHANGES */}
                 <div id="save-button">
-                    <button>
+                    <button
+                        onClick={async () => {
+                            console.log(settings)
+                            SaveSettings(settings);
+                        }}>
                         SAVE
                     </button>
                 </div>

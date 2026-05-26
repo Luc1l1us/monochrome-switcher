@@ -1,4 +1,4 @@
 {
- "Resizable": true,
- "MinimizeToTray": true
+ "resizable": false,
+ "minimizetotray": false
 }
