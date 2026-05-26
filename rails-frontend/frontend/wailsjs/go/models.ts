@@ -1,8 +1,8 @@
 export namespace services {
 	
 	export class Settings {
-	    Resizable: boolean;
-	    MinimizeToTray: boolean;
+	    resizable: boolean;
+	    minimizetotray: boolean;
 	
 	    static createFrom(source: any = {}) {
 	        return new Settings(source);
@@ -10,8 +10,8 @@ export namespace services {
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
-	        this.Resizable = source["Resizable"];
-	        this.MinimizeToTray = source["MinimizeToTray"];
+	        this.resizable = source["resizable"];
+	        this.minimizetotray = source["minimizetotray"];
 	    }
 	}
 
