@@ -1,4 +1,5 @@
 ### INCOMPLETE / NOT WORKING
+
 ### Monochrome-switcher
 
 <p> An app that lets the users mix-and-match different kinds of agents/AI either local or Cloud AIs. These agents/AIs are integrated into a panel to which it can support up to 5 agents/AIs at once. </p>
@@ -68,6 +69,25 @@ GEMINI_API_KEY = [insert api token here]
 OPENAI_API_KEY = [insert api token here]
 ANTHROPIC_API_KEY = [insert api token here]
 and much more
+```
+
+### User Configuration
+
+<p> To view or edit the settings.json file, here are the location for each operating system: </p>
+
+```
+Windows
+C:\Users\[UserName]\AppData\Roaming\monochrome-switcher\settings.json
+```
+
+```
+MacOS
+~/Library/Application Support/monochrome-switcher/settings.json
+```
+
+```
+Linux
+~/.config/monochrome-switcher/settings.json
 ```
 
 ### AI/Agents to add
