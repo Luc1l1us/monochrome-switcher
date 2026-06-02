@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 export default function Settings() {
     const [settings, setSettings] = useState({
         resizable: false,
-        minimizetotray: false
+        minimizetotray: false,
+        launchonstartup: false,
+        transparency: false,
     });
 
     useEffect(() => {
@@ -174,6 +176,42 @@ export default function Settings() {
                                         setSettings(prev => ({
                                             ...prev,
                                             minimizetotray: e.target.checked
+                                        }))
+                                    }}
+                                ></input>
+                                <span className="slider round"></span>
+                            </label>
+                        </div>                        
+                        <div className="launchonstartup" id="pref">
+                            <div className="pref-text">
+                                Launch on Startup?
+                            </div>
+                            <label className="switch">
+                            <input 
+                                    type="checkbox"
+                                    checked={settings.launchonstartup}
+                                    onChange={(e) => {
+                                        setSettings(prev => ({
+                                            ...prev,
+                                            launchonstartup: e.target.checked
+                                        }))
+                                    }}
+                                ></input>
+                                <span className="slider round"></span>
+                            </label>
+                        </div>                        
+                        <div className="transparency" id="pref">
+                            <div className="pref-text">
+                                Enable Transparency?
+                            </div>
+                            <label className="switch">
+                            <input 
+                                    type="checkbox"
+                                    checked={settings.transparency}
+                                    onChange={(e) => {
+                                        setSettings(prev => ({
+                                            ...prev,
+                                            transparency: e.target.checked
                                         }))
                                     }}
                                 ></input>

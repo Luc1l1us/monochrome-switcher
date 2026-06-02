@@ -8,8 +8,10 @@ import (
 )
 
 type Settings struct {
-	Resizable      bool `json:"resizable"`
-	MinimizeToTray bool `json:"minimizetotray"`
+	Resizable       bool `json:"resizable"`
+	MinimizeToTray  bool `json:"minimizetotray"`
+	LaunchOnStartup bool `json:"launchonstartup"`
+	Transparency    bool `json:"transparency"`
 }
 
 // this is not working
