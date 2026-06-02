@@ -90,6 +90,8 @@ Linux
 ~/.config/monochrome-switcher/settings.json
 ```
 
+<p> replace [UserName] with your own desktop's username </p>
+
 ### AI/Agents to add
 
 ```
