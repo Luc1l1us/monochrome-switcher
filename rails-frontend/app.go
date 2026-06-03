@@ -8,6 +8,10 @@ import (
 	"monochrome-switcher/backend/config"
 	"monochrome-switcher/backend/core"
 	"monochrome-switcher/backend/services"
+	"os"
+	"os/exec"
+	osRuntime "runtime"
+	"syscall"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -65,6 +69,22 @@ func (a *App) SaveSettings(settings services.Settings) error {
 
 func (a *App) LoadSettings() (services.Settings, error) {
 	return services.LoadSettings()
+}
+
+// Apply settings in realtime
+func (a *App) ReloadApp(_ ...any) {
+	self, _ := os.Executable()
+	args := os.Args
+	env := os.Environ()
+	if osRuntime.GOOS == "windows" {
+		cmd := exec.Command(self, args[1:]...)
+		cmd.Env = env
+		if err := cmd.Start(); err == nil {
+			os.Exit(0)
+		}
+	} else {
+		syscall.Exec(self, args, env)
+	}
 }
 
 // Greet returns a greeting for the given name

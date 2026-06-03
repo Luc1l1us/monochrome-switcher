@@ -10,6 +10,10 @@ export function LoadSettings() {
   return window['go']['main']['App']['LoadSettings']();
 }
 
+export function ReloadApp(arg1) {
+  return window['go']['main']['App']['ReloadApp'](arg1);
+}
+
 export function SaveSettings(arg1) {
   return window['go']['main']['App']['SaveSettings'](arg1);
 }

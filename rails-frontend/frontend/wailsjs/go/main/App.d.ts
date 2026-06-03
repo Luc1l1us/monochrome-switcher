@@ -6,6 +6,8 @@ export function Greet(arg1:string):Promise<string>;
 
 export function LoadSettings():Promise<services.Settings>;
 
+export function ReloadApp(arg1:Array<any>):Promise<void>;
+
 export function SaveSettings(arg1:services.Settings):Promise<void>;
 
 export function SendPrompt(arg1:string,arg2:string):Promise<string>;

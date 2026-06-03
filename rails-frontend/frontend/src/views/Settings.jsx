@@ -1,7 +1,7 @@
 import geminiIcon from "../../../../icons/gemini_icon.png";
 import chatgptIcon from "../../../../icons/chatgpt_icon.png"
 import claudeIcon from "../../../../icons/claude_icon.png"
-import { SaveSettings, LoadSettings } from "../../wailsjs/go/main/App"
+import { SaveSettings, LoadSettings, ReloadApp } from "../../wailsjs/go/main/App"
 import { useEffect, useState } from "react";
 
 export default function Settings() {
@@ -226,6 +226,7 @@ export default function Settings() {
                         onClick={async () => {
                             console.log(settings)
                             SaveSettings(settings);
+                            //ReloadApp();
                         }}>
                         SAVE
                     </button>
