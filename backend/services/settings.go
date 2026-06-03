@@ -14,7 +14,6 @@ type Settings struct {
 	Transparency    bool `json:"transparency"`
 }
 
-// this is not working
 func GetSettingsPath() string {
 	exePath, err := os.UserConfigDir()
 	if err != nil {
