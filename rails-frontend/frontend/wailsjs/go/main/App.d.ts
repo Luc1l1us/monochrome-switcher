@@ -4,9 +4,13 @@ import {services} from '../models';
 
 export function Greet(arg1:string):Promise<string>;
 
+export function LoadAPIKeys():Promise<services.APIKeys>;
+
 export function LoadSettings():Promise<services.Settings>;
 
 export function ReloadApp(arg1:Array<any>):Promise<void>;
+
+export function SaveAPIKeys(arg1:services.APIKeys):Promise<void>;
 
 export function SaveSettings(arg1:services.Settings):Promise<void>;
 

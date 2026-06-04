@@ -1,8 +1,9 @@
 import geminiIcon from "../../../../icons/gemini_icon.png";
 import chatgptIcon from "../../../../icons/chatgpt_icon.png"
 import claudeIcon from "../../../../icons/claude_icon.png"
-import { SaveSettings, LoadSettings, ReloadApp } from "../../wailsjs/go/main/App"
+import { SaveSettings, LoadSettings, SaveAPIKeys, LoadAPIKeys } from "../../wailsjs/go/main/App"
 import { useEffect, useState } from "react";
+import { claude } from "../../../../icons";
 
 export default function Settings() {
     const [settings, setSettings] = useState({
@@ -11,6 +12,12 @@ export default function Settings() {
         launchonstartup: false,
         transparency: false,
     });
+
+    const [apikeys, setapikeys] = useState({
+        gemini_key: '',
+        claude_key: '',
+        chatgpt_key: '',
+    })
 
     useEffect(() => {
         const init = async () => {
@@ -21,11 +28,15 @@ export default function Settings() {
 
             const settings = await LoadSettings();
             setSettings(settings);
+
+            const apikeys = await LoadAPIKeys();
+            setapikeys(apikeys);
         };
 
         init();
     }, []);
 
+    // one is const, whilst the other is function | Make this consistent
     const handleCheckboxChange = (e) => {
         const {name, checked} = e.target
 
@@ -33,6 +44,15 @@ export default function Settings() {
             ...prev,
             [name]: checked
         }))
+    }
+
+    function handleAPIChange(e) {
+        const {name, value} = e.target;
+
+        setapikeys(prev => ({
+            ...prev,
+            [name]: value
+        }));
     }
 
     return (
@@ -62,7 +82,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
+                                    <input type="password" value={apikeys.claude} onChange={handleAPIChange} name="claude_key" className="api-key" autoComplete="off" placeholder={apikeys.claude_key}/>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +97,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
+                                    <input type="password" value={apikeys.chatgpt} onChange={handleAPIChange} name="chatgpt_key" className="api-key" autoComplete="off" placeholder={apikeys.chatgpt_key}/>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +112,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
+                                    <input type="password" value={apikeys.gemini} onChange={handleAPIChange} name="gemini_key" className="api-key" autoComplete="off" placeholder={apikeys.gemini_key}/>
                                 </div>
                             </div>
                         </div>
@@ -226,6 +246,8 @@ export default function Settings() {
                         onClick={async () => {
                             console.log(settings)
                             SaveSettings(settings);
+                            console.log(apikeys);
+                            SaveAPIKeys(apikeys);
                             //ReloadApp();
                         }}>
                         SAVE

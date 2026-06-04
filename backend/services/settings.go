@@ -14,7 +14,13 @@ type Settings struct {
 	Transparency    bool `json:"transparency"`
 }
 
-func GetSettingsPath() string {
+type APIKeys struct {
+	Claude  string `json:"claude_key"`
+	ChatGPT string `json:"chatgpt_key"`
+	Gemini  string `json:"gemini_key"`
+}
+
+func GetSettingsPath(filename string) string {
 	exePath, err := os.UserConfigDir()
 	if err != nil {
 		panic(err)
@@ -24,11 +30,11 @@ func GetSettingsPath() string {
 
 	os.MkdirAll(appDir, os.ModePerm)
 
-	return filepath.Join(appDir, "settings.json")
+	return filepath.Join(appDir, filename)
 }
 
 func SaveSettings(settings Settings) error {
-	SettingsPath := GetSettingsPath()
+	SettingsPath := GetSettingsPath("settings.json")
 
 	fmt.Println("ABS PATH:", SettingsPath)
 	fmt.Println("SAVE PATH:", SettingsPath)
@@ -41,9 +47,23 @@ func SaveSettings(settings Settings) error {
 	return os.WriteFile(SettingsPath, data, 0644)
 }
 
+func SaveAPIKeys(apis APIKeys) error {
+	SettingsPath := GetSettingsPath("apikeys.json")
+
+	fmt.Println("ABS PATH:", SettingsPath)
+	fmt.Println("SAVE PATH:", SettingsPath)
+
+	data, err := json.MarshalIndent(apis, "", " ")
+	if err != nil {
+		return err
+	}
+
+	return os.WriteFile(SettingsPath, data, 0644)
+}
+
 func LoadSettings() (Settings, error) {
 	var settings Settings
-	SettingsPath := GetSettingsPath()
+	SettingsPath := GetSettingsPath("settings.json")
 
 	file, err := os.ReadFile(SettingsPath)
 	if err != nil {
@@ -52,4 +72,18 @@ func LoadSettings() (Settings, error) {
 
 	err = json.Unmarshal(file, &settings)
 	return settings, err
+}
+
+func LoadAPIKeys() (APIKeys, error) {
+	SettingsPath := GetSettingsPath("apikeys.json")
+
+	var keys APIKeys
+
+	data, err := os.ReadFile(SettingsPath)
+	if err != nil {
+		return keys, err
+	}
+
+	err = json.Unmarshal(data, &keys)
+	return keys, err
 }

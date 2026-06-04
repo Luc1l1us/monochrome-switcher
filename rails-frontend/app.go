@@ -71,6 +71,14 @@ func (a *App) LoadSettings() (services.Settings, error) {
 	return services.LoadSettings()
 }
 
+func (a *App) SaveAPIKeys(apis services.APIKeys) error {
+	return services.SaveAPIKeys(apis)
+}
+
+func (a *App) LoadAPIKeys() (services.APIKeys, error) {
+	return services.LoadAPIKeys()
+}
+
 // Apply settings in realtime
 func (a *App) ReloadApp(_ ...any) {
 	self, _ := os.Executable()
