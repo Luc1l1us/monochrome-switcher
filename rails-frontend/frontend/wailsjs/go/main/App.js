@@ -6,12 +6,20 @@ export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
 
+export function LoadAPIKeys() {
+  return window['go']['main']['App']['LoadAPIKeys']();
+}
+
 export function LoadSettings() {
   return window['go']['main']['App']['LoadSettings']();
 }
 
 export function ReloadApp(arg1) {
   return window['go']['main']['App']['ReloadApp'](arg1);
+}
+
+export function SaveAPIKeys(arg1) {
+  return window['go']['main']['App']['SaveAPIKeys'](arg1);
 }
 
 export function SaveSettings(arg1) {
