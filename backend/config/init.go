@@ -5,11 +5,10 @@ import (
 	"log"
 	"monochrome-switcher/backend/Agents/Cloud"
 	"monochrome-switcher/backend/core"
-	"os"
+	"monochrome-switcher/backend/services"
 
 	"github.com/anthropics/anthropic-sdk-go"
 	anthropicOption "github.com/anthropics/anthropic-sdk-go/option"
-	"github.com/joho/godotenv"
 
 	"github.com/openai/openai-go/v3"
 	openaiOption "github.com/openai/openai-go/v3/option"
@@ -19,17 +18,23 @@ import (
 
 func InitProviders() map[string]core.Provider {
 
-	dotenv := godotenv.Load("../backend/.env")
+	keys, err := services.LoadAPIKeys()
+	if err != nil {
+		log.Println("Warning: .json file not loaded!")
+	}
+
+	/* dotenv := godotenv.Load("../backend/.env")
 
 	if dotenv != nil {
 		log.Println("Warning: .env not loaded")
-	}
+	} */
 
 	ctx := context.Background()
 
 	//Gemini Client Initialization
 	geminiClient, err := genai.NewClient(ctx, &genai.ClientConfig{
-		APIKey:  os.Getenv("GEMINI_API_KEY"),
+		//APIKey:  os.Getenv("GEMINI_API_KEY"), old method
+		APIKey:  keys.Gemini,
 		Backend: genai.BackendGeminiAPI,
 	})
 
@@ -39,12 +44,12 @@ func InitProviders() map[string]core.Provider {
 
 	//ChatGPT Client Initialization
 	chatgptClient := openai.NewClient(
-		openaiOption.WithAPIKey(os.Getenv("OPENAI_API_KEY")),
+		openaiOption.WithAPIKey(keys.ChatGPT),
 	)
 
 	//Claude Client Initialization
 	claudeClient := anthropic.NewClient(
-		anthropicOption.WithAPIKey(os.Getenv("ANTHROPIC_API_KEY")),
+		anthropicOption.WithAPIKey(keys.Claude),
 	)
 
 	return map[string]core.Provider{
