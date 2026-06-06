@@ -62,12 +62,12 @@ go run .
 
 ### Inputting API Keys
 
-<p> To manually input API Keys, create an .env file in the Backend folder and add the following: </p>
+<p> To manually input API Keys, locate the UserConfig Folder (see below) and edit these in: </p>
 
 ```
-GEMINI_API_KEY = [insert api token here]
-OPENAI_API_KEY = [insert api token here]
-ANTHROPIC_API_KEY = [insert api token here]
+"claude_key" = [insert api token here]
+"chatgpt_key" = [insert api token here]
+"gemini_key" = [insert api token here]
 and much more
 ```
 

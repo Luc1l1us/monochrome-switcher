@@ -19,6 +19,16 @@ export default function Settings() {
         chatgpt_key: '',
     })
 
+    //function to show toast notifcation for user
+    const [toast, setToast] = useState('');
+    function showToast(text) {
+        setToast(text)
+
+        setTimeout(() => {
+            setToast("");
+        }, 5000);
+    }
+
     useEffect(() => {
         const init = async () => {
             if (!window.go?.main) {
@@ -54,6 +64,7 @@ export default function Settings() {
             [name]: value
         }));
     }
+
 
     return (
         <div id="settings">
@@ -248,11 +259,17 @@ export default function Settings() {
                             SaveSettings(settings);
                             console.log(apikeys);
                             SaveAPIKeys(apikeys);
+                            showToast("Restart is required to apply changes")
                             //ReloadApp();
                         }}>
                         SAVE
                     </button>
                 </div>
+                    {toast && (
+                        <div className="toast-notif">
+                            {toast}
+                        </div>
+                    )}
             </div>
         </div>
     )
