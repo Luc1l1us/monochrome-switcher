@@ -1,9 +1,6 @@
-import geminiIcon from "../../../../icons/gemini_icon.png";
-import chatgptIcon from "../../../../icons/chatgpt_icon.png"
-import claudeIcon from "../../../../icons/claude_icon.png"
 import { SaveSettings, LoadSettings, SaveAPIKeys, LoadAPIKeys } from "../../wailsjs/go/main/App"
 import { useEffect, useState } from "react";
-import { claude } from "../../../../icons";
+import * as icons from "../../../../icons"
 
 export default function Settings() {
     const [settings, setSettings] = useState({
@@ -84,7 +81,7 @@ export default function Settings() {
                     <div id="first-column">
                         <div className="agent">
                             <div className="agent-image">
-                                <img id="claude-image" src={claudeIcon}></img>
+                                <img id="claude-image" src={icons.claude}></img>
                             </div>
                             <div className="agent-text">
                                 <a href="https://platform.claude.com/settings/keys">
@@ -99,7 +96,7 @@ export default function Settings() {
                         </div>
                         <div className="agent">
                             <div className="agent-image">
-                                <img id="chatgpt-image" src={chatgptIcon}></img>
+                                <img id="chatgpt-image" src={icons.chatgpt}></img>
                             </div>
                             <div className="agent-text">
                                 <a href="https://openai.com/api/">
@@ -114,7 +111,7 @@ export default function Settings() {
                         </div>
                         <div className="agent">
                             <div className="agent-image">
-                                <img id="gemini-image" src={geminiIcon}></img>
+                                <img id="gemini-image" src={icons.gemini}></img>
                             </div>
                             <div className="agent-text">
                                 <a href="https://ai.google.dev/gemini-api/docs">
@@ -134,7 +131,7 @@ export default function Settings() {
                     <div id="second-column">
                         <div className="agent">
                             <div className="agent-image">
-                                <img id="perplex-image" src={claudeIcon}></img>
+                                <img id="perplex-image" src={icons.perplexity}></img>
                             </div>
                             <div className="agent-text">
                                 <a href="https://console.perplexity.ai/">
@@ -150,12 +147,28 @@ export default function Settings() {
 
                         <div className="agent">
                             <div className="agent-image">
-                                <img id="deepseek-image" src={claudeIcon}></img>
+                                <img id="deepseek-image" src={icons.deepseek}></img>
                             </div>
                             <div className="agent-text">
                                 <a href="https://platform.deepseek.com/api_keys">
                                     <div className="agent-title">
                                         DeepSeek
+                                    </div>
+                                </a>
+                                <div className="agent-key">
+                                    <input type="password" className="api-key" autoComplete="off" placeholder="Enter your API Key here"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="agent">
+                            <div className="agent-image">
+                                <img id="deepseek-image" src={icons.grok}></img>
+                            </div>
+                            <div className="agent-text">
+                                <a href="https://grok-api.apidog.io/">
+                                    <div className="agent-title">
+                                        Grok
                                     </div>
                                 </a>
                                 <div className="agent-key">
