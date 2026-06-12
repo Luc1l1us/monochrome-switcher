@@ -24,8 +24,9 @@ const SelectDemo = ({onValueChange}) => (
 						<SelectItem value="claude" disabled> <img id="claude-icon" src={icons.claude}/> !Claude</SelectItem>
 						<SelectItem value="chatgpt" disabled> <img id="chatgpt-icon" src={icons.chatgpt}/> !ChatGPT</SelectItem>
 						<SelectItem value="gemini"> <img id="gemini-icon" src={icons.gemini}/>  Gemini</SelectItem>
-						<SelectItem value="placeholder">placeholder</SelectItem>
-						<SelectItem value="placeholder">placeholder</SelectItem>
+						<SelectItem value="perplexity" disabled> <img id="gemini-icon" src={icons.perplexity}/> !Perplexity</SelectItem>
+						<SelectItem value="grok" disabled> <img id="gemini-icon" src={icons.grok}/> !Grok</SelectItem>
+						<SelectItem value="deepseek" disabled> <img id="gemini-icon" src={icons.deepseek}/> !Deepseek</SelectItem>
 					</Select.Group>
 
 					<Select.Separator className="SelectSeparator" />
@@ -33,20 +34,15 @@ const SelectDemo = ({onValueChange}) => (
 					<Select.Group>
 						<Select.Label className="SelectLabel">Local AI</Select.Label>
 						<SelectItem value="ollama">Ollama</SelectItem>
-						<SelectItem value="placeholder">placeholder</SelectItem>
 						<SelectItem value="carrot" disabled>
 							disabled placeholder
 						</SelectItem>
-						<SelectItem value="placeholder">placeholder</SelectItem>
 					</Select.Group>
 
 					<Select.Separator className="SelectSeparator" />
 
 					<Select.Group>
-						<Select.Label className="SelectLabel">placeholder</Select.Label>
-						<SelectItem value="placeholder">placeholder</SelectItem>
-						<SelectItem value="placeholder">placeholder</SelectItem>
-						<SelectItem value="placeholder">placeholder</SelectItem>
+						<Select.Label className="SelectLabel">Misc</Select.Label>
 						<SelectItem value="placeholder">placeholder</SelectItem>
 					</Select.Group>
 				</Select.Viewport>

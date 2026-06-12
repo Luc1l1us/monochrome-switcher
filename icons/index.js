@@ -1,4 +1,7 @@
 export { default as gemini } from "./gemini_icon.png"
 export { default as chatgpt } from "./chatgpt_icon.png"
 export { default as claude } from "./claude_icon.png"
+export { default as deepseek } from "./deepseek_icon.png"
+export { default as perplexity } from "./perplexity_icon.png"
+export { default as grok } from "./grok_icon.png"
 export { default as userdefaultIcon } from "./profile.png"
