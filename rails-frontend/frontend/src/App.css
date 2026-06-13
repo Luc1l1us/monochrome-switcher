@@ -41,6 +41,8 @@ h3 {
 #home-content,
 #Selector-container,
 #Messenger-container,
+#Multi-Messenger-Container,
+#select-container,
 #settings-content {
   border: 4px solid var(--border-color);
 }
@@ -357,6 +359,29 @@ a:visited:hover {
   flex-flow: column wrap;
   margin-top: 65px;
   margin-bottom: 200px;
+}
+
+/*Multi Agent stuff here*/
+#Multi-mcontainer {
+  display: flex;
+  max-width: 780px;
+  gap: 5px;
+}
+
+#Multi-Messenger-Container {
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex-basis: 66.667%;
+  height: 70vh;
+  width: 40vh;
+  display: flex;
+}
+
+#Multi-Selector-container {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 5px;
 }
 
 #Messenger-container {
