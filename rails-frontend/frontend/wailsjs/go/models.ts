@@ -4,6 +4,9 @@ export namespace services {
 	    claude_key: string;
 	    chatgpt_key: string;
 	    gemini_key: string;
+	    perplex_key: string;
+	    deepseek_key: string;
+	    grok_key: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new APIKeys(source);
@@ -14,6 +17,9 @@ export namespace services {
 	        this.claude_key = source["claude_key"];
 	        this.chatgpt_key = source["chatgpt_key"];
 	        this.gemini_key = source["gemini_key"];
+	        this.perplex_key = source["perplex_key"];
+	        this.deepseek_key = source["deepseek_key"];
+	        this.grok_key = source["grok_key"];
 	    }
 	}
 	export class Settings {
