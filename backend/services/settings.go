@@ -15,9 +15,12 @@ type Settings struct {
 }
 
 type APIKeys struct {
-	Claude  string `json:"claude_key"`
-	ChatGPT string `json:"chatgpt_key"`
-	Gemini  string `json:"gemini_key"`
+	Claude     string `json:"claude_key"`
+	ChatGPT    string `json:"chatgpt_key"`
+	Gemini     string `json:"gemini_key"`
+	Perplexity string `json:"perplex_key"`
+	DeepSeek   string `json:"deepseek_key"`
+	Grok       string `json:"grok_key"`
 }
 
 func GetSettingsPath(filename string) string {
