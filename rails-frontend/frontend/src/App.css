@@ -207,6 +207,11 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
+#nav-settings {
+  max-width: 25px;
+  max-height: 25px;
+}
+
 /* Content Cards here */
 #content-cards {
   display: flex;
