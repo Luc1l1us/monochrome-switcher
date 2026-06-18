@@ -1,3 +1,4 @@
+import * as icons from "../../../../icons"
 
 export default function NavBar({setSelectedPanel}) {
     return (
@@ -17,13 +18,8 @@ export default function NavBar({setSelectedPanel}) {
                 </div>
                 <div className='bottom-nav'>
                     <button className="nav-button" onClick={() => setSelectedPanel("settings")}>
-                        Settings
-                    </button>
-                    <button className="nav-button" onClick={() => setSelectedPanel("about")}>
-                        About
-                    </button>
-                    <button className="nav-button" onClick={() => setSelectedPanel("faq")}>
-                        FAQ
+                        {/* Settings */}
+                        <img id="nav-settings" src={icons.settingsicon}></img>
                     </button>
                 </div>
             </div>
