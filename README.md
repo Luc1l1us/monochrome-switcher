@@ -112,6 +112,7 @@ Connect frontend to backend
 Finish frontend
 Bind frontend to backend (make both end start once run)
 Concurrency
+Add RAG functionality
 ```
 
 ### Tech Stack
