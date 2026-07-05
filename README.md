@@ -105,7 +105,8 @@ Linux
 (!) DeepSeek
 (!) Grok
 (!) Synthesia
-(!) Ollama
+Ollama
+OpenRouter
 ```
 
 ### Goals
