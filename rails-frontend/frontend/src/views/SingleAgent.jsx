@@ -21,7 +21,7 @@ export default function AISelectionScreen({setSelectedPanel}) {
     function sendPromptnAgent() {
         setsubmittedPrompt(prompt);
 
-        SendPrompt(prompt, selected)
+        SendPrompt("default", selected, prompt)
             .then(updateResultText2)
             .then(() => {
                 setConvo("1");

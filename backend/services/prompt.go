@@ -2,18 +2,31 @@ package services
 
 import (
 	//unused imports
-	"fmt"
 	//"log"
 	//"backend/config"
+	"fmt"
+	"monochrome-switcher/backend/conversation"
 	"monochrome-switcher/backend/core"
 	//"github.com/joho/godotenv"
 )
 
-func HandlePrompt(prompt string, agent string, providers map[string]core.Provider) (string, error) {
-	provider, ok := providers[agent]
-	if !ok {
-		return "", fmt.Errorf("Invalid Agent Selected")
+func HandlePrompt(
+	manager *conversation.ConvoManager,
+	providers map[string]core.Provider,
+	chatID string,
+	providerName string,
+	prompt string,
+) (string, error) {
+	fmt.Printf("Prompt received: %q\n", prompt)
+	manager.AddUserMessage(chatID, prompt)
+
+	response, err := providers[providerName].Generate(
+		manager.History(chatID),
+	)
+	if err != nil {
+		return "", err
 	}
 
-	return provider.Generate(prompt)
+	manager.AddAIAgentMessage(chatID, response)
+	return response, nil
 }
