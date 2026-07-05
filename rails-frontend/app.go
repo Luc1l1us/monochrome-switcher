@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"monochrome-switcher/backend/config"
+	"monochrome-switcher/backend/conversation"
 	"monochrome-switcher/backend/core"
 	"monochrome-switcher/backend/services"
 	"os"
@@ -19,12 +20,14 @@ import (
 // App struct
 type App struct {
 	ctx       context.Context
+	manager   *conversation.ConvoManager
 	providers map[string]core.Provider
 }
 
 // NewApp creates a new App application struct
 func NewApp() *App {
 	return &App{
+		manager:   conversation.NewManager(),
 		providers: config.InitProviders(),
 	}
 }
@@ -46,8 +49,15 @@ func (a *App) startup(ctx context.Context) {
 	runtime.WindowSetPosition(a.ctx, x, y)
 }
 
-func (a *App) SendPrompt(prompt string, agent string) string {
-	result, err := services.HandlePrompt(prompt, agent, a.providers)
+func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) string {
+	fmt.Printf("SendPrompt got: %q\n", Prompt)
+	result, err := services.HandlePrompt(
+		a.manager,
+		a.providers,
+		ChatID,
+		ProviderName,
+		Prompt,
+	)
 	if err != nil {
 		return err.Error()
 	}
