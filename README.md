@@ -95,14 +95,17 @@ Linux
 ### AI/Agents to add
 
 ```
+(x) mark for AI Agents that are implemented
+(!) mark for AI Agents that require a subscription to access
+
 (x) Gemini
 (x) ChatGPT
 (x) Claude
-Perplexity
-DeepSeek
-Grok
-Synthesia
-Ollama
+(!) Perplexity
+(!) DeepSeek
+(!) Grok
+(!) Synthesia
+(!) Ollama
 ```
 
 ### Goals
