@@ -65,6 +65,10 @@ func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) stri
 	return result
 }
 
+func (a *App) CreateChat(provider string) string {
+	return a.manager.CreateChat(provider)
+}
+
 // TODO still needs to receive agent string here
 // This does not work but we'll let it stay for now
 /* func (a *App) SendPrompt(prompt string, recagent string) string {

@@ -1,12 +1,20 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
 import {EnterIcon} from "@radix-ui/react-icons";
-import {Greet, SendPrompt} from "../../wailsjs/go/main/App";
+import {CreateChat, Greet, SendPrompt} from "../../wailsjs/go/main/App";
 import * as icons from "../../../../icons"
 import {MultiAgent} from '../views';
 
 export default function AISelectionScreen({setSelectedPanel}) {
+
+    //creating chatID when AI Selection is pressed
+    const [chatID, setChatID] = useState("");
+
+    useEffect(() => {
+        CreateChat(selected)
+            .then(setChatID)
+    })
 
     const [resultText2, setResultText2] = useState(''); 
     const [prompt, setPrompt] = useState('');
@@ -20,7 +28,7 @@ export default function AISelectionScreen({setSelectedPanel}) {
     function sendPromptnAgent() {
         setsubmittedPrompt(prompt);
 
-        SendPrompt("default", selected, prompt)
+        SendPrompt(chatID, selected, prompt)
             .then(updateResultText2)
             .then(() => {
                 setConvo("1");
