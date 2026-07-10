@@ -57,6 +57,10 @@ func (m *ConvoManager) CreateChat(provider string) string {
 	return id
 }
 
+func (m *ConvoManager) LoadChatHistory(chatID string, history []core.Message) {
+	m.Chats[chatID] = history
+}
+
 func GetConvoPath(filename string) string {
 	exePath, err := os.UserConfigDir()
 	if err != nil {

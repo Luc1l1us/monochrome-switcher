@@ -69,6 +69,18 @@ func (a *App) CreateChat(provider string) string {
 	return a.manager.CreateChat(provider)
 }
 
+func (a *App) LoadHistory(chatID string) ([]core.Message, error) {
+	history, err := conversation.LoadChat(chatID)
+
+	if err != nil {
+		return nil, err
+	}
+
+	a.manager.LoadChatHistory(chatID, history)
+
+	return history, nil
+}
+
 // TODO still needs to receive agent string here
 // This does not work but we'll let it stay for now
 /* func (a *App) SendPrompt(prompt string, recagent string) string {

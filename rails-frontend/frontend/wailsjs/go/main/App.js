@@ -14,6 +14,10 @@ export function LoadAPIKeys() {
   return window['go']['main']['App']['LoadAPIKeys']();
 }
 
+export function LoadHistory(arg1) {
+  return window['go']['main']['App']['LoadHistory'](arg1);
+}
+
 export function LoadSettings() {
   return window['go']['main']['App']['LoadSettings']();
 }
