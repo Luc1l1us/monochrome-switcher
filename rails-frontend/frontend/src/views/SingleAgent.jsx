@@ -13,8 +13,8 @@ export default function AISelectionScreen({setSelectedPanel}) {
 
     useEffect(() => {
         CreateChat(selected)
-            .then(setChatID)
-    })
+            .then(setChatID);
+    }, []);
 
     const [resultText2, setResultText2] = useState(''); 
     const [prompt, setPrompt] = useState('');

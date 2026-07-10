@@ -1,5 +1,21 @@
 export namespace core {
 	
+	export class ChatSummary {
+	    id: string;
+	    provider: string;
+	    title: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new ChatSummary(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.id = source["id"];
+	        this.provider = source["provider"];
+	        this.title = source["title"];
+	    }
+	}
 	export class Message {
 	    role: string;
 	    content: string;

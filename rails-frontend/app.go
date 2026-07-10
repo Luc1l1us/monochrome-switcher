@@ -69,16 +69,12 @@ func (a *App) CreateChat(provider string) string {
 	return a.manager.CreateChat(provider)
 }
 
-func (a *App) LoadHistory(chatID string) ([]core.Message, error) {
-	history, err := conversation.LoadChat(chatID)
+func (a *App) ListChats() ([]core.ChatSummary, error) {
+	return conversation.ListChats()
+}
 
-	if err != nil {
-		return nil, err
-	}
-
-	a.manager.LoadChatHistory(chatID, history)
-
-	return history, nil
+func (a *App) LoadOneChat(chatID string) ([]core.Message, error) {
+	return conversation.LoadChat(chatID)
 }
 
 // TODO still needs to receive agent string here

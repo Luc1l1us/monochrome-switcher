@@ -10,12 +10,16 @@ export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
 
+export function ListChats() {
+  return window['go']['main']['App']['ListChats']();
+}
+
 export function LoadAPIKeys() {
   return window['go']['main']['App']['LoadAPIKeys']();
 }
 
-export function LoadHistory(arg1) {
-  return window['go']['main']['App']['LoadHistory'](arg1);
+export function LoadOneChat(arg1) {
+  return window['go']['main']['App']['LoadOneChat'](arg1);
 }
 
 export function LoadSettings() {

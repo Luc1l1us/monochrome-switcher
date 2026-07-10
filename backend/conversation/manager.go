@@ -6,6 +6,7 @@ import (
 	"monochrome-switcher/backend/core"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/google/uuid"
 )
@@ -73,6 +74,18 @@ func GetConvoPath(filename string) string {
 	return filepath.Join(ConvoDir, filename)
 }
 
+func GetConvoDir() string {
+	exePath, err := os.UserConfigDir()
+	if err != nil {
+		panic(err)
+	}
+
+	ConvoDir := filepath.Join(exePath, "monochrome-switcher", "Chat")
+	os.MkdirAll(ConvoDir, os.ModePerm)
+
+	return ConvoDir
+}
+
 // func SaveChat(chat Chat) error { use this in the future
 func SaveChat(chatID string, messages []core.Message) error {
 	data, err := json.MarshalIndent(messages, "", "   ")
@@ -86,20 +99,42 @@ func SaveChat(chatID string, messages []core.Message) error {
 	return os.WriteFile(ChatPath, data, 0644)
 }
 
+// Load oneChat
 func LoadChat(chatID string) ([]core.Message, error) {
-	data, err := os.ReadFile(
-		filepath.Join(
-			"history - ", chatID+".json",
-		),
-	)
-
+	data, err := os.ReadFile(GetConvoPath(chatID))
 	if err != nil {
 		return nil, err
 	}
 
 	var history []core.Message
-
 	err = json.Unmarshal(data, &history)
-
 	return history, err
+}
+
+// Load All chats
+func ListChats() ([]core.ChatSummary, error) {
+	entries, err := os.ReadDir(GetConvoDir())
+	if err != nil {
+		return nil, err
+	}
+
+	var chats []core.ChatSummary
+
+	for _, entry := range entries {
+
+		if entry.IsDir() {
+			continue
+		}
+
+		if filepath.Ext(entry.Name()) != ".json" {
+			continue
+		}
+
+		chatID := strings.TrimSuffix(entry.Name(), ".json")
+
+		chats = append(chats, core.ChatSummary{
+			ID: chatID,
+		})
+	}
+	return chats, nil
 }

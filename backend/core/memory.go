@@ -22,10 +22,9 @@ type Chat struct {
 }
 
 type ChatSummary struct {
-	ID       string
-	Provider string
-	LastUsed time.Time
-	Title    string
+	ID       string `json:"id"`
+	Provider string `json:"provider"`
+	Title    string `json:"title"`
 }
 
 func BuildPrompt(messages []Message) string {
