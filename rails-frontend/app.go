@@ -65,6 +65,18 @@ func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) stri
 	return result
 }
 
+func (a *App) CreateChat(provider string) string {
+	return a.manager.CreateChat(provider)
+}
+
+func (a *App) ListChats() ([]core.ChatSummary, error) {
+	return conversation.ListChats()
+}
+
+func (a *App) LoadOneChat(chatID string) ([]core.Message, error) {
+	return conversation.LoadChat(chatID)
+}
+
 // TODO still needs to receive agent string here
 // This does not work but we'll let it stay for now
 /* func (a *App) SendPrompt(prompt string, recagent string) string {
