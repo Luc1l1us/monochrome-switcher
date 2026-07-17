@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import MessageBubble from './MessageBubble';
 import * as icons from "../../../../icons"
 
 function MessengerContainer({submittedPrompt, resultText2, convo, selected}) {
@@ -9,27 +10,12 @@ function MessengerContainer({submittedPrompt, resultText2, convo, selected}) {
             <div id="prompt" className="prompt">Please enter your prompt: </div>
         )}
         <div id="OutputBox">
-            { convo && (
-                <div id="user-prompt-container">
-                    <div className='text'>
-                        {submittedPrompt}
-                    </div>
-                    <div className='avatar'>
-                        <img src={icons.userdefaultIcon}></img>
-                    </div>
-                </div>
-                )
-            }
-            { convo && (
-                <div id="ai-response">
-                    <div className='avatar'>
-                        <img src={icons[selected]}></img>
-                    </div>
-                    <div className='text'>
-                        {resultText2}
-                    </div>
-                </div>
-            )}
+            {conversation.map((message, index) => (
+                <MessageBubble
+                    key={index}
+                    message={message}
+                />
+            ))}
         </div>
     </div>
 )

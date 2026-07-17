@@ -1,13 +1,26 @@
-function MessageBubble(avatar) {
-    const [conversation, setConversation] = useState([]); 
+export default function MessageBubble({ message }) {
 
-// Make the avatar alternate between 
-<div id="user-prompt-container">
-    <div className='text'>
-        {submittedPrompt}
-    </div>
-    <div className='avatar'>
-        <img src={icons.userdefaultIcon}></img>
-    </div>
-</div>
+    const isUser = message.role === "user";
+
+    return (
+        <div className={isUser ? "user-prompt-container" : "ai-response"}>
+
+            {!isUser && (
+                <div className="avatar">
+                    <img src={message.avatar} />
+                </div>
+            )}
+
+            <div className="text">
+                {message.content}
+            </div>
+
+            {isUser && (
+                <div className="avatar">
+                    <img src={message.avatar} />
+                </div>
+            )}
+
+        </div>
+    );
 }
