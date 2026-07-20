@@ -14,6 +14,8 @@ import (
 	osRuntime "runtime"
 	"syscall"
 
+	"github.com/google/uuid"
+
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
@@ -65,15 +67,24 @@ func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) stri
 	return result
 }
 
-func (a *App) CreateChat(provider string) string {
-	return a.manager.CreateChat(provider)
+func (a *App) CreateChat(provider string) (string, error) {
+	id := uuid.New().String()
+
+	chat := a.manager.CreateChat(id, provider)
+	fmt.Printf("CreateChat Provider got: %q\n", provider)
+
+	err := conversation.SaveChat(chat)
+	if err != nil {
+		return "", err
+	}
+	return id, nil
 }
 
 func (a *App) ListChats() ([]core.ChatSummary, error) {
 	return conversation.ListChats()
 }
 
-func (a *App) LoadOneChat(chatID string) ([]core.Message, error) {
+func (a *App) LoadOneChat(chatID string) (*core.Chat, error) {
 	return conversation.LoadChat(chatID)
 }
 

@@ -7,24 +7,24 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/google/uuid"
 )
 
 type ConvoManager struct {
-	Chats map[string][]core.Message
+	//Chats map[string][]core.Message
+	Chats map[string]*core.Chat
 }
 
 func NewManager() *ConvoManager {
 	return &ConvoManager{
-		Chats: make(map[string][]core.Message),
+		Chats: make(map[string]*core.Chat),
+		//Chats: make(map[string]*core.Chat),
 	}
 }
 
 func (m *ConvoManager) AddUserMessage(chatID, text string) {
 	fmt.Printf("AddUserMessage: %q\n", text)
-	m.Chats[chatID] = append(
-		m.Chats[chatID],
+	m.Chats[chatID].Messages = append(
+		m.Chats[chatID].Messages,
 		core.Message{
 			Role:    "user",
 			Content: text,
@@ -33,8 +33,8 @@ func (m *ConvoManager) AddUserMessage(chatID, text string) {
 }
 
 func (m *ConvoManager) AddAIAgentMessage(chatID, text string) {
-	m.Chats[chatID] = append(
-		m.Chats[chatID],
+	m.Chats[chatID].Messages = append(
+		m.Chats[chatID].Messages,
 		core.Message{
 			Role:    "assistant",
 			Content: text,
@@ -43,23 +43,28 @@ func (m *ConvoManager) AddAIAgentMessage(chatID, text string) {
 }
 
 func (m *ConvoManager) History(chatID string) []core.Message {
-	return m.Chats[chatID]
+	return m.Chats[chatID].Messages
 }
 
 func (m *ConvoManager) LoadChat(chatID string, history []core.Message) {
-	m.Chats[chatID] = history
+	m.Chats[chatID].Messages = history
 }
 
-func (m *ConvoManager) CreateChat(provider string) string {
-	id := uuid.New().String()
+func (m *ConvoManager) CreateChat(chatID, provider string) *core.Chat {
+	chat := &core.Chat{
+		ID:       chatID,
+		Provider: provider,
+		Title:    "New Chat",
+		Messages: []core.Message{},
+	}
 
-	m.Chats[id] = []core.Message{}
+	m.Chats[chatID] = chat
 
-	return id
+	return chat
 }
 
 func (m *ConvoManager) LoadChatHistory(chatID string, history []core.Message) {
-	m.Chats[chatID] = history
+	m.Chats[chatID].Messages = history
 }
 
 func GetConvoPath(filename string) string {
@@ -87,28 +92,32 @@ func GetConvoDir() string {
 }
 
 // func SaveChat(chat Chat) error { use this in the future
-func SaveChat(chatID string, messages []core.Message) error {
-	data, err := json.MarshalIndent(messages, "", "   ")
+func SaveChat(chat *core.Chat) error {
+	data, err := json.MarshalIndent(chat, "", "   ")
 	if err != nil {
 		return err
 	}
 
-	historyid := "history - " + chatID + ".json"
+	//historyid := "history - " + chat.ID + ".json"
+	historyid := chat.ID + ".json"
 	ChatPath := GetConvoPath(historyid)
 
 	return os.WriteFile(ChatPath, data, 0644)
 }
 
 // Load oneChat
-func LoadChat(chatID string) ([]core.Message, error) {
-	data, err := os.ReadFile(GetConvoPath(chatID))
+func LoadChat(chatID string) (*core.Chat, error) {
+	//filename := "history - " + chatID + ".json"
+	filename := chatID + ".json"
+
+	data, err := os.ReadFile(GetConvoPath(filename))
 	if err != nil {
 		return nil, err
 	}
 
-	var history []core.Message
-	err = json.Unmarshal(data, &history)
-	return history, err
+	var chat core.Chat
+	err = json.Unmarshal(data, &chat)
+	return &chat, err
 }
 
 // Load All chats

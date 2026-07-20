@@ -2,7 +2,6 @@ package core
 
 import (
 	"strings"
-	"time"
 )
 
 type Message struct {
@@ -15,10 +14,10 @@ type Conversation struct {
 }
 
 type Chat struct {
-	ID        string    `json:"id"`
-	Provider  string    `json:"provider"`
-	CreatedAT time.Time `json:"createdAt"`
-	Messages  []Message `json:"messages"`
+	ID       string    `json:"id"`
+	Provider string    `json:"provider"`
+	Title    string    `json:"title"`
+	Messages []Message `json:"messages"`
 }
 
 type ChatSummary struct {

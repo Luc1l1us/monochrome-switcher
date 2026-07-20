@@ -5,8 +5,10 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons
 import "../style.css";
 import * as icons from "../../../../icons"
 
-const SelectDemo = ({onValueChange}) => (
-	<Select.Root onValueChange={onValueChange}>
+const SelectDemo = ({selected, onProviderChange}) => (
+	<Select.Root
+		value={selected}
+		onValueChange={onProviderChange}>
 		<Select.Trigger className="SelectTrigger" aria-label="Food">
 			<Select.Value placeholder="Select an AI/Agent" />
 			<Select.Icon className="SelectIcon">

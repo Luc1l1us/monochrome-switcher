@@ -29,9 +29,7 @@ func HandlePrompt(
 
 	manager.AddAIAgentMessage(chatID, response)
 	//save prompts and responses to a file
-	err = conversation.SaveChat(
-		chatID,
-		manager.History(chatID),
-	)
+	chat := manager.Chats[chatID]
+	err = conversation.SaveChat(chat)
 	return response, nil
 }

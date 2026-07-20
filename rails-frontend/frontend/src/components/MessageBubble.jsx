@@ -1,13 +1,14 @@
+import * as icons from "../../../../icons"
 export default function MessageBubble({ message }) {
 
     const isUser = message.role === "user";
 
     return (
-        <div className={isUser ? "user-prompt-container" : "ai-response"}>
+        <div id={isUser ? "user-prompt-container" : "ai-response"}>
 
             {!isUser && (
                 <div className="avatar">
-                    <img src={message.avatar} />
+                    <img src={icons[message.provider]} />
                 </div>
             )}
 
@@ -17,7 +18,7 @@ export default function MessageBubble({ message }) {
 
             {isUser && (
                 <div className="avatar">
-                    <img src={message.avatar} />
+                    <img src={icons.userdefaultIcon} />
                 </div>
             )}
 
