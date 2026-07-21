@@ -1,5 +1,11 @@
 import * as icons from "../../../../icons"
-export default function MessageBubble({ message }) {
+export default function MessageBubble({ message, provider }) {
+    
+    //testing out role
+    console.log("Message received: ", message)
+    console.log("Provider: ", provider)
+    console.log("Role: ", message.role)
+    
 
     const isUser = message.role === "user";
 
@@ -8,7 +14,7 @@ export default function MessageBubble({ message }) {
 
             {!isUser && (
                 <div className="avatar">
-                    <img src={icons[message.provider]} />
+                    <img src={icons[provider]} />
                 </div>
             )}
 

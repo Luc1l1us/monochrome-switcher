@@ -85,7 +85,13 @@ func (a *App) ListChats() ([]core.ChatSummary, error) {
 }
 
 func (a *App) LoadOneChat(chatID string) (*core.Chat, error) {
-	return conversation.LoadChat(chatID)
+	chat, err := conversation.LoadChat(chatID)
+	if err != nil {
+		return nil, err
+	}
+
+	a.manager.LoadChat(chat)
+	return chat, nil
 }
 
 // TODO still needs to receive agent string here

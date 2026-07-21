@@ -7,6 +7,7 @@ export default function History() {
     const [chatID, setChatID] = useState("");
     const [chats, setChats] = useState([])
     const [conversation, setConversation] = useState([])
+    const [selected, setSelected] = useState('');
     
     useEffect(() => {
         ListChats().then(data => {
@@ -16,9 +17,18 @@ export default function History() {
     }, []);
 
     async function switchChat(chatID) {
-        const history = await LoadOneChat(chatID)
-        setChatID(chatID)
-        setConversation(history)
+        console.log("switchChat received:", chatID);
+        try {
+            const chat = await LoadOneChat(chatID)
+
+            console.log("Loaded Chat:", chat);
+
+            setChatID(chat.id)
+            setConversation(chat.messages)
+            setSelected(chat.provider)
+        } catch(error) {
+            console.error("Failed to load chat:", error)
+        }
     }
 
     return (

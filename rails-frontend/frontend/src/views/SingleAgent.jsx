@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
 import {EnterIcon} from "@radix-ui/react-icons";
-import {CreateChat, Greet, SendPrompt} from "../../wailsjs/go/main/App";
+import {CreateChat, Greet, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import * as icons from "../../../../icons"
 import {MultiAgent} from '../views';
 
@@ -31,9 +31,12 @@ export default function AISelectionScreen({setSelectedPanel}) {
     const [selected, setSelected] = useState('');
 
     const updatePrompt = (e) => setPrompt(e.target.value);
-    const updateResultText2 = (prompt) => setResultText2(prompt);
 
     async function sendPromptnAgent() {
+
+        if (!prompt.trim()) {
+            return;
+        }
         if (!chatID) {
             console.error("No chat exists!")
         }
@@ -43,9 +46,11 @@ export default function AISelectionScreen({setSelectedPanel}) {
             selected, 
             prompt
         )
-        
+
+        const updatedChat = await LoadOneChat(chatID)
+        setConversation(updatedChat.messages)
         //setConversation(await LoadChat(chatID));
-        setConversation(prev => [
+/*         setConversation(prev => [
             ...prev,
             {
                 id: crypto.randomUUID(),
@@ -53,7 +58,7 @@ export default function AISelectionScreen({setSelectedPanel}) {
                 provider: selected,
                 content: response,
             }
-        ])
+        ]) */
             setPrompt("");
     }
 
@@ -87,7 +92,9 @@ export default function AISelectionScreen({setSelectedPanel}) {
                         +
                     </button>
                 </div>
-                <MessengerContainer conversation={conversation}/>
+                <MessengerContainer 
+                    conversation={conversation}
+                    provider={selected}/>
                 <div id="user-input" className="input-box">
                     <input id="name" className="input" value={prompt} autoComplete="off" placeholder={`Message ${selected}`} name="prompt" type="text" onChange={updatePrompt}/>
                     <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>

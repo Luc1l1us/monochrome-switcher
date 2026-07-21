@@ -1,6 +1,6 @@
 import MessageBubble from './MessageBubble';
 
-function MessengerContainer({conversation}) {
+function MessengerContainer({conversation, provider}) {
     return (
     <div id='Messenger-container'>
         {conversation.length === 0 ? (
@@ -13,6 +13,7 @@ function MessengerContainer({conversation}) {
                     <MessageBubble
                         key={index}
                         message={message}
+                        provider={provider}
                     />
                 ))}
             </div>

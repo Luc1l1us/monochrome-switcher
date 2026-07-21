@@ -46,8 +46,8 @@ func (m *ConvoManager) History(chatID string) []core.Message {
 	return m.Chats[chatID].Messages
 }
 
-func (m *ConvoManager) LoadChat(chatID string, history []core.Message) {
-	m.Chats[chatID].Messages = history
+func (m *ConvoManager) LoadChat(chat *core.Chat) {
+	m.Chats[chat.ID] = chat
 }
 
 func (m *ConvoManager) CreateChat(chatID, provider string) *core.Chat {
@@ -117,7 +117,10 @@ func LoadChat(chatID string) (*core.Chat, error) {
 
 	var chat core.Chat
 	err = json.Unmarshal(data, &chat)
-	return &chat, err
+	if err != nil {
+		return nil, err
+	}
+	return &chat, nil
 }
 
 // Load All chats
