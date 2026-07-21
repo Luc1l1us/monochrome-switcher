@@ -1,38 +1,24 @@
-import {useState} from 'react';
-import * as icons from "../../../../icons"
+import MessageBubble from './MessageBubble';
 
-function MessengerContainer({submittedPrompt, resultText2, convo, selected}) {
-    const [conversation, setConversation] = useState([]);    
+function MessengerContainer({conversation, provider}) {
     return (
     <div id='Messenger-container'>
-        { !convo && (
-            <div id="prompt" className="prompt">Please enter your prompt: </div>
+        {conversation.length === 0 ? (
+            <div id="prompt" className="prompt">
+                Please enter your prompt.
+            </div>
+        ) : (
+            <div id="OutputBox">
+                {conversation.map((message, index) => (
+                    <MessageBubble
+                        key={index}
+                        message={message}
+                        provider={provider}
+                    />
+                ))}
+            </div>
         )}
-        <div id="OutputBox">
-            { convo && (
-                <div id="user-prompt-container">
-                    <div className='text'>
-                        {submittedPrompt}
-                    </div>
-                    <div className='avatar'>
-                        <img src={icons.userdefaultIcon}></img>
-                    </div>
-                </div>
-                )
-            }
-            { convo && (
-                <div id="ai-response">
-                    <div className='avatar'>
-                        <img src={icons[selected]}></img>
-                    </div>
-                    <div className='text'>
-                        {resultText2}
-                    </div>
-                </div>
-            )}
-        </div>
     </div>
-)
-} 
+)} 
 
 export default MessengerContainer
