@@ -7,6 +7,10 @@ import { About, SingleAgent, MultiAgent, FAQ, History, Home, Settings } from './
 function App() {
     //switching views
     const [selectedPanel, setSelectedPanel] = useState("home")
+    const [chatID, setChatID] = useState("");
+    const [conversation, setConversation] = useState([]);
+    const [selected, setSelected] = useState("");
+    const [activeChat, setActiveChat] = useState(null);
 
     return (
         <div id="App">
@@ -16,9 +20,16 @@ function App() {
                     <div id='content'>
                         {selectedPanel === "home" && <Home setSelectedPanel={setSelectedPanel}/>}
                         {selectedPanel === "settings" &&  <Settings />}
-                        {selectedPanel === "singleagent" &&  <SingleAgent setSelectedPanel={setSelectedPanel}/>}
+                        {selectedPanel === "singleagent" &&  <SingleAgent 
+                            chat={activeChat}
+                            onChatUpdated={setActiveChat}/>}
                         {selectedPanel === "multiagent" &&  <MultiAgent />}
-                        {selectedPanel === "history" &&  <History />}
+                        {selectedPanel === "history" &&  <History 
+                            onChatSelected={(chat) => {
+                                setActiveChat(chat)
+                                setSelectedPanel("singleagent")
+                            }}
+                        />}
                         {selectedPanel === "about" &&  <About />}
                         {selectedPanel === "faq" &&  <FAQ />}
                     </div>

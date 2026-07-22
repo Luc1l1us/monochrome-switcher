@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import HistoryCards from "../components/HistoryCards"
 import { ListChats, LoadOneChat } from "../../wailsjs/go/main/App"
 
-export default function History() {
+export default function History({onChatSelected}) {
 
     const [chatID, setChatID] = useState("");
     const [chats, setChats] = useState([])
@@ -23,9 +23,10 @@ export default function History() {
 
             console.log("Loaded Chat:", chat);
 
-            setChatID(chat.id)
+            onChatSelected(chat)
+/*             setChatID(chat.id)
             setConversation(chat.messages)
-            setSelected(chat.provider)
+            setSelected(chat.provider) */
         } catch(error) {
             console.error("Failed to load chat:", error)
         }
