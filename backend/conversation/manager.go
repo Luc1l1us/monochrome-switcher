@@ -6,7 +6,6 @@ import (
 	"monochrome-switcher/backend/core"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 type ConvoManager struct {
@@ -142,10 +141,24 @@ func ListChats() ([]core.ChatSummary, error) {
 			continue
 		}
 
-		chatID := strings.TrimSuffix(entry.Name(), ".json")
+		data, err := os.ReadFile(
+			filepath.Join(GetConvoDir(), entry.Name()),
+		)
+		if err != nil {
+			continue
+		}
+
+		var chat core.Chat
+
+		err = json.Unmarshal(data, &chat)
+		if err != nil {
+			continue
+		}
 
 		chats = append(chats, core.ChatSummary{
-			ID: chatID,
+			ID:       chat.ID,
+			Provider: chat.Provider,
+			Title:    chat.Title,
 		})
 	}
 	return chats, nil
