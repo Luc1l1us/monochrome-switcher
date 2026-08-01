@@ -212,12 +212,28 @@ input:checked + .slider:before {
   max-height: 25px;
 }
 
-/* Content Cards here */
+/* History Content Cards here */
 #content-cards {
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
   gap: 30px;
+}
+
+.History-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 60vh;
+}
+
+.history-smol {
+  font-size: 15px;
+  display: flex;
+  justify-self: center;
 }
 
 .card {

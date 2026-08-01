@@ -4,8 +4,8 @@ export default function HistoryCards({ chat, onClick }) {
             console.log("Clicked chat:", chat.id, "Chat Title:",chat.title, chat.provider)
             onClick(chat.id)
             }}>
-            <h3>{chat.title}</h3>
-            <p>{chat.provider}</p>
+            <h3 className="history-smol">{chat.title}</h3>
+            <p className="history-smol">{chat.provider}</p>
             <small>{chat.id}</small>
         </div>
     )

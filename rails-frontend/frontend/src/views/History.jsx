@@ -46,7 +46,7 @@ export default function History({onChatSelected}) {
                         Select one of the chats below to view and continue.
                     </h3>
                 </div>
-                <div id='content-cards'>
+                <div className="History-container">
                     {chats.map(chat => (
                         <HistoryCards
                             key={chat.id}
