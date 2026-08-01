@@ -223,11 +223,12 @@ input:checked + .slider:before {
 .History-container {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  overflow: scroll;
+  gap: 15px;
+  overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   width: 60vh;
+  height: 65vh;
 }
 
 .history-smol {
