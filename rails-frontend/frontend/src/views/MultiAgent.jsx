@@ -46,26 +46,21 @@ export default function MultiAgent() {
                 </div>
                 <div id='Multi-mcontainer'>
                     <div id='Multi-Messenger-Container'>
-                        {/* Show this when the convo variable is empty */}
                         { !convo && (
                             <div id="prompt" className="prompt">Please enter your prompt: </div>
                         )}
-                        {/* we might need to make this a separate component */}
                         <div id="OutputBox">
-                            {/* HIDE THE USER PROMPT WHEN THERE IS NO CONVO */}
                             { convo && (
                                 <div id="user-prompt-container">
                                     <div className='text'>
                                         {submittedPrompt}
                                     </div>
                                     <div className='avatar'>
-                                        {/* THIS IS PLACEHOLDER FOR NOW */}
                                         <img src={icons.userdefaultIcon}></img>
                                     </div>
                                 </div>
                                 )
                             }
-                            {/* HIDE THE AI PROMPT WHEN THERE IS NO CONVO */}
                             { convo && (
                                 <div id="ai-response">
                                     <div className='avatar'>
@@ -79,26 +74,21 @@ export default function MultiAgent() {
                         </div>
                     </div>
                     <div id='Multi-Messenger-Container'>
-                        {/* Show this when the convo variable is empty */}
                         { !convo && (
                             <div id="prompt" className="prompt">Please enter your prompt: </div>
                         )}
-                        {/* we might need to make this a separate component */}
                         <div id="OutputBox">
-                            {/* HIDE THE USER PROMPT WHEN THERE IS NO CONVO */}
                             { convo && (
                                 <div id="user-prompt-container">
                                     <div className='text'>
                                         {submittedPrompt}
                                     </div>
                                     <div className='avatar'>
-                                        {/* THIS IS PLACEHOLDER FOR NOW */}
                                         <img src={icons.userdefaultIcon}></img>
                                     </div>
                                 </div>
                                 )
                             }
-                            {/* HIDE THE AI PROMPT WHEN THERE IS NO CONVO */}
                             { convo && (
                                 <div id="ai-response">
                                     <div className='avatar'>
