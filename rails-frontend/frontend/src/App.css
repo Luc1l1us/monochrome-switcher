@@ -420,6 +420,10 @@ a:visited:hover {
   gap: 5px;
 }
 
+#multi-agent-container {
+  display: flex;
+}
+
 #Messenger-container {
   overflow: scroll;
   scrollbar-width: none;
