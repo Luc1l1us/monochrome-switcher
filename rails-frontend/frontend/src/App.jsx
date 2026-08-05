@@ -24,7 +24,9 @@ function App() {
                             chat={activeChat}
                             onChatUpdated={setActiveChat}
                             setSelectedPanel={setSelectedPanel}/>}
-                        {selectedPanel === "multiagent" &&  <MultiAgent />}
+                        {selectedPanel === "multiagent" &&  <MultiAgent
+                            chat={activeChat}
+                            onChatUpdated={setActiveChat}/>}
                         {selectedPanel === "history" &&  <History 
                             onChatSelected={(chat) => {
                                 setActiveChat(chat)
