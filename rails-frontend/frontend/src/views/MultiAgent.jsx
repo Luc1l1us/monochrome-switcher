@@ -54,8 +54,17 @@ export default function MultiAgent({chat, onChatUpdated}) {
         await Promise.all(
             panels.map(async (panel) => {
                 if (!panel.chat) {
+                    console.log("Panel has no chat!", panel.id);
                     return;
                 }
+
+                //logging purposes
+                console.log(
+                    "Sending to:",
+                    panel.id,
+                    panel.chat.provider,
+                    panel.chat.id,
+                )
 
                 try {
                     await SendPrompt(
@@ -64,6 +73,16 @@ export default function MultiAgent({chat, onChatUpdated}) {
                         sharedPrompt,
                     );
                     const updatedChat = await LoadOneChat(panel.chat.id)
+
+                    //logging again
+                    console.log(
+                        "Updated chat:",
+                        panel.id,
+                        updatedChat
+                    )
+
+                    updatePanel(panel.id, updatedChat)
+
                 } catch (error) {
                     console.error(
                         `Failed to send to ${panel.chat.provider}:`, error

@@ -36,7 +36,7 @@ export default function AgentPanel({chat, onChatUpdated, showInput}) {
             prompt
         )
 
-        const updatedChat = await LoadOneChat(chatID)
+        const updatedChat = await LoadOneChat(chat.id)
         onChatUpdated(updatedChat)
             setPrompt("");
     }
