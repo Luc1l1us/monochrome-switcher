@@ -6,7 +6,7 @@ import {CreateChat, Greet, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/
 import * as icons from "../../../../icons"
 import {MultiAgent} from '../views';
 
-export default function AgentPanel({chat, onChatUpdated}) {
+export default function AgentPanel({chat, onChatUpdated, showInput}) {
 
     const [chatID, setChatID] = useState("");
     const [prompt, setPrompt] = useState('');
@@ -36,7 +36,7 @@ export default function AgentPanel({chat, onChatUpdated}) {
             prompt
         )
 
-        const updatedChat = await LoadOneChat(chatID)
+        const updatedChat = await LoadOneChat(chat.id)
         onChatUpdated(updatedChat)
             setPrompt("");
     }
@@ -68,19 +68,21 @@ export default function AgentPanel({chat, onChatUpdated}) {
                 <MessengerContainer 
                     conversation={conversation}
                     provider={selected}/>
-                <div id="user-input" className="input-box">
-                    <input 
-                        id="name" 
-                        className="input" 
-                        value={prompt} 
-                        autoComplete="off" 
-                        placeholder={`Message ${selected}`} 
-                        name="prompt" 
-                        type="text" 
-                        onChange={updatePrompt}
-                    />
-                    <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>
-                </div>
+                {showInput && (
+                    <div id="user-input" className="input-box">
+                            <input 
+                                id="name" 
+                                className="input" 
+                                value={prompt} 
+                                autoComplete="off" 
+                                placeholder={`Message ${selected}`} 
+                                name="prompt" 
+                                type="text" 
+                                onChange={updatePrompt}
+                            />
+                        <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>
+                    </div>
+                )}   
             </div>
     );
 }

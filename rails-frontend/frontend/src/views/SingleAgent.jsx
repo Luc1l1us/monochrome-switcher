@@ -21,6 +21,7 @@ export default function SingleAgent({setSelectedPanel, chat, onChatUpdated}) {
             <ChatPanel
                 chat={chat}
                 onChatUpdated={onChatUpdated}
+                showInput={true}
             />
         </div>
     )
