@@ -45,7 +45,7 @@ const SelectDemo = ({selected, onProviderChange}) => (
 
 					<Select.Group>
 						<Select.Label className="SelectLabel">Misc</Select.Label>
-						<SelectItem value="placeholder">placeholder</SelectItem>
+						<SelectItem value="openrouter">OpenRouter</SelectItem>
 					</Select.Group>
 				</Select.Viewport>
 				<Select.ScrollDownButton className="SelectScrollButton">

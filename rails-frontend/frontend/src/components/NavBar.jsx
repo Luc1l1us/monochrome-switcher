@@ -24,9 +24,11 @@ export default function NavBar({setSelectedPanel}) {
                     </button>
                 </div>
             </div>
+            {/* uncomment if avatar is to be implemented
             <div id='avatar'>
                 TEST
-            </div>
+            </div> 
+            */}
         </div>
     );
 }
