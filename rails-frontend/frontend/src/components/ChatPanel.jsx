@@ -17,8 +17,13 @@ export default function AgentPanel({chat, onChatUpdated, showInput}) {
 
     const updatePrompt = (e) => setPrompt(e.target.value);
 
+    function handleProviderChange(provider) {
+        console.log("User chose: ", provider)
+        setSelected(provider)
+    }
+
     async function sendPromptnAgent() {
-        if (!chat) {
+        if (!selected) {
             console.error("Please select an AI Agent first")
             return
         } 
@@ -26,21 +31,36 @@ export default function AgentPanel({chat, onChatUpdated, showInput}) {
         if (!prompt.trim()) {
             return;
         }
-        if (!chatID) {
+
+        {/* Redundant too since we don't use nor set chatID anymore (?) */}
+        /* if (!chatID) {
             console.error("No chat exists!")
+        } */
+
+        try {
+            let activeChat = chat;
+            if (!activeChat) {
+                const id = await CreateChat(selected);
+                activeChat = await LoadOneChat(id)
+                console.log("Created chat:", activeChat)
+            }
+
+            const response = await SendPrompt(
+                activeChat.id, 
+                selected, 
+                prompt
+            )
+            const updatedChat = await LoadOneChat(activeChat.id)
+            onChatUpdated(updatedChat)
+                setPrompt("");
+        } catch (error) {
+            console.error(
+                "Failed to send prompt:", error
+            )
         }
-
-        const response = await SendPrompt(
-            chat.id, 
-            selected, 
-            prompt
-        )
-
-        const updatedChat = await LoadOneChat(chat.id)
-        onChatUpdated(updatedChat)
-            setPrompt("");
     }
 
+    {/* this seems redundant since we moved the newChat to sendPrompt */}
     async function newChat(provider) {
         try {
             console.log("Creating chat for:", provider)
@@ -62,7 +82,7 @@ export default function AgentPanel({chat, onChatUpdated, showInput}) {
                     <div id='Selector-container'>
                         <SelectDemo 
                             selected={selected}
-                            onProviderChange={newChat}/>
+                            onProviderChange={handleProviderChange}/>
                     </div>
                 </div>
                 <MessengerContainer 
