@@ -3,30 +3,37 @@ import HistoryCards from "../components/HistoryCards"
 import { ListChats, LoadOneChat } from "../../wailsjs/go/main/App"
 
 export default function History({onChatSelected}) {
-
-    const [chatID, setChatID] = useState("");
     const [chats, setChats] = useState([])
-    const [conversation, setConversation] = useState([])
-    const [selected, setSelected] = useState('');
     
     useEffect(() => {
-        ListChats().then(data => {
-            console.log(data);
-            setChats(data);
-        });
+        ListChats()
+            .then(data => {
+                console.log(data);
+                setChats(data || []);
+        })
+            .catch(error => {
+                console.error("Failed to list chats: ", error)
+                setChats([])
+            })
     }, []);
 
     async function switchChat(chatID) {
+        if (!chatID) {
+            console.error("No chatID supplied!")
+            return;
+        }
         console.log("switchChat received:", chatID);
         try {
             const chat = await LoadOneChat(chatID)
 
             console.log("Loaded Chat:", chat);
 
+            if (!chat) {
+                console.error("No chat returned!")
+                return;
+            }
+            console.log("Calling onChatSelected with:", chat)
             onChatSelected(chat)
-/*             setChatID(chat.id)
-            setConversation(chat.messages)
-            setSelected(chat.provider) */
         } catch(error) {
             console.error("Failed to load chat:", error)
         }
@@ -46,15 +53,25 @@ export default function History({onChatSelected}) {
                         Select one of the chats below to view and continue.
                     </h3>
                 </div>
-                <div className="History-container">
-                    {chats.map(chat => (
-                        <HistoryCards
-                            key={chat.id}
-                            chat={chat}
-                            onClick={switchChat}
-                        />
-                    ))}
-                </div>
+                    {chats.length === 0 ? (
+                        <div className="empty-history">
+                            <h3>No conversations yet</h3>
+                            <p>
+                                Start a conversation with an AI Agent
+                                and it will appear here
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="History-container">
+                        {chats.map(chat => (
+                            <HistoryCards
+                                key={chat.id}
+                                chat={chat}
+                                onClick={switchChat}
+                            />
+                        ))}
+                        </div>
+                    )}
             </div>
         </div>
     )

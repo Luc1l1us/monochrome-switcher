@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
-import ChatPanel from '../components/ChatPanel';
+import AgentPanel from '../components/ChatPanel';
 import {EnterIcon} from "@radix-ui/react-icons";
 import {CreateChat, Greet, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import * as icons from "../../../../icons"
@@ -18,7 +18,7 @@ export default function SingleAgent({setSelectedPanel, chat, onChatUpdated}) {
                     +
                 </button>
             </div>
-            <ChatPanel
+            <AgentPanel
                 chat={chat}
                 onChatUpdated={onChatUpdated}
                 showInput={true}

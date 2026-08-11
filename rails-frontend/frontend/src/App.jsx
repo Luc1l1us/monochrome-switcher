@@ -12,6 +12,18 @@ function App() {
     const [selected, setSelected] = useState("");
     const [activeChat, setActiveChat] = useState(null);
 
+    function handleChatSelected(chat) {
+        console.log("=== HANDLE CHAT SELECTED ===");
+        console.log("chat:", chat);
+        console.log("chat.id:", chat?.id);
+        console.log("chat.provider:", chat?.provider);
+        console.log("chat.title:", chat?.title);
+        console.log("chat.messages:", chat?.messages);
+
+        setActiveChat(chat);
+        setSelectedPanel("singleagent");
+    }
+
     return (
         <div id="App">
             <div className='container'>
@@ -28,10 +40,7 @@ function App() {
                             chat={activeChat}
                             onChatUpdated={setActiveChat}/>}
                         {selectedPanel === "history" &&  <History 
-                            onChatSelected={(chat) => {
-                                setActiveChat(chat)
-                                setSelectedPanel("singleagent")
-                            }}
+                            onChatSelected={handleChatSelected}
                         />}
                         {selectedPanel === "about" &&  <About />}
                         {selectedPanel === "faq" &&  <FAQ />}

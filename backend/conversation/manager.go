@@ -129,7 +129,8 @@ func ListChats() ([]core.ChatSummary, error) {
 		return nil, err
 	}
 
-	var chats []core.ChatSummary
+	chats := make([]core.ChatSummary, 0)
+	//var chats []core.ChatSummary
 
 	for _, entry := range entries {
 
