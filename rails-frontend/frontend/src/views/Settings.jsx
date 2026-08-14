@@ -127,6 +127,21 @@ export default function Settings() {
                                     <input type="password" value={apikeys.gemini} onChange={handleAPIChange} name="gemini_key" className="api-key" autoComplete="off" placeholder={apikeys.gemini_key || "Please enter an API Key"}/>
                                 </div>
                             </div>
+                        </div>                        
+                        <div className="agent">
+                            <div className="agent-image">
+                                <img id="gemini-image" src={icons.gemini}></img>
+                            </div>
+                            <div className="agent-text">
+                                <a href="https://ai.google.dev/gemini-api/docs">
+                                    <div className="agent-title">
+                                        OpenRouter
+                                    </div>
+                                </a>
+                                <div className="agent-key">
+                                    <input type="password" value={apikeys.gemini} onChange={handleAPIChange} name="gemini_key" className="api-key" autoComplete="off" placeholder={apikeys.gemini_key || "Please enter an API Key"}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
