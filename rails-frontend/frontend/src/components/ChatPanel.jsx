@@ -5,8 +5,9 @@ import {EnterIcon} from "@radix-ui/react-icons";
 import {CreateChat, Greet, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import * as icons from "../../../../icons"
 import {MultiAgent} from '../views';
+import OpenRouter from './OpenRouter';
 
-export default function AgentPanel({chat, onChatUpdated, showInput}) {
+export default function ChatPanel({chat, onChatUpdated, showInput}) {
 
     const [chatID, setChatID] = useState("");
     const [prompt, setPrompt] = useState('');
@@ -14,12 +15,18 @@ export default function AgentPanel({chat, onChatUpdated, showInput}) {
         chat?.provider || ""
     )
     const conversation = chat?.messages || []
+    const [routerOpen, setrouterOpen] = useState(false)
 
     const updatePrompt = (e) => setPrompt(e.target.value);
 
     function handleProviderChange(provider) {
         console.log("User chose: ", provider)
         setSelected(provider)
+
+        if (provider === "openrouter") {
+            setrouterOpen(true);
+            console.log(`selected is: ${selected} and setrouterOpen is: ${routerOpen}`)
+        }
     }
 
     async function sendPromptnAgent() {
@@ -83,6 +90,11 @@ export default function AgentPanel({chat, onChatUpdated, showInput}) {
                         <SelectDemo 
                             selected={selected}
                             onProviderChange={handleProviderChange}/>
+                    {routerOpen && (
+                        <OpenRouter
+                            selected={selected}
+                            onProviderChange={handleProviderChange}/>
+                    )}
                     </div>
                 </div>
                 <MessengerContainer 
