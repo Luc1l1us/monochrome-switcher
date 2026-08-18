@@ -6,6 +6,7 @@ import (
 	"monochrome-switcher/backend/core"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 type ConvoManager struct {
@@ -51,10 +52,11 @@ func (m *ConvoManager) LoadChat(chat *core.Chat) {
 
 func (m *ConvoManager) CreateChat(chatID, provider string) *core.Chat {
 	chat := &core.Chat{
-		ID:       chatID,
-		Provider: provider,
-		Title:    "New Chat",
-		Messages: []core.Message{},
+		ID:        chatID,
+		Provider:  provider,
+		Title:     "New Chat",
+		CreatedAt: time.Now(),
+		Messages:  []core.Message{},
 	}
 
 	m.Chats[chatID] = chat
