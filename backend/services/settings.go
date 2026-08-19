@@ -21,6 +21,7 @@ type APIKeys struct {
 	Perplexity string `json:"perplex_key"`
 	DeepSeek   string `json:"deepseek_key"`
 	Grok       string `json:"grok_key"`
+	OpenRouter string `json:"openrouter_key"`
 }
 
 func GetSettingsPath(filename string) string {
