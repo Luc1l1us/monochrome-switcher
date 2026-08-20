@@ -18,6 +18,8 @@ export namespace core {
 	    id: string;
 	    provider: string;
 	    title: string;
+	    state: string;
+	    created_at: string;
 	    messages: Message[];
 	
 	    static createFrom(source: any = {}) {
@@ -29,6 +31,8 @@ export namespace core {
 	        this.id = source["id"];
 	        this.provider = source["provider"];
 	        this.title = source["title"];
+	        this.state = source["state"];
+	        this.created_at = source["created_at"];
 	        this.messages = this.convertValues(source["messages"], Message);
 	    }
 	
@@ -54,6 +58,8 @@ export namespace core {
 	    id: string;
 	    provider: string;
 	    title: string;
+	    created_at: string;
+	    state: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new ChatSummary(source);
@@ -64,6 +70,8 @@ export namespace core {
 	        this.id = source["id"];
 	        this.provider = source["provider"];
 	        this.title = source["title"];
+	        this.created_at = source["created_at"];
+	        this.state = source["state"];
 	    }
 	}
 
@@ -78,6 +86,7 @@ export namespace services {
 	    perplex_key: string;
 	    deepseek_key: string;
 	    grok_key: string;
+	    openrouter_key: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new APIKeys(source);
@@ -91,6 +100,7 @@ export namespace services {
 	        this.perplex_key = source["perplex_key"];
 	        this.deepseek_key = source["deepseek_key"];
 	        this.grok_key = source["grok_key"];
+	        this.openrouter_key = source["openrouter_key"];
 	    }
 	}
 	export class Settings {

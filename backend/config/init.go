@@ -13,6 +13,8 @@ import (
 	"github.com/openai/openai-go/v3"
 	openaiOption "github.com/openai/openai-go/v3/option"
 
+	openrouter "github.com/OpenRouterTeam/go-sdk"
+
 	"google.golang.org/genai"
 )
 
@@ -52,6 +54,11 @@ func InitProviders() map[string]core.Provider {
 		anthropicOption.WithAPIKey(keys.Claude),
 	)
 
+	//OpenRouter Client Initialization
+	openrouterClient := openrouter.New(
+		openrouter.WithSecurity(keys.OpenRouter),
+	)
+
 	return map[string]core.Provider{
 		"claude": &Cloud.Claude{
 			Client: &claudeClient,
@@ -61,6 +68,9 @@ func InitProviders() map[string]core.Provider {
 		},
 		"gemini": &Cloud.Gemini{
 			Client: geminiClient,
+		},
+		"openrouter": &Cloud.OpenRouterAI{
+			Client: openrouterClient,
 		},
 	}
 }
