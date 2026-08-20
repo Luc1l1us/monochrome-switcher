@@ -1,8 +1,9 @@
 module monochrome-switcher
 
-go 1.25.0
+go 1.25.10
 
 require (
+	github.com/OpenRouterTeam/go-sdk v0.7.58
 	github.com/anthropics/anthropic-sdk-go v1.37.0
 	github.com/google/uuid v1.6.0
 	github.com/joho/godotenv v1.5.1
@@ -36,6 +37,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/samber/lo v1.49.1 // indirect
+	github.com/spyzhov/ajson v0.8.0 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect

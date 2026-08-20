@@ -55,7 +55,7 @@ func (m *ConvoManager) CreateChat(chatID, provider string) *core.Chat {
 		ID:        chatID,
 		Provider:  provider,
 		Title:     "New Chat",
-		CreatedAt: time.Now(),
+		CreatedAt: time.Now().Format(time.RFC3339),
 		Messages:  []core.Message{},
 	}
 
@@ -158,10 +158,15 @@ func ListChats() ([]core.ChatSummary, error) {
 			continue
 		}
 
+		parsedTime, err := time.Parse(time.RFC3339, chat.CreatedAt)
+
+		readableTime := parsedTime.Format("January 2, 2006 at 3:04 PM")
+
 		chats = append(chats, core.ChatSummary{
-			ID:       chat.ID,
-			Provider: chat.Provider,
-			Title:    chat.Title,
+			ID:        chat.ID,
+			Provider:  chat.Provider,
+			Title:     chat.Title,
+			CreatedAt: readableTime,
 		})
 	}
 	return chats, nil

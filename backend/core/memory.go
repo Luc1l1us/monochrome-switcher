@@ -2,7 +2,6 @@ package core
 
 import (
 	"strings"
-	"time"
 )
 
 type Message struct {
@@ -19,16 +18,16 @@ type Chat struct {
 	Provider   string    `json:"provider"`
 	Title      string    `json:"title"`
 	AgentState string    `json:"state"`
-	CreatedAt  time.Time `json:"created_at"`
+	CreatedAt  string    `json:"created_at"`
 	Messages   []Message `json:"messages"`
 }
 
 type ChatSummary struct {
-	ID         string    `json:"id"`
-	Provider   string    `json:"provider"`
-	Title      string    `json:"title"`
-	CreatedAt  time.Time `json:"created_at"`
-	AgentState string    `json:"state"`
+	ID         string `json:"id"`
+	Provider   string `json:"provider"`
+	Title      string `json:"title"`
+	CreatedAt  string `json:"created_at"`
+	AgentState string `json:"state"`
 }
 
 func BuildPrompt(messages []Message) string {
