@@ -52,7 +52,12 @@ func (a *App) startup(ctx context.Context) {
 }
 
 func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) string {
-	fmt.Printf("SendPrompt got: %q\n", Prompt)
+	//fmt.Printf("ChatID: %q\n", ChatID)
+	//fmt.Printf("ProviderName: %q\n", ProviderName)
+	//fmt.Printf("Prompt: %q\n", Prompt)
+	//fmt.Printf("Manager: %q\n", a.manager)
+	//fmt.Printf("Provider: %q\n", a.providers)
+	//fmt.Printf("SendPrompt got: %q\n", Prompt)
 	result, err := services.HandlePrompt(
 		a.manager,
 		a.providers,

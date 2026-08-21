@@ -14,10 +14,13 @@ type OpenRouterAI struct {
 }
 
 func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
+	fmt.Printf("OpenRouter Generate called\n")
+	fmt.Printf("OpenRouter client: %#v\n", g.Client)
 	ctx := context.Background()
 
 	prompt := core.BuildPrompt(messages)
 
+	fmt.Println("About to call OpenRouter Chat.Send")
 	result, err := g.Client.Chat.Send(
 		ctx,
 		components.ChatRequest{
@@ -33,13 +36,22 @@ func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
 		}, nil,
 	)
 
+	if err != nil {
+		return "", err
+	}
+
+	fmt.Println("OpenRouter Chat.Send returned")
+
 	content := result.ChatResult.Choices[0].Message.Content
 
-	assistantContent, test := content.Get()
+	assistantContent, ok := content.Get()
+	if !ok {
+		return "", fmt.Errorf("no content in OpenRouter response")
+	}
 
-	fmt.Println(assistantContent, test)
+	if assistantContent.Str == nil {
+		return "", fmt.Errorf("OpenRouter content has no string value")
+	}
 
-	fmt.Printf("%T\n", assistantContent)
-	fmt.Printf("%v\n", assistantContent)
-	return *assistantContent.Str, err
+	return *assistantContent.Str, nil
 }

@@ -17,6 +17,7 @@ export default function Settings() {
         perplex_key: '',
         deepseek_key: '',
         grok_key: '',
+        openrouter_key: '',
     })
 
     //function to show toast notifcation for user
@@ -130,7 +131,7 @@ export default function Settings() {
                         </div>                        
                         <div className="agent">
                             <div className="agent-image">
-                                <img id="gemini-image" src={icons.gemini}></img>
+                                <img id="gemini-image" src={icons.openrouter}></img>
                             </div>
                             <div className="agent-text">
                                 <a href="https://ai.google.dev/gemini-api/docs">
@@ -139,7 +140,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.gemini} onChange={handleAPIChange} name="gemini_key" className="api-key" autoComplete="off" placeholder={apikeys.gemini_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.openrouter} onChange={handleAPIChange} name="openrouter_key" className="api-key" autoComplete="off" placeholder={apikeys.openrouter_key || "Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>
