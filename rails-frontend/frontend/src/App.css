@@ -234,7 +234,23 @@ input:checked + .slider:before {
 .history-smol {
   font-size: 15px;
   display: flex;
-  justify-self: center;
+  justify-content: flex-start;
+}
+
+#historycard-id {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.delete-button {
+  align-self: flex-end;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.delete-button:hover {
+  color: var(--accent-hover-color);
 }
 
 .card {
