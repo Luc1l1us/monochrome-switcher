@@ -171,3 +171,18 @@ func ListChats() ([]core.ChatSummary, error) {
 	}
 	return chats, nil
 }
+
+func DeleteChat(chatID string) {
+	fileName := chatID + ".json"
+	fmt.Println("File is: ", fileName)
+
+	filePath := GetConvoPath(fileName)
+	fmt.Println("File is located in: ", filePath)
+	err := os.Remove(filePath)
+	if err != nil {
+		fmt.Println("Error deleting file: ", err)
+		return
+	}
+
+	fmt.Println("File deleted successfully!")
+}

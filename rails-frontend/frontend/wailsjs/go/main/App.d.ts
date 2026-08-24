@@ -5,6 +5,8 @@ import {services} from '../models';
 
 export function CreateChat(arg1:string):Promise<string>;
 
+export function DeleteOneChat(arg1:string):Promise<void>;
+
 export function Greet(arg1:string):Promise<string>;
 
 export function ListChats():Promise<Array<core.ChatSummary>>;

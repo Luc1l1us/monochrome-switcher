@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import HistoryCards from "../components/HistoryCards"
-import { ListChats, LoadOneChat } from "../../wailsjs/go/main/App"
+import { DeleteOneChat, ListChats, LoadOneChat } from "../../wailsjs/go/main/App"
 
 export default function History({onChatSelected}) {
     const [chats, setChats] = useState([])
@@ -39,6 +39,19 @@ export default function History({onChatSelected}) {
         }
     }
 
+    function deleteChat(chatID) {
+        if (!chatID) {
+            console.error("No chatID supplied!")
+            return;
+        }
+        console.log("Selected ChatID:", chatID)
+        try {
+            DeleteOneChat(chatID)
+        } catch (error) {
+            console.error("Failed to delete chat!", error)
+        }
+    }
+
     return (
         <div id="home">
             <div id='Title'>
@@ -68,6 +81,7 @@ export default function History({onChatSelected}) {
                                 key={chat.id}
                                 chat={chat}
                                 onClick={switchChat}
+                                DeleteChat={deleteChat}
                             />
                         ))}
                         </div>

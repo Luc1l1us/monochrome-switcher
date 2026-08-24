@@ -99,6 +99,10 @@ func (a *App) LoadOneChat(chatID string) (*core.Chat, error) {
 	return chat, nil
 }
 
+func (a *App) DeleteOneChat(chatID string) {
+	conversation.DeleteChat(chatID)
+}
+
 // TODO still needs to receive agent string here
 // This does not work but we'll let it stay for now
 /* func (a *App) SendPrompt(prompt string, recagent string) string {
