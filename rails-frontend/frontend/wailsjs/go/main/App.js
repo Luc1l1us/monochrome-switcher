@@ -6,6 +6,10 @@ export function CreateChat(arg1) {
   return window['go']['main']['App']['CreateChat'](arg1);
 }
 
+export function DeleteOneChat(arg1) {
+  return window['go']['main']['App']['DeleteOneChat'](arg1);
+}
+
 export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
