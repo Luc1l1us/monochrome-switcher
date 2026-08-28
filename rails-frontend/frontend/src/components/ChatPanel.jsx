@@ -101,7 +101,11 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                     conversation={conversation}
                     provider={selected}/>
                 {showInput && (
-                    <div id="user-input" className="input-box">
+                    <form onSubmit={(event) => {
+                        event.preventDefault();
+                        sendPromptnAgent()
+                    }}>
+                        <div id="user-input" className="input-box">
                             <input 
                                 id="name" 
                                 className="input" 
@@ -112,8 +116,9 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                                 type="text" 
                                 onChange={updatePrompt}
                             />
-                        <button className="btn" onClick={sendPromptnAgent}><EnterIcon /></button>
-                    </div>
+                            <button className="btn" type="submit"><EnterIcon /></button>
+                        </div>
+                    </form>
                 )}   
             </div>
     );
