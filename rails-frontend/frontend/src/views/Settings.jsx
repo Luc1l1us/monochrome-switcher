@@ -1,6 +1,8 @@
 import { SaveSettings, LoadSettings, SaveAPIKeys, LoadAPIKeys } from "../../wailsjs/go/main/App"
 import { useEffect, useState } from "react";
 import * as icons from "../../../../icons"
+import Toast from "../components/Toast";
+import { useToast } from "../components/useToast";
 
 export default function Settings() {
     const [settings, setSettings] = useState({
@@ -21,14 +23,7 @@ export default function Settings() {
     })
 
     //function to show toast notifcation for user
-    const [toast, setToast] = useState('');
-    function showToast(text) {
-        setToast(text)
-
-        setTimeout(() => {
-            setToast("");
-        }, 5000);
-    }
+    const { toast, toastVisible, showToast } = useToast(); 
 
     useEffect(() => {
         const init = async () => {
@@ -298,11 +293,10 @@ export default function Settings() {
                         SAVE
                     </button>
                 </div>
-                    {toast && (
-                        <div className="toast-notif">
-                            {toast}
-                        </div>
-                    )}
+                    <Toast 
+                        message={toast}
+                        visible={toastVisible}
+                    />
             </div>
         </div>
     )

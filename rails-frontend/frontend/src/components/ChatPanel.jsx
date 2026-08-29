@@ -2,10 +2,12 @@ import {useEffect, useState} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
 import {EnterIcon} from "@radix-ui/react-icons";
-import {CreateChat, Greet, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
+import {CreateChat, Greet, LoadAPIKeys, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import * as icons from "../../../../icons"
 import {MultiAgent} from '../views';
 import OpenRouter from './OpenRouter';
+import Toast from './Toast';
+import { useToast } from './useToast';
 
 export default function ChatPanel({chat, onChatUpdated, showInput}) {
 
@@ -19,9 +21,34 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
 
     const updatePrompt = (e) => setPrompt(e.target.value);
 
-    function handleProviderChange(provider) {
+    const [openrouterAPIkey, setopenrouterAPIkey] = useState({
+        openrouter_key: '',
+    })
+
+    //Toast function here
+    const { toast, toastVisible, showToast } = useToast();
+
+    async function handleOpenRouter() {
+        const apikeys = await LoadAPIKeys();
+        setopenrouterAPIkey(apikeys)
+        console.log("openrouterkey is:", apikeys.openrouter_key)
+        if (apikeys.openrouter_key === "") {
+            return false
+        }
+        return true
+    }
+
+    async function handleProviderChange(provider) {
         console.log("User chose: ", provider)
         setSelected(provider)
+
+        const checkopenrouterAPI = await handleOpenRouter();
+        console.log("verdict is",checkopenrouterAPI)
+
+        if (!checkopenrouterAPI) {
+            showToast("OpenRouter API field is empty!")
+            return;
+        }
 
         if (provider === "openrouter") {
             setrouterOpen(true);
@@ -97,6 +124,10 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                     )}
                     </div>
                 </div>
+                <Toast 
+                    message={toast}
+                    visible={toastVisible}
+                />
                 <MessengerContainer 
                     conversation={conversation}
                     provider={selected}/>
@@ -119,7 +150,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                             <button className="btn" type="submit"><EnterIcon /></button>
                         </div>
                     </form>
-                )}   
+                )}
             </div>
     );
 }
