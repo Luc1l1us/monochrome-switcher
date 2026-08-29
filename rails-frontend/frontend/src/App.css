@@ -269,6 +269,36 @@ input:checked + .slider:before {
   margin-bottom: 10px;
 }
 
+/* Toast notif here */
+.toast-notif {
+  position: fixed;
+  bottom: 30px;
+  right: 30%;
+  min-width: 250px;
+  max-width: 400px;
+  padding: 14px 18px;
+  background: #333;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.toast-notif.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-notif.hide {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 .prompt {
   height: 20px;
   line-height: 20px;
