@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import HistoryCards from "../components/HistoryCards"
 import { DeleteOneChat, ListChats, LoadOneChat } from "../../wailsjs/go/main/App"
+import Toast from "../components/Toast";
+import { useToast } from "../components/useToast";
 
 export default function History({onChatSelected}) {
     const [chats, setChats] = useState([])
+    const { toast, toastVisible, showToast } = useToast();
     
     useEffect(() => {
         ListChats()
@@ -42,13 +45,16 @@ export default function History({onChatSelected}) {
     function deleteChat(chatID) {
         if (!chatID) {
             console.error("No chatID supplied!")
+            showToast(`No chatID supplied!`)
             return;
         }
         console.log("Selected ChatID:", chatID)
         try {
             DeleteOneChat(chatID)
+            showToast(`Deleted ${chatID}!`)
         } catch (error) {
             console.error("Failed to delete chat!", error)
+            showToast(`Failed to delete chat! Error: ${error}`)
         }
     }
 
@@ -84,7 +90,12 @@ export default function History({onChatSelected}) {
                                 DeleteChat={deleteChat}
                             />
                         ))}
+                        <Toast 
+                            message={toast}
+                            visible={toastVisible}
+                        />
                         </div>
+                        
                     )}
             </div>
         </div>
