@@ -39,6 +39,7 @@ export default function History({onChatSelected}) {
             onChatSelected(chat)
         } catch(error) {
             console.error("Failed to load chat:", error)
+            showToast(`Failed to load chat! Error: ${error}`)
         }
     }
 
