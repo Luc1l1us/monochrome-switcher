@@ -33,6 +33,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         setopenrouterAPIkey(apikeys)
         console.log("openrouterkey is:", apikeys.openrouter_key)
         if (apikeys.openrouter_key === "") {
+            showToast(`No OpenRouter key present!`)
             return false
         }
         return true
@@ -58,6 +59,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
 
     async function sendPromptnAgent() {
         if (!selected) {
+            showToast(`Please select an AI Agent first!`)
             console.error("Please select an AI Agent first")
             return
         } 
@@ -88,6 +90,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             onChatUpdated(updatedChat)
                 setPrompt("");
         } catch (error) {
+            showToast(`Failed to send prompt: error: ${error}`)
             console.error(
                 "Failed to send prompt:", error
             )
@@ -106,6 +109,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             onChatUpdated(newChat)
             console.log("Created chat:", id)
         } catch(error) {
+            showToast(`Failed to create chat: error: ${error}`)
             console.error("Failed to create chat:", error)
         }
     }
@@ -149,7 +153,11 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                             />
                             <button className="btn" type="submit"><EnterIcon /></button>
                         </div>
-                    </form>
+                        <Toast 
+                            message={toast}
+                            visible={toastVisible}
+                        />
+                    </form>   
                 )}
             </div>
     );
