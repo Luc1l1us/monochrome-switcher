@@ -29,6 +29,7 @@ export default function Settings() {
         const init = async () => {
             if (!window.go?.main) {
                 console.warn("Wails not ready yet");
+                showToast("Wails not ready yet!")
                 return;
             }
 

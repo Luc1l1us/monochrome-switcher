@@ -1,9 +1,7 @@
 import {useState} from 'react';
 import SelectDemo from '../components/aiselection';
-//import sendPromptnAgent from './SingleAgent';
 import {EnterIcon} from "@radix-ui/react-icons";
-import {Greet, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
-import * as icons from "../../../../icons"
+import {LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import ChatPanel from '../components/ChatPanel';
 
 export default function MultiAgent({chat, onChatUpdated}) {
@@ -54,6 +52,7 @@ export default function MultiAgent({chat, onChatUpdated}) {
         await Promise.all(
             panels.map(async (panel) => {
                 if (!panel.chat) {
+                    showToast("Panel has no chat!")
                     console.log("Panel has no chat!", panel.id);
                     return;
                 }
@@ -87,6 +86,7 @@ export default function MultiAgent({chat, onChatUpdated}) {
                     console.error(
                         `Failed to send to ${panel.chat.provider}:`, error
                     )
+                    showToast(`Failed to send to ${panel.chat.provider}: ${error}`)
                 }
             })
         )
