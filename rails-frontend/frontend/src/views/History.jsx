@@ -16,6 +16,7 @@ export default function History({onChatSelected}) {
         })
             .catch(error => {
                 console.error("Failed to list chats: ", error)
+                showToast(`Failed to list chats, error: ${error}`)
                 setChats([])
             })
     }, []);
@@ -23,6 +24,7 @@ export default function History({onChatSelected}) {
     async function switchChat(chatID) {
         if (!chatID) {
             console.error("No chatID supplied!")
+            showToast("No chatID supplied!")
             return;
         }
         console.log("switchChat received:", chatID);
