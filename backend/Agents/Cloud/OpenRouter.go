@@ -4,9 +4,11 @@ import (
 	"context"
 	"fmt"
 	"monochrome-switcher/backend/core"
+	"time"
 
 	openrouter "github.com/OpenRouterTeam/go-sdk"
 	"github.com/OpenRouterTeam/go-sdk/models/components"
+	"github.com/OpenRouterTeam/go-sdk/optionalnullable"
 )
 
 type OpenRouterAI struct {
@@ -14,9 +16,11 @@ type OpenRouterAI struct {
 }
 
 func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
-	fmt.Printf("OpenRouter Generate called\n")
-	fmt.Printf("OpenRouter client: %#v\n", g.Client)
-	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(
+		context.Background(),
+		30*time.Second,
+	)
+	defer cancel()
 
 	prompt := core.BuildPrompt(messages)
 
@@ -25,6 +29,9 @@ func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
 		ctx,
 		components.ChatRequest{
 			Model: openrouter.Pointer("google/gemini-2.5-flash"),
+			MaxCompletionTokens: optionalnullable.From(
+				openrouter.Pointer(int64(4096)),
+			),
 			Messages: []components.ChatMessages{
 				components.CreateChatMessagesUser(
 					components.ChatUserMessage{
@@ -33,14 +40,18 @@ func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
 					},
 				),
 			},
-		}, nil,
+		},
+		nil,
 	)
 
-	if err != nil {
-		return "", err
-	}
+	// Uncomment these if errors pop up
+	//fmt.Println("OpenRouter Chat.Send returned")
+	//fmt.Printf("ERROR: %$v\n", err)
+	//fmt.Printf("RESULT: %#v\v", result)
 
-	fmt.Println("OpenRouter Chat.Send returned")
+	if err != nil {
+		return "", fmt.Errorf("OpenRouter request failed: %w\n", err)
+	}
 
 	content := result.ChatResult.Choices[0].Message.Content
 
