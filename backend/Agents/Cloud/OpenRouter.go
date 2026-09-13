@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"monochrome-switcher/backend/core"
+	"os"
 	"time"
 
 	openrouter "github.com/OpenRouterTeam/go-sdk"
@@ -65,4 +66,17 @@ func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
 	}
 
 	return *assistantContent.Str, nil
+}
+
+func (g *OpenRouterAI) FetchModels() {
+	ctx := context.Background()
+
+	openrouterClient := openrouter.New(
+		openrouter.WithSecurity(keys.OpenRouter),
+	)
+	if err != nil {
+		return "", fmt.Errorf("Wrong or no API Key present for OpenRouter! %w\n", err)
+	}
+
+	result, err := 
 }
