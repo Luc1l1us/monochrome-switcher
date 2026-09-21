@@ -5,6 +5,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"monochrome-switcher/backend/Agents/Cloud"
 	"monochrome-switcher/backend/config"
 	"monochrome-switcher/backend/conversation"
 	"monochrome-switcher/backend/core"
@@ -49,6 +51,16 @@ func (a *App) startup(ctx context.Context) {
 	y := primary.Size.Height - height
 
 	runtime.WindowSetPosition(a.ctx, x, y)
+
+	//Get or Fetch models from OpenRouter at startup
+	//Primitive, will need to revamp this soon
+	openRouter, err := a.providers["openrouter"].(*Cloud.OpenRouterAI)
+	if !err {
+		log.Println("OpenRouter provider not found!")
+	}
+	if err := openRouter.FetchModels(); err != nil {
+		log.Printf("Failed to fetch OpenRouter models %v", err)
+	}
 }
 
 func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) string {

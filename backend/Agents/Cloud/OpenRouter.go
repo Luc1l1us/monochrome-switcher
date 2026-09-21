@@ -2,18 +2,27 @@ package Cloud
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"log"
 	"monochrome-switcher/backend/core"
+	"monochrome-switcher/backend/services"
 	"os"
 	"time"
 
 	openrouter "github.com/OpenRouterTeam/go-sdk"
 	"github.com/OpenRouterTeam/go-sdk/models/components"
+	"github.com/OpenRouterTeam/go-sdk/models/operations"
 	"github.com/OpenRouterTeam/go-sdk/optionalnullable"
 )
 
 type OpenRouterAI struct {
 	Client *openrouter.OpenRouter
+}
+
+type ModelInfo struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
@@ -68,15 +77,43 @@ func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
 	return *assistantContent.Str, nil
 }
 
-func (g *OpenRouterAI) FetchModels() {
+func (g *OpenRouterAI) FetchModels() error {
 	ctx := context.Background()
 
-	openrouterClient := openrouter.New(
-		openrouter.WithSecurity(keys.OpenRouter),
-	)
+	// Looking for one model
+	/* result, err := g.Client.Models.Get(ctx, "openai", "gpt-4")
 	if err != nil {
-		return "", fmt.Errorf("Wrong or no API Key present for OpenRouter! %w\n", err)
+		log.Fatal(err)
+	} */
+
+	/* models := append(models, ModelInfo{
+		ID:   result.Result.Data.,
+		Name: result.Data.Name,
+	}) */
+
+	result, err := g.Client.Models.List(ctx, &operations.GetModelsRequest{})
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	result, err := 
+	// If multiple models
+	var models []ModelInfo
+
+	// try to add model count here to get available models (?)
+	for _, model := range result.Result.Data {
+		models = append(models, ModelInfo{
+			ID:   model.ID,
+			Name: model.Name,
+		})
+	}
+
+	data, err := json.MarshalIndent(models, "", "    ")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ModelFile := "openrouterModels.json"
+	ModelPath := services.GetSettingsPath(ModelFile)
+
+	return os.WriteFile(ModelPath, data, 0644)
 }

@@ -77,6 +77,11 @@ func GetConvoPath(filename string) string {
 	ConvoDir := filepath.Join(exePath, "monochrome-switcher", "Chat")
 	os.MkdirAll(ConvoDir, os.ModePerm)
 
+	// adding error handler here (revamp this)
+	/* if err := os.MkdirAll(ConvoDir, os.ModePerm); err != nil {
+		return "", err
+	} */
+
 	return filepath.Join(ConvoDir, filename)
 }
 
