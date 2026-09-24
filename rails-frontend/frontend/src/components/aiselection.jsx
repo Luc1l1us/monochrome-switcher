@@ -23,29 +23,31 @@ const SelectDemo = ({selected, onProviderChange}) => (
 				<Select.Viewport className="SelectViewport">
 					<Select.Group>
 						<Select.Label className="SelectLabel">Cloud AI</Select.Label>
-						<SelectItem value="claude" disabled> <img id="claude-icon" src={icons.claude}/> !Claude</SelectItem>
-						<SelectItem value="chatgpt" disabled> <img id="chatgpt-icon" src={icons.chatgpt}/> !ChatGPT</SelectItem>
+						<SelectItem value="claude"> <img id="claude-icon" src={icons.claude}/> Claude</SelectItem>
+						<SelectItem value="chatgpt"> <img id="chatgpt-icon" src={icons.chatgpt}/> ChatGPT</SelectItem>
 						<SelectItem value="gemini"> <img id="gemini-icon" src={icons.gemini}/>  Gemini</SelectItem>
-						<SelectItem value="perplexity" disabled> <img id="gemini-icon" src={icons.perplexity}/> !Perplexity</SelectItem>
-						<SelectItem value="grok" disabled> <img id="gemini-icon" src={icons.grok}/> !Grok</SelectItem>
-						<SelectItem value="deepseek" disabled> <img id="gemini-icon" src={icons.deepseek}/> !Deepseek</SelectItem>
+						<SelectItem value="perplexity"> <img id="gemini-icon" src={icons.perplexity}/> (x) Perplexity</SelectItem>
+						<SelectItem value="grok"> <img id="gemini-icon" src={icons.grok}/> (x) Grok</SelectItem>
+						<SelectItem value="deepseek"> <img id="gemini-icon" src={icons.deepseek}/> (x) Deepseek</SelectItem>
 					</Select.Group>
 
 					<Select.Separator className="SelectSeparator" />
 
 					<Select.Group>
 						<Select.Label className="SelectLabel">Local AI</Select.Label>
-						<SelectItem value="ollama">Ollama</SelectItem>
+						<SelectItem value="ollama">(x) Ollama</SelectItem>
+					{/* disabled placeholder for showcase purposes
 						<SelectItem value="carrot" disabled>
 							disabled placeholder
 						</SelectItem>
+					*/}
 					</Select.Group>
 
 					<Select.Separator className="SelectSeparator" />
 
 					<Select.Group>
 						<Select.Label className="SelectLabel">Misc</Select.Label>
-						<SelectItem value="openrouter">OpenRouter</SelectItem>
+						<SelectItem value="openrouter"> <img id="openrouter-icon" src={icons.openrouter}/> OpenRouter</SelectItem>
 					</Select.Group>
 				</Select.Viewport>
 				<Select.ScrollDownButton className="SelectScrollButton">

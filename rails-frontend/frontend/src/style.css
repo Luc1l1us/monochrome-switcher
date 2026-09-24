@@ -138,7 +138,8 @@ body {
 
 #gemini-icon,
 #chatgpt-icon,
-#claude-icon {
+#claude-icon,
+#openrouter-icon {
   width: 15px;
   height: 15px;
 }

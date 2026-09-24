@@ -3,8 +3,12 @@ import SelectDemo from '../components/aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
 import {LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import ChatPanel from '../components/ChatPanel';
+import Toast from '../components/Toast';
+import { useToast } from '../components/useToast';
 
 export default function MultiAgent({chat, onChatUpdated}) {
+    //Toast function here
+    const { toast, toastVisible, showToast } = useToast();
 
     const [panels, setPanels] = useState([
         {
@@ -66,7 +70,7 @@ export default function MultiAgent({chat, onChatUpdated}) {
                 )
 
                 try {
-                    await SendPrompt(
+                    const response = await SendPrompt(
                         panel.chat.id,
                         panel.chat.provider,
                         sharedPrompt,
@@ -79,6 +83,8 @@ export default function MultiAgent({chat, onChatUpdated}) {
                         panel.id,
                         updatedChat
                     )
+
+                    console.log("SUCCESS", response)
 
                     updatePanel(panel.id, updatedChat)
 
@@ -118,21 +124,30 @@ export default function MultiAgent({chat, onChatUpdated}) {
                 ))}
             </div>
                 {sharedInputMode && (
-                    <div id="user-input" className="input-box">
-                            <input 
-                                id="name" 
-                                className="input" 
-                                value={sharedPrompt} 
-                                autoComplete="off" 
-                                placeholder={`Message all agents...`} 
-                                name="prompt" 
-                                type="text" 
-                                onChange={
-                                    e => setSharedPrompt(e.target.value)
-                                }
+                    <form onSubmit={(event) => {
+                        event.preventDefault();
+                        sendSharedPrompt();
+                    }}>
+                        <div id="user-input" className="input-box">
+                                <input 
+                                    id="name" 
+                                    className="input" 
+                                    value={sharedPrompt} 
+                                    autoComplete="off" 
+                                    placeholder={`Message all agents...`} 
+                                    name="prompt" 
+                                    type="text" 
+                                    onChange={
+                                        e => setSharedPrompt(e.target.value)
+                                    }
+                                />
+                            <button className="btn" type='submit'><EnterIcon /></button>
+                            <Toast 
+                                message={toast}
+                                visible={toastVisible}
                             />
-                        <button className="btn" onClick={sendSharedPrompt}><EnterIcon /></button>
-                    </div>
+                        </div>
+                    </form>
                 )}
         </div>
     )

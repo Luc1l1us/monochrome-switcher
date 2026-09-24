@@ -91,7 +91,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.claude} onChange={handleAPIChange} name="claude_key" className="api-key" autoComplete="off" placeholder={apikeys.claude_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.claude_key} onChange={handleAPIChange} name="claude_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.chatgpt} onChange={handleAPIChange} name="chatgpt_key" className="api-key" autoComplete="off" placeholder={apikeys.chatgpt_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.chatgpt_key} onChange={handleAPIChange} name="chatgpt_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.gemini} onChange={handleAPIChange} name="gemini_key" className="api-key" autoComplete="off" placeholder={apikeys.gemini_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.gemini_key} onChange={handleAPIChange} name="gemini_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>                        
@@ -136,7 +136,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.openrouter} onChange={handleAPIChange} name="openrouter_key" className="api-key" autoComplete="off" placeholder={apikeys.openrouter_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.openrouter_key} onChange={handleAPIChange} name="openrouter_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>
@@ -156,7 +156,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.perplex_key} onChange={handleAPIChange} name="perplex_key" className="api-key" autoComplete="off" placeholder={apikeys.perplex_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.perplex_key} onChange={handleAPIChange} name="perplex_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.deepseek_key} onChange={handleAPIChange} name="deepseek_key" className="api-key" autoComplete="off" placeholder={apikeys.deepseek_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.deepseek_key} onChange={handleAPIChange} name="deepseek_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +188,7 @@ export default function Settings() {
                                     </div>
                                 </a>
                                 <div className="agent-key">
-                                    <input type="password" value={apikeys.grok_key} onChange={handleAPIChange} name="grok_key" className="api-key" autoComplete="off" placeholder={apikeys.grok_key || "Please enter an API Key"}/>
+                                    <input type="password" value={apikeys.grok_key} onChange={handleAPIChange} name="grok_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
                                 </div>
                             </div>
                         </div>

@@ -18,20 +18,19 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     )
     const conversation = chat?.messages || []
     const [routerOpen, setrouterOpen] = useState(false)
-
     const updatePrompt = (e) => setPrompt(e.target.value);
-
     const [openrouterAPIkey, setopenrouterAPIkey] = useState({
         openrouter_key: '',
     })
 
     //Toast function here
     const { toast, toastVisible, showToast } = useToast();
+    const [isLoading, setIsLoading] = useState(false)
 
     async function handleOpenRouter() {
         const apikeys = await LoadAPIKeys();
         setopenrouterAPIkey(apikeys)
-        console.log("openrouterkey is:", apikeys.openrouter_key)
+        //console.log("openrouterkey is:", apikeys.openrouter_key)
         if (apikeys.openrouter_key === "") {
             showToast(`No OpenRouter key present!`)
             return false
@@ -64,9 +63,8 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             return
         } 
 
-        if (!prompt.trim()) {
-            return;
-        }
+        if (!prompt.trim() || isLoading) return;
+        setIsLoading(true)
 
         {/* Redundant too since we don't use nor set chatID anymore (?) */}
         /* if (!chatID) {
@@ -94,6 +92,8 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             console.error(
                 "Failed to send prompt:", error
             )
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -121,11 +121,14 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                         <SelectDemo 
                             selected={selected}
                             onProviderChange={handleProviderChange}/>
+                {/* Commented this out due to OpenRouter model change 
+                    function is still in progress
                     {routerOpen && (
                         <OpenRouter
                             selected={selected}
                             onProviderChange={handleProviderChange}/>
                     )}
+                */}
                     </div>
                 </div>
                 <Toast 
@@ -134,7 +137,8 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                 />
                 <MessengerContainer 
                     conversation={conversation}
-                    provider={selected}/>
+                    provider={selected}
+                    isLoading={isLoading}/>
                 {showInput && (
                     <form onSubmit={(event) => {
                         event.preventDefault();

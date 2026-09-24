@@ -311,6 +311,17 @@ input:checked + .slider:before {
   align-items: center;
 }
 
+.input-box textarea {
+  width: 100%;
+  resize: none;
+  overflow-y: auto;
+
+  min-height: 24px;
+  max-height: 200px;
+
+  box-sizing: border-box;
+}
+
 .input-box .btn {
   width: 60px;
   height: 30px;
@@ -444,6 +455,43 @@ a:visited:hover {
   margin-bottom: 200px;
 }
 
+.skeleton {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-line {
+  height: 12px;
+  width: 100%;
+  border-radius: 6px;
+  background: #ddd;
+  animation: skeleton-loading 1.2s ease-in-out infinite;
+}
+
+.skeleton-line.short {
+  width: 35%;
+}
+
+.skeleton-line.medium {
+  width: 65%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+
 /*Multi Agent stuff here*/
 #Multi-mcontainer {
   display: flex;
@@ -497,6 +545,27 @@ a:visited:hover {
   display: flex;
   background-color: var(--accent-color);
   margin: 20px;
+}
+
+/*Markdown things*/
+.text {
+  text-align: left;
+}
+
+.text pre {
+  border-radius: 8px;
+  padding: 16px;
+  background-color: var(--primary-color);
+}
+
+.text code {
+  font-family: monospace;
+}
+
+.text :not(pre) > code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: var(--primary-color);
 }
 
 #user-prompt-container .text,
