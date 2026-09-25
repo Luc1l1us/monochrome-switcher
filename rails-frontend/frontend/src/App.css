@@ -486,43 +486,6 @@ a:visited:hover {
   min-width: none;
 }
 
-.skeleton {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.skeleton-line {
-  height: 12px;
-  width: 100%;
-  border-radius: 6px;
-  background: #ddd;
-  animation: skeleton-loading 1.2s ease-in-out infinite;
-}
-
-.skeleton-line.short {
-  width: 35%;
-}
-
-.skeleton-line.medium {
-  width: 65%;
-}
-
-@keyframes skeleton-loading {
-  0% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
-
-  100% {
-    opacity: 0.4;
-  }
-}
-
 /*Multi Agent stuff here*/
 #Multi-mcontainer {
   display: flex;
@@ -627,8 +590,11 @@ a:visited:hover {
 #ai-response {
   display: flex;
   align-self: flex-start;
+  align-items: flex-start;
+  gap: 10px;
   min-width: 0;
   max-width: 70%;
+  box-sizing: border-box;
 }
 
 #ai-response .pre {
@@ -646,5 +612,53 @@ a:visited:hover {
 #ai-response.loading {
   min-height: 100px;
   padding: 12px;
-  box-sizing: border-box;
+}
+
+#ai-response.loading .avatar {
+  flex-shrink: 0;
+}
+
+.skeleton {
+  flex: 1;
+  min-width: 0;
+}
+
+#ai-response.loading .skeleton {
+  flex: 1;
+  width: auto;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+#ai-response.loading .skeleton-line {
+  height: 14px;
+  width: 100%;
+  border-radius: 7px;
+  background: #ddd;
+  animation: skeleton-loading 1.2s ease-in-out infinite;
+}
+
+#ai-response.loading .skeleton-line.short {
+  width: 35%;
+}
+
+#ai-response.loading .skeleton-line.medium {
+  width: 65%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
 }

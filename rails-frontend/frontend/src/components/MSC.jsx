@@ -20,15 +20,17 @@ function MessengerContainer({conversation, provider, isLoading}) {
                 ))}
 
                 {isLoading && (
-                    <div id="ai-response" className='loading'>
-                        <div className='avatar'>
+                    <div id="ai-response" className="loading">
+                        <div className="avatar">
                             <img src={icons[provider]} />
                         </div>
 
-                        <div className='skeleton'>
-                            <div className='skeleton-line short'></div>
-                            <div className='skeleton-line'></div>
-                            <div className='skeleton-line medium'></div>
+                        <div className="skeleton">
+                            <div className="skeleton-line short"></div>
+                            <div className="skeleton-line"></div>
+                            <div className="skeleton-line medium"></div>
+                            <div className="skeleton-line"></div>
+                            <div className="skeleton-line short"></div>
                         </div>
                     </div>
                 )}
