@@ -1,4 +1,4 @@
-### INCOMPLETE / NOT WORKING
+# INCOMPLETE / NOT WORKING
 
 ### Monochrome-switcher
 
@@ -7,9 +7,24 @@
 ### Features
 
 - Switch between multiple AI or Agents seamlessly
-- Support for local LLMs
 - API Based Authentication
 - Cross-platform
+- OpenRouter integration
+- Support for local LLMs (x)
+
+### Screenshots
+
+#### AI Selection
+
+![AI Selection](docs/images/AI-Selection.jpg)
+
+for the symbols, please refer to the [AI/Agents section](#aiagents)
+
+#### Multi-Agent Chat
+
+#### Settings
+
+### Demo
 
 ### Installation
 
@@ -75,46 +90,47 @@ and much more
 
 <p> To view or edit the settings.json file, here are the location for each operating system: </p>
 
+#### Windows
+
 ```
-Windows
 C:\Users\[UserName]\AppData\Roaming\monochrome-switcher\settings.json
 ```
 
+#### MacOS
+
 ```
-MacOS
 ~/Library/Application Support/monochrome-switcher/settings.json
 ```
 
+#### Linux
+
 ```
-Linux
 ~/.config/monochrome-switcher/settings.json
 ```
 
 <p> replace [UserName] with your own desktop's username </p>
 
-### AI/Agents to add
+### AI/Agents
 
 ```
-(x) mark for AI Agents that are implemented
+(✓) mark for AI Agents that are implemented
 (!) mark for AI Agents that require a subscription to access
+(x) mark for AI Agents that haven't been implemented yet
 
-(x) Gemini
-(x) ChatGPT
-(x) Claude
-(!) Perplexity
-(!) DeepSeek
-(!) Grok
-(!) Synthesia
-Ollama
-OpenRouter
+(✓) Gemini
+(✓) ChatGPT
+(✓) Claude
+(x) Perplexity
+(x) DeepSeek
+(x) Grok
+(x) Synthesia
+(x) Ollama
+(✓) OpenRouter
 ```
 
 ### Goals
 
 ```
-Connect frontend to backend
-Finish frontend
-Bind frontend to backend (make both end start once run)
 Concurrency
 Add RAG functionality
 ```

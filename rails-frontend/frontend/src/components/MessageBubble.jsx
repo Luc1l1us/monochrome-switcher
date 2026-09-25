@@ -1,4 +1,6 @@
 import * as icons from "../../../../icons"
+import ReactMarkdown from "react-markdown"
+
 export default function MessageBubble({ message, provider }) {
     
     //testing out role
@@ -19,7 +21,13 @@ export default function MessageBubble({ message, provider }) {
             )}
 
             <div className="text">
-                {message.content}
+                {isUser ? (
+                    message.content
+                ) : (
+                    <ReactMarkdown>
+                        {message.content}
+                    </ReactMarkdown>
+                )}
             </div>
 
             {isUser && (

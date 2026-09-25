@@ -19,7 +19,7 @@ func (g *Gemini) Generate(messages []core.Message) (string, error) {
 	prompt := core.BuildPrompt(messages)
 
 	// checking history
-	fmt.Println("===== Gemini Prompt =====")
+	fmt.Println("\n===== Gemini Prompt =====")
 	fmt.Println(prompt)
 	fmt.Println("=========================")
 	// end of history
@@ -31,15 +31,46 @@ func (g *Gemini) Generate(messages []core.Message) (string, error) {
 		nil,
 	)
 
+	// uncomment this if problem is solved
+	//fmt.Println("Gemini received the msg successfully!")
+	//fmt.Println(`The result is:`, result.Text())
+
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("Gemini GenerateContent: %w", err)
 	}
 
 	if result == nil {
-		return "", fmt.Errorf("Empty Response")
+		return "", fmt.Errorf("Gemini returned a nil response")
 	}
 
-	return result.Text(), err
+	//debugging purposes
+	if len(result.Candidates) == 0 {
+		return "", fmt.Errorf("Gemini returned no candidates")
+	}
+
+	candidate := result.Candidates[0]
+
+	if candidate == nil {
+		return "", fmt.Errorf("Gemini candidate has no content")
+	}
+
+	if len(candidate.Content.Parts) == 0 {
+		return "", fmt.Errorf("Gemini candidate has no parts")
+	}
+
+	for _, part := range candidate.Content.Parts {
+		if part == nil {
+			continue
+		}
+
+		if part.Text != "" {
+			return part.Text, nil
+		}
+	}
+
+	return "", fmt.Errorf("Gemini response contained no text")
+
+	//return result.Text(), err
 }
 
 /* func CallGemini(prompt string, apikey string, err error) {

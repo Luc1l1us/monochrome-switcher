@@ -63,7 +63,7 @@ func (a *App) startup(ctx context.Context) {
 	}
 }
 
-func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) string {
+func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) (string, error) {
 	//fmt.Printf("ChatID: %q\n", ChatID)
 	//fmt.Printf("ProviderName: %q\n", ProviderName)
 	//fmt.Printf("Prompt: %q\n", Prompt)
@@ -78,10 +78,11 @@ func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) stri
 		Prompt,
 	)
 	if err != nil {
-		return err.Error()
+		fmt.Println("SendPrompt returning error: ", err)
+		return "", err
 	}
 
-	return result
+	return result, nil
 }
 
 func (a *App) CreateChat(provider string) (string, error) {

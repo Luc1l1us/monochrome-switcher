@@ -1,11 +1,8 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
-import {EnterIcon} from "@radix-ui/react-icons";
+import {ArrowUpIcon, PauseIcon} from "@radix-ui/react-icons";
 import {CreateChat, LoadAPIKeys, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
-import * as icons from "../../../../icons"
-import {MultiAgent} from '../views';
-import OpenRouter from './OpenRouter';
 import Toast from './Toast';
 import { useToast } from './useToast';
 
@@ -18,20 +15,46 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     )
     const conversation = chat?.messages || []
     const [routerOpen, setrouterOpen] = useState(false)
-
-    const updatePrompt = (e) => setPrompt(e.target.value);
-
     const [openrouterAPIkey, setopenrouterAPIkey] = useState({
         openrouter_key: '',
     })
 
     //Toast function here
     const { toast, toastVisible, showToast } = useToast();
+    const [isLoading, setIsLoading] = useState(false)
+
+    const textareaRef = useRef(null);
+
+    function updatePrompt(e) {
+        const textarea = e.target
+        setPrompt(textarea.value);
+        textarea.style.height = "auto"
+        textarea.style.height = `${Math.min(textarea.scrollHeight,200)}px`
+    }
+
+    function handleKeyDown(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendPromptnAgent();
+        }  
+    }
+
+    function resizeTexture() {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
+
+        textarea.style.height = "auto"
+        textarea.style.height = `${textarea.scrollHeight}px`
+    }
+
+    useEffect(() => {
+        resizeTexture();
+    }, [prompt])
 
     async function handleOpenRouter() {
         const apikeys = await LoadAPIKeys();
         setopenrouterAPIkey(apikeys)
-        console.log("openrouterkey is:", apikeys.openrouter_key)
+        //console.log("openrouterkey is:", apikeys.openrouter_key)
         if (apikeys.openrouter_key === "") {
             showToast(`No OpenRouter key present!`)
             return false
@@ -64,9 +87,8 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             return
         } 
 
-        if (!prompt.trim()) {
-            return;
-        }
+        if (!prompt.trim() || isLoading) return;
+        setIsLoading(true)
 
         {/* Redundant too since we don't use nor set chatID anymore (?) */}
         /* if (!chatID) {
@@ -89,11 +111,17 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             const updatedChat = await LoadOneChat(activeChat.id)
             onChatUpdated(updatedChat)
                 setPrompt("");
+
+            if (textareaRef.current) {
+                textareaRef.current.style.height = "30px";
+            }
         } catch (error) {
             showToast(`Failed to send prompt: error: ${error}`)
             console.error(
                 "Failed to send prompt:", error
             )
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -121,11 +149,14 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                         <SelectDemo 
                             selected={selected}
                             onProviderChange={handleProviderChange}/>
+                {/* Commented this out due to OpenRouter model change 
+                    function is still in progress
                     {routerOpen && (
                         <OpenRouter
                             selected={selected}
                             onProviderChange={handleProviderChange}/>
                     )}
+                */}
                     </div>
                 </div>
                 <Toast 
@@ -134,24 +165,30 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                 />
                 <MessengerContainer 
                     conversation={conversation}
-                    provider={selected}/>
+                    provider={selected}
+                    isLoading={isLoading}/>
                 {showInput && (
                     <form onSubmit={(event) => {
                         event.preventDefault();
                         sendPromptnAgent()
                     }}>
                         <div id="user-input" className="input-box">
-                            <input 
-                                id="name" 
-                                className="input" 
-                                value={prompt} 
-                                autoComplete="off" 
-                                placeholder={`Message ${selected}`} 
-                                name="prompt" 
-                                type="text" 
-                                onChange={updatePrompt}
-                            />
-                            <button className="btn" type="submit"><EnterIcon /></button>
+                            <div className='inputcombo'>
+                                <textarea
+                                    ref={textareaRef}
+                                    value={prompt} 
+                                    placeholder={`Message ${selected}`} 
+                                    onChange={updatePrompt}
+                                    onKeyDown={handleKeyDown}
+                                />
+                                <button className={`btn ${isLoading ? "loading" : ""}`} type="submit">
+                                    {isLoading ? (
+                                        <PauseIcon className='icon' />
+                                    ) : (
+                                        <ArrowUpIcon className='icon'/>
+                                    )}
+                                </button>
+                            </div>
                         </div>
                         <Toast 
                             message={toast}
