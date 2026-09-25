@@ -1,6 +1,8 @@
 @import url("style.css");
 
 #app {
+  width: 100%;
+  height: 100%;
   text-align: center;
 }
 
@@ -306,35 +308,63 @@ input:checked + .slider:before {
 }
 
 #user-input {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  width: 98.8%;
+  height: fit-content;
 }
 
-.input-box textarea {
+.inputcombo {
+  position: relative;
   width: 100%;
-  resize: none;
-  overflow-y: auto;
-
-  min-height: 24px;
-  max-height: 200px;
-
   box-sizing: border-box;
 }
 
-.input-box .btn {
-  width: 60px;
-  height: 30px;
-  line-height: 30px;
+.input-box textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  max-height: 200px;
+  box-sizing: border-box;
+  resize: none;
+  overflow-y: auto;
+  padding: 10px 58px 10px 12px;
+  margin: 0;
   border: none;
-  padding: 20px 8px;
-  cursor: pointer;
-  color: white;
-  background: var(--border-color);
+  border-radius: 12px;
+  background-color: var(--primary-color-darker);
+  color: var(--text-color);
+  line-height: 24px;
+}
+
+.input-box textarea:focus {
+  outline: transparent;
+}
+
+.input-box .icon {
+  height: 18px;
+  width: 18px;
+}
+
+.input-box .btn {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-end;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: var(--border-color);
+}
+
+/* If state is still loading */
+.input-box .btn.loading {
+  background-color: var(--red-color);
 }
 
 .input-box .btn:hover {
@@ -453,6 +483,7 @@ a:visited:hover {
   flex-flow: column wrap;
   margin-top: 65px;
   margin-bottom: 200px;
+  min-width: none;
 }
 
 .skeleton {
@@ -521,15 +552,22 @@ a:visited:hover {
 }
 
 #Messenger-container {
+  display: flex;
+  flex-direction: column;
   overflow: scroll;
+  overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   flex-basis: 66.667%;
   height: 70vh;
-  width: 83vh;
+  min-width: 83vh;
+  max-width: fit-content;
 }
 
 #user-prompt-container {
+  display: flex;
+  min-width: 0;
+  max-width: 70%;
   align-self: flex-end;
 }
 
@@ -553,9 +591,22 @@ a:visited:hover {
 }
 
 .text pre {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  margin: 12px 0;
+  padding: 12px;
+
+  overflow-x: auto;
+  white-space: pre;
+
   border-radius: 8px;
-  padding: 16px;
   background-color: var(--primary-color);
+}
+
+.text pre code {
+  white-space: pre;
 }
 
 .text code {
@@ -574,5 +625,26 @@ a:visited:hover {
 }
 
 #ai-response {
+  display: flex;
   align-self: flex-start;
+  min-width: 0;
+  max-width: 70%;
+}
+
+#ai-response .pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+#ai-response .text {
+  width: fit-content;
+  min-width: 0;
+  max-width: 50%;
+  overflow-wrap: anywhere;
+}
+
+#ai-response.loading {
+  min-height: 100px;
+  padding: 12px;
+  box-sizing: border-box;
 }

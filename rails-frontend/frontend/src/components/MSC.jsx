@@ -2,6 +2,7 @@ import MessageBubble from './MessageBubble';
 import * as icons from "../../../../icons"
 
 function MessengerContainer({conversation, provider, isLoading}) {
+    console.log("isLoading state is:", isLoading)
     return (
     <div id='Messenger-container'>
         {conversation.length === 0 ? (
@@ -19,7 +20,7 @@ function MessengerContainer({conversation, provider, isLoading}) {
                 ))}
 
                 {isLoading && (
-                    <div className='ai-response loading'>
+                    <div id="ai-response" className='loading'>
                         <div className='avatar'>
                             <img src={icons[provider]} />
                         </div>
