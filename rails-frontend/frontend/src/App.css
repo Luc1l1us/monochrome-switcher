@@ -528,10 +528,16 @@ a:visited:hover {
 }
 
 #user-prompt-container {
-  display: flex;
+  align-self: flex-end;
   min-width: 0;
   max-width: 70%;
-  align-self: flex-end;
+}
+
+#ai-response .text,
+#user-prompt-container .text {
+  width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 #user-prompt-container img,
@@ -614,8 +620,11 @@ a:visited:hover {
   padding: 12px;
 }
 
+/*Skeleton loader stuff here*/
+
 #ai-response.loading .avatar {
   flex-shrink: 0;
+  animation: skeleton-loading 1.2s ease-in-out infinite;
 }
 
 .skeleton {
