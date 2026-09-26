@@ -1,0 +1,57 @@
+.Root {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  color: var(--text-color);
+  background-color: var(--border-color);
+  box-shadow: 0 0 0 1px var(--black-a6);
+  padding: 0 0.55em;
+  height: 30px;
+  gap: 8px;
+}
+
+.Root:hover {
+  box-shadow: 0 0 0 1px var(--text-color);
+}
+
+.Root:focus-within {
+  box-shadow: 0 0 0 2px var(--text-color);
+}
+
+.Toggle:focus-visible {
+  outline: 2px solid var(--accent-9);
+  outline-offset: 2px;
+}
+
+.agent-key {
+  width: 100%;
+  min-width: 0;
+}
+
+.Input {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-size: 12px;
+  line-height: 18px;
+  color: inherit;
+}
+
+.Toggle {
+  all: unset;
+}
+
+.Input::selection {
+  border: none;
+  background-color: skyblue;
+  color: var(--text-color);
+}

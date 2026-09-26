@@ -1,8 +1,10 @@
 import { SaveSettings, LoadSettings, SaveAPIKeys, LoadAPIKeys } from "../../wailsjs/go/main/App"
+import AgentAPIField from "../components/settings/AgentAPIField";
 import { useEffect, useState } from "react";
 import * as icons from "../../../../icons"
 import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
+import { providers } from "../components/config/providers";
 
 export default function Settings() {
     const [settings, setSettings] = useState({
@@ -21,6 +23,28 @@ export default function Settings() {
         grok_key: '',
         openrouter_key: '',
     })
+
+    //API Key fields function here
+    const leftColumn = providers.filter(
+        (provider) => provider.column === 1
+    );
+
+    const rightColumn = providers.filter(
+        (provider) => provider.column === 2
+    );
+
+    const renderProviders = (items) => 
+        items.map((provider) => (
+            <AgentAPIField
+                key={provider.id}
+                provider={provider.id}
+                name={provider.name}
+                icon={provider.icon}
+                apiURL={provider.apiURL}
+                apikey={apikeys[provider.apikey]}
+                onAPIChange={handleAPIChange}
+            />
+        ));
 
     //function to show toast notifcation for user
     const { toast, toastVisible, showToast } = useToast(); 
@@ -42,16 +66,6 @@ export default function Settings() {
 
         init();
     }, []);
-
-    // one is const, whilst the other is function | Make this consistent
-    const handleCheckboxChange = (e) => {
-        const {name, checked} = e.target
-
-        setSettings(prev => ({
-            ...prev,
-            [name]: checked
-        }))
-    }
 
     function handleAPIChange(e) {
         const {name, value} = e.target;
@@ -77,121 +91,15 @@ export default function Settings() {
                         Manage API keys for your AI Models. Keys are stored locally.
                     </h3>
                 </div>
-                {/* Start creating a component from here*/}
                 <div id="ai-models">
                     <div id="first-column">
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="claude-image" src={icons.claude}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://platform.claude.com/settings/keys">
-                                    <div className="agent-title">
-                                        Claude
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" value={apikeys.claude_key} onChange={handleAPIChange} name="claude_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="chatgpt-image" src={icons.chatgpt}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://openai.com/api/">
-                                    <div className="agent-title">
-                                        ChatGPT
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" value={apikeys.chatgpt_key} onChange={handleAPIChange} name="chatgpt_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="gemini-image" src={icons.gemini}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://ai.google.dev/gemini-api/docs">
-                                    <div className="agent-title">
-                                        Gemini
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" value={apikeys.gemini_key} onChange={handleAPIChange} name="gemini_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
-                                </div>
-                            </div>
-                        </div>                        
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="gemini-image" src={icons.openrouter}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://ai.google.dev/gemini-api/docs">
-                                    <div className="agent-title">
-                                        OpenRouter
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" value={apikeys.openrouter_key} onChange={handleAPIChange} name="openrouter_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
-                                </div>
-                            </div>
-                        </div>
+                        {renderProviders(leftColumn)}
                     </div>
 
 
                     {/* SECOND COLUMN */}
                     <div id="second-column">
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="perplex-image" src={icons.perplexity}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://console.perplexity.ai/">
-                                    <div className="agent-title">
-                                        Perplexity
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" value={apikeys.perplex_key} onChange={handleAPIChange} name="perplex_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="deepseek-image" src={icons.deepseek}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://platform.deepseek.com/api_keys">
-                                    <div className="agent-title">
-                                        DeepSeek
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" value={apikeys.deepseek_key} onChange={handleAPIChange} name="deepseek_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="agent">
-                            <div className="agent-image">
-                                <img id="deepseek-image" src={icons.grok}></img>
-                            </div>
-                            <div className="agent-text">
-                                <a href="https://grok-api.apidog.io/">
-                                    <div className="agent-title">
-                                        Grok
-                                    </div>
-                                </a>
-                                <div className="agent-key">
-                                    <input type="password" value={apikeys.grok_key} onChange={handleAPIChange} name="grok_key" className="api-key" autoComplete="off" placeholder={"Please enter an API Key"}/>
-                                </div>
-                            </div>
-                        </div>
+                        {renderProviders(rightColumn)}
                     </div>
                 </div>
 
