@@ -10,6 +10,10 @@ export function DeleteOneChat(arg1) {
   return window['go']['main']['App']['DeleteOneChat'](arg1);
 }
 
+export function GetOpenRouterModels() {
+  return window['go']['main']['App']['GetOpenRouterModels']();
+}
+
 export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }

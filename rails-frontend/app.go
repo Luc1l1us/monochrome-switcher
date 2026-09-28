@@ -63,7 +63,19 @@ func (a *App) startup(ctx context.Context) {
 	}
 }
 
-func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) (string, error) {
+func (a *App) GetOpenRouterModels() ([]Cloud.ModelInfo, error) {
+	openRouter, ok := a.providers["openrouter"].(*Cloud.OpenRouterAI)
+	if !ok {
+		log.Println("OpenRouter provider not found or has an unexpected type")
+	}
+	models, err := openRouter.ReadOpenRouterModels()
+	if err != nil {
+		return nil, err
+	}
+	return models, nil
+}
+
+func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string, ModelID string) (string, error) {
 	//fmt.Printf("ChatID: %q\n", ChatID)
 	//fmt.Printf("ProviderName: %q\n", ProviderName)
 	//fmt.Printf("Prompt: %q\n", Prompt)
@@ -76,6 +88,7 @@ func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string) (str
 		ChatID,
 		ProviderName,
 		Prompt,
+		ModelID,
 	)
 	if err != nil {
 		fmt.Println("SendPrompt returning error: ", err)

@@ -117,3 +117,18 @@ func (g *OpenRouterAI) FetchModels() error {
 
 	return os.WriteFile(ModelPath, data, 0644)
 }
+
+func (g *OpenRouterAI) ReadOpenRouterModels() ([]ModelInfo, error) {
+	filePath := services.GetSettingsPath("openrouterModels.json")
+
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return nil, fmt.Errorf("read OpenRouter models file: %w", err)
+	}
+
+	var models []ModelInfo
+	if err := json.Unmarshal(data, &models); err != nil {
+		return nil, fmt.Errorf("decode OpenRouter models file: %w", err)
+	}
+	return models, nil
+}
