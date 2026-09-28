@@ -12,7 +12,7 @@ type Claude struct {
 }
 
 // func (g *Claude) Generate(prompt string) (string, error) {
-func (g *Claude) Generate(messages []core.Message) (string, error) {
+func (g *Claude) Generate(messages []core.Message, modelID string) (string, error) {
 
 	prompt := core.BuildPrompt(messages)
 

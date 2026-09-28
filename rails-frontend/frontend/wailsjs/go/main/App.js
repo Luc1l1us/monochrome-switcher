@@ -46,6 +46,6 @@ export function SaveSettings(arg1) {
   return window['go']['main']['App']['SaveSettings'](arg1);
 }
 
-export function SendPrompt(arg1, arg2, arg3) {
-  return window['go']['main']['App']['SendPrompt'](arg1, arg2, arg3);
+export function SendPrompt(arg1, arg2, arg3, arg4) {
+  return window['go']['main']['App']['SendPrompt'](arg1, arg2, arg3, arg4);
 }

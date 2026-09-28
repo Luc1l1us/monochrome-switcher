@@ -14,7 +14,7 @@ type ChatGPT struct {
 }
 
 // func (g *ChatGPT) Generate(prompt string) (string, error) {
-func (g *ChatGPT) Generate(messages []core.Message) (string, error) {
+func (g *ChatGPT) Generate(messages []core.Message, modelID string) (string, error) {
 	ctx := context.Background()
 
 	prompt := core.BuildPrompt(messages)

@@ -40,7 +40,7 @@ func HandlePrompt(
 	//fmt.Printf("\n4. History retrieved \n")
 	//fmt.Println("message count \n", len(messages))
 
-	response, err := provider.Generate(messages)
+	response, err := provider.Generate(messages, modelID)
 
 	//fmt.Printf("5. Provider.Generate returned \n")
 

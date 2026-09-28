@@ -13,7 +13,7 @@ type Gemini struct {
 }
 
 // func (g *Gemini) Generate(prompt string) (string, error) {
-func (g *Gemini) Generate(messages []core.Message) (string, error) {
+func (g *Gemini) Generate(messages []core.Message, modelID string) (string, error) {
 	ctx := context.Background()
 
 	prompt := core.BuildPrompt(messages)

@@ -96,6 +96,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     }
 
     async function sendPromptnAgent() {
+        const modelID = selectedModel.id
         if (!selected) {
             showToast(`Please select an AI Agent first!`)
             console.error("Please select an AI Agent first")
@@ -107,9 +108,8 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                 showToast("Please select an OpenRouter model first!")
                 return;
             }
-            modelID = selectedModel.id
         }
-
+        
         if (!prompt.trim() || isLoading) return;
         setIsLoading(true)
 

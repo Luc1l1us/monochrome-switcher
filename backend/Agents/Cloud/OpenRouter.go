@@ -25,7 +25,7 @@ type ModelInfo struct {
 	Name string `json:"name"`
 }
 
-func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
+func (g *OpenRouterAI) Generate(messages []core.Message, modelID string) (string, error) {
 	ctx, cancel := context.WithTimeout(
 		context.Background(),
 		30*time.Second,
@@ -38,7 +38,7 @@ func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
 	result, err := g.Client.Chat.Send(
 		ctx,
 		components.ChatRequest{
-			Model: openrouter.Pointer("google/gemini-2.5-flash"),
+			Model: openrouter.Pointer(modelID),
 			MaxCompletionTokens: optionalnullable.From(
 				openrouter.Pointer(int64(4096)),
 			),
