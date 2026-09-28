@@ -25,7 +25,7 @@ type ModelInfo struct {
 	Name string `json:"name"`
 }
 
-func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
+func (g *OpenRouterAI) Generate(messages []core.Message, modelID string) (string, error) {
 	ctx, cancel := context.WithTimeout(
 		context.Background(),
 		30*time.Second,
@@ -38,7 +38,7 @@ func (g *OpenRouterAI) Generate(messages []core.Message) (string, error) {
 	result, err := g.Client.Chat.Send(
 		ctx,
 		components.ChatRequest{
-			Model: openrouter.Pointer("google/gemini-2.5-flash"),
+			Model: openrouter.Pointer(modelID),
 			MaxCompletionTokens: optionalnullable.From(
 				openrouter.Pointer(int64(4096)),
 			),
@@ -116,4 +116,19 @@ func (g *OpenRouterAI) FetchModels() error {
 	ModelPath := services.GetSettingsPath(ModelFile)
 
 	return os.WriteFile(ModelPath, data, 0644)
+}
+
+func (g *OpenRouterAI) ReadOpenRouterModels() ([]ModelInfo, error) {
+	filePath := services.GetSettingsPath("openrouterModels.json")
+
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return nil, fmt.Errorf("read OpenRouter models file: %w", err)
+	}
+
+	var models []ModelInfo
+	if err := json.Unmarshal(data, &models); err != nil {
+		return nil, fmt.Errorf("decode OpenRouter models file: %w", err)
+	}
+	return models, nil
 }

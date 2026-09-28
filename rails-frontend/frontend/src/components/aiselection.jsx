@@ -16,7 +16,8 @@ const SelectDemo = ({selected, onProviderChange}) => (
 			</Select.Icon>
 		</Select.Trigger>
 		<Select.Portal>
-			<Select.Content className="SelectContent">
+			<Select.Content 
+				className="SelectContent">
 				<Select.ScrollUpButton className="SelectScrollButton">
 					<ChevronUpIcon />
 				</Select.ScrollUpButton>

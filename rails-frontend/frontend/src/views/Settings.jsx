@@ -1,7 +1,6 @@
 import { SaveSettings, LoadSettings, SaveAPIKeys, LoadAPIKeys } from "../../wailsjs/go/main/App"
 import AgentAPIField from "../components/settings/AgentAPIField";
 import { useEffect, useState } from "react";
-import * as icons from "../../../../icons"
 import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
 import { providers } from "../components/config/providers";

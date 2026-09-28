@@ -2,7 +2,8 @@ import {useEffect, useState, useRef} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
 import {ArrowUpIcon, PauseIcon} from "@radix-ui/react-icons";
-import {CreateChat, LoadAPIKeys, LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
+import {CreateChat, LoadAPIKeys, LoadOneChat, SendPrompt, GetOpenRouterModels} from "../../wailsjs/go/main/App";
+import OpenrouterModelPicker from './OR-model-picker/ORModelPicker';
 import Toast from './Toast';
 import { useToast } from './useToast';
 
@@ -24,6 +25,10 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     const [isLoading, setIsLoading] = useState(false)
 
     const textareaRef = useRef(null);
+
+    // OpenRouter models here
+    const [models, setModels] = useState([]);
+    const [selectedModel, setSelectedModel] = useState(null);
 
     function updatePrompt(e) {
         const textarea = e.target
@@ -48,6 +53,16 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     }
 
     useEffect(() => {
+        async function loadModels() {
+            try {
+                const result = await GetOpenRouterModels();
+                setModels(result ?? []);
+            } catch (error) {
+                console.error("Failed to load OpenRouter models:", error)
+                showToast("Failed to load OpenRouter models!")
+            }
+        }
+        loadModels();
         resizeTexture();
     }, [prompt])
 
@@ -81,19 +96,23 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     }
 
     async function sendPromptnAgent() {
+        const modelID = selectedModel.id
         if (!selected) {
             showToast(`Please select an AI Agent first!`)
             console.error("Please select an AI Agent first")
             return
         } 
-
+        if (selected === "openrouter") {
+            if (!selectedModel) {
+                console.warn("Please select an OpenRouter model first!")
+                showToast("Please select an OpenRouter model first!")
+                return;
+            }
+        }
+        
         if (!prompt.trim() || isLoading) return;
         setIsLoading(true)
 
-        {/* Redundant too since we don't use nor set chatID anymore (?) */}
-        /* if (!chatID) {
-            console.error("No chat exists!")
-        } */
 
         try {
             let activeChat = chat;
@@ -106,7 +125,8 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             const response = await SendPrompt(
                 activeChat.id, 
                 selected, 
-                prompt
+                prompt,
+                modelID
             )
             const updatedChat = await LoadOneChat(activeChat.id)
             onChatUpdated(updatedChat)
@@ -149,14 +169,13 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                         <SelectDemo 
                             selected={selected}
                             onProviderChange={handleProviderChange}/>
-                {/* Commented this out due to OpenRouter model change 
-                    function is still in progress
                     {routerOpen && (
-                        <OpenRouter
-                            selected={selected}
-                            onProviderChange={handleProviderChange}/>
+                        <OpenrouterModelPicker
+                            models={models}
+                            selectedModel={selectedModel}
+                            onSelectModel={setSelectedModel}
+                            />
                     )}
-                */}
                     </div>
                 </div>
                 <Toast 

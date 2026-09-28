@@ -10,6 +10,10 @@ export function DeleteOneChat(arg1) {
   return window['go']['main']['App']['DeleteOneChat'](arg1);
 }
 
+export function GetOpenRouterModels() {
+  return window['go']['main']['App']['GetOpenRouterModels']();
+}
+
 export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
@@ -42,6 +46,6 @@ export function SaveSettings(arg1) {
   return window['go']['main']['App']['SaveSettings'](arg1);
 }
 
-export function SendPrompt(arg1, arg2, arg3) {
-  return window['go']['main']['App']['SendPrompt'](arg1, arg2, arg3);
+export function SendPrompt(arg1, arg2, arg3, arg4) {
+  return window['go']['main']['App']['SendPrompt'](arg1, arg2, arg3, arg4);
 }
