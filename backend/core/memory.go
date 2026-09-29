@@ -20,6 +20,7 @@ type Chat struct {
 	AgentState string    `json:"state"`
 	CreatedAt  string    `json:"created_at"`
 	Messages   []Message `json:"messages"`
+	ModelID    string    `json:"modelID"`
 }
 
 type ChatSummary struct {
@@ -28,6 +29,7 @@ type ChatSummary struct {
 	Title      string `json:"title"`
 	CreatedAt  string `json:"created_at"`
 	AgentState string `json:"state"`
+	ModelID    string `json:"modelID"`
 }
 
 func BuildPrompt(messages []Message) string {

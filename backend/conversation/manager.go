@@ -50,13 +50,14 @@ func (m *ConvoManager) LoadChat(chat *core.Chat) {
 	m.Chats[chat.ID] = chat
 }
 
-func (m *ConvoManager) CreateChat(chatID, provider string) *core.Chat {
+func (m *ConvoManager) CreateChat(chatID, provider string, modelID string) *core.Chat {
 	chat := &core.Chat{
 		ID:        chatID,
 		Provider:  provider,
 		Title:     "New Chat",
 		CreatedAt: time.Now().Format(time.RFC3339),
 		Messages:  []core.Message{},
+		ModelID:   modelID,
 	}
 
 	m.Chats[chatID] = chat
@@ -163,6 +164,8 @@ func ListChats() ([]core.ChatSummary, error) {
 			continue
 		}
 
+		//fmt.Printf("DEBUG: Chat struct from JSON: %+v\n", chat)
+
 		parsedTime, err := time.Parse(time.RFC3339, chat.CreatedAt)
 
 		readableTime := parsedTime.Format("January 2, 2006 at 3:04 PM")
@@ -172,6 +175,7 @@ func ListChats() ([]core.ChatSummary, error) {
 			Provider:  chat.Provider,
 			Title:     chat.Title,
 			CreatedAt: readableTime,
+			ModelID:   chat.ModelID,
 		})
 	}
 	return chats, nil

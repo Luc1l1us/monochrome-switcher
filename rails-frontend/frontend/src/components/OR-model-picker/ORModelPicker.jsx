@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import "./ModelPicker.css";
 export default function ORModelPicker({
-    models, selectedModel, onSelectModel
+    models, selectedModel, onSelectModel,
 }) {
     const [open, setOpen] = useState(false)
     const [query, setQuery] = useState("")

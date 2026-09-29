@@ -40,6 +40,7 @@ export namespace core {
 	    state: string;
 	    created_at: string;
 	    messages: Message[];
+	    modelID: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Chat(source);
@@ -53,6 +54,7 @@ export namespace core {
 	        this.state = source["state"];
 	        this.created_at = source["created_at"];
 	        this.messages = this.convertValues(source["messages"], Message);
+	        this.modelID = source["modelID"];
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
@@ -79,6 +81,7 @@ export namespace core {
 	    title: string;
 	    created_at: string;
 	    state: string;
+	    modelID: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new ChatSummary(source);
@@ -91,6 +94,7 @@ export namespace core {
 	        this.title = source["title"];
 	        this.created_at = source["created_at"];
 	        this.state = source["state"];
+	        this.modelID = source["modelID"];
 	    }
 	}
 

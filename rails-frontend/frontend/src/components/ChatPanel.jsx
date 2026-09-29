@@ -52,6 +52,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         textarea.style.height = `${textarea.scrollHeight}px`
     }
 
+    //load models
     useEffect(() => {
         async function loadModels() {
             try {
@@ -63,6 +64,25 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             }
         }
         loadModels();
+    },[]);
+    //restore openrouter models
+    useEffect(() => {
+        if (!chat) return;
+
+        setrouterOpen(chat.provider === "openrouter");
+
+        if (chat.provider === "openrouter" && chat.modelID) {
+            const selected = models.find(
+                model => model.id === chat.modelID
+            );
+
+            setSelectedModel(selected ?? null);
+        } else {
+            setSelectedModel(null);
+        }
+    }, [chat, models]);
+    //textarea
+    useEffect(() => {
         resizeTexture();
     }, [prompt])
 
@@ -96,15 +116,15 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     }
 
     async function sendPromptnAgent() {
-        const modelID = selectedModel.id
         if (!selected) {
             showToast(`Please select an AI Agent first!`)
             console.error("Please select an AI Agent first")
             return
         } 
+        let modelID = "";
         if (selected === "openrouter") {
-            if (!selectedModel) {
-                console.warn("Please select an OpenRouter model first!")
+            modelID = selectedModel?.id ?? "";
+            if (!modelID) {
                 showToast("Please select an OpenRouter model first!")
                 return;
             }
@@ -117,7 +137,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         try {
             let activeChat = chat;
             if (!activeChat) {
-                const id = await CreateChat(selected);
+                const id = await CreateChat(selected, modelID);
                 activeChat = await LoadOneChat(id)
                 console.log("Created chat:", activeChat)
             }
