@@ -26,8 +26,8 @@ export function LoadAPIKeys() {
   return window['go']['main']['App']['LoadAPIKeys']();
 }
 
-export function LoadOneChat(arg1) {
-  return window['go']['main']['App']['LoadOneChat'](arg1);
+export function LoadOneChat(arg1, arg2) {
+  return window['go']['main']['App']['LoadOneChat'](arg1, arg2);
 }
 
 export function LoadSettings() {

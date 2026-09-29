@@ -102,7 +102,7 @@ func (a *App) CreateChat(provider string, modelID string) (string, error) {
 	id := uuid.New().String()
 
 	chat := a.manager.CreateChat(id, provider, modelID)
-	fmt.Printf("CreateChat Provider got: %q\n", provider+modelID)
+	fmt.Printf("CreateChat Provider got: %q\n", provider)
 
 	err := conversation.SaveChat(chat)
 	if err != nil {
@@ -115,7 +115,7 @@ func (a *App) ListChats() ([]core.ChatSummary, error) {
 	return conversation.ListChats()
 }
 
-func (a *App) LoadOneChat(chatID string) (*core.Chat, error) {
+func (a *App) LoadOneChat(chatID string, modelID string) (*core.Chat, error) {
 	chat, err := conversation.LoadChat(chatID)
 	if err != nil {
 		return nil, err

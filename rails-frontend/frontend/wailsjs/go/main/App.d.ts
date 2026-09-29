@@ -16,7 +16,7 @@ export function ListChats():Promise<Array<core.ChatSummary>>;
 
 export function LoadAPIKeys():Promise<services.APIKeys>;
 
-export function LoadOneChat(arg1:string):Promise<core.Chat>;
+export function LoadOneChat(arg1:string,arg2:string):Promise<core.Chat>;
 
 export function LoadSettings():Promise<services.Settings>;
 

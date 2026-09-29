@@ -53,6 +53,13 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     }
 
     useEffect(() => {
+        if (!chat) return;
+        setrouterOpen(chat.provider === "openrouter")
+        if (chat?.provider === "openrouter" && chat.modelID) {
+            setSelectedModel(chat.modelID ?? null);
+        } else {
+            setSelectedModel(null);
+        } 
         async function loadModels() {
             try {
                 const result = await GetOpenRouterModels();
@@ -64,7 +71,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         }
         loadModels();
         resizeTexture();
-    }, [prompt])
+    }, [prompt], [chat?.provider]);
 
     async function handleOpenRouter() {
         const apikeys = await LoadAPIKeys();
@@ -96,15 +103,15 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     }
 
     async function sendPromptnAgent() {
-        const modelID = selectedModel.id ?? "";
         if (!selected) {
             showToast(`Please select an AI Agent first!`)
             console.error("Please select an AI Agent first")
             return
         } 
+        let modelID = "";
         if (selected === "openrouter") {
-            if (!selectedModel) {
-                console.warn("Please select an OpenRouter model first!")
+            modelID = selectedModel?.id ?? chat?.modelID ?? "";
+            if (!modelID) {
                 showToast("Please select an OpenRouter model first!")
                 return;
             }
