@@ -68,17 +68,19 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     //restore openrouter models
     useEffect(() => {
         if (!chat) return;
+
         setrouterOpen(chat.provider === "openrouter");
 
         if (chat.provider === "openrouter" && chat.modelID) {
-            const model = models.find(
+            const selected = models.find(
                 model => model.id === chat.modelID
-        );
-            setSelectedModel(model ?? null);
+            );
+
+            setSelectedModel(selected ?? null);
         } else {
             setSelectedModel(null);
         }
-    }, [chat, models])
+    }, [chat, models]);
     //textarea
     useEffect(() => {
         resizeTexture();
@@ -192,7 +194,6 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                             models={models}
                             selectedModel={selectedModel}
                             onSelectModel={setSelectedModel}
-                            onOpenChange={setrouterOpen}
                             />
                     )}
                     </div>

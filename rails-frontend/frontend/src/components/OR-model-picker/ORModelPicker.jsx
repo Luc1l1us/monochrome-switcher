@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import "./ModelPicker.css";
 export default function ORModelPicker({
-    models, selectedModel, onSelectModel, onOpenChange,
+    models, selectedModel, onSelectModel,
 }) {
     const [open, setOpen] = useState(false)
     const [query, setQuery] = useState("")
@@ -22,7 +22,7 @@ export default function ORModelPicker({
     }, [models, query])
 
     return (
-        <Popover.Root open={open} onOpenChange={onOpenChange}>
+        <Popover.Root open={open} onOpenChange={setOpen}>
             <Popover.Trigger asChild>
                 <button type="button" className="model-picker-trigger">
                     {selectedModel?.name ?? "Choose a model"}
