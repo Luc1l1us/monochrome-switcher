@@ -98,11 +98,11 @@ func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string, Mode
 	return result, nil
 }
 
-func (a *App) CreateChat(provider string) (string, error) {
+func (a *App) CreateChat(provider string, modelID string) (string, error) {
 	id := uuid.New().String()
 
-	chat := a.manager.CreateChat(id, provider)
-	fmt.Printf("CreateChat Provider got: %q\n", provider)
+	chat := a.manager.CreateChat(id, provider, modelID)
+	fmt.Printf("CreateChat Provider got: %q\n", provider+modelID)
 
 	err := conversation.SaveChat(chat)
 	if err != nil {

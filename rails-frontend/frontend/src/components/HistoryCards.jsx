@@ -8,6 +8,7 @@ export default function HistoryCards({ chat, onClick, DeleteChat }) {
             }}>
             <h3 className="history-smol">{chat.title}</h3>
             <p className="history-smol">{chat.provider}</p>
+            <p className="history-smol">{chat.modelID}</p>
             <small className="history-smol">{chat.created_at}</small>
             <small className="history-smol">{chat.id}</small>
             <div className="delete-button">

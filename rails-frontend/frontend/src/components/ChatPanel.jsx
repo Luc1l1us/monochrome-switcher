@@ -96,7 +96,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     }
 
     async function sendPromptnAgent() {
-        const modelID = selectedModel.id
+        const modelID = selectedModel.id ?? "";
         if (!selected) {
             showToast(`Please select an AI Agent first!`)
             console.error("Please select an AI Agent first")
@@ -117,7 +117,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         try {
             let activeChat = chat;
             if (!activeChat) {
-                const id = await CreateChat(selected);
+                const id = await CreateChat(selected, modelID);
                 activeChat = await LoadOneChat(id)
                 console.log("Created chat:", activeChat)
             }
