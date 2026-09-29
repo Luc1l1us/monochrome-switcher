@@ -52,14 +52,8 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         textarea.style.height = `${textarea.scrollHeight}px`
     }
 
+    //load models
     useEffect(() => {
-        if (!chat) return;
-        setrouterOpen(chat.provider === "openrouter")
-        if (chat?.provider === "openrouter" && chat.modelID) {
-            setSelectedModel(chat.modelID ?? null);
-        } else {
-            setSelectedModel(null);
-        } 
         async function loadModels() {
             try {
                 const result = await GetOpenRouterModels();
@@ -70,8 +64,25 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             }
         }
         loadModels();
+    },[]);
+    //restore openrouter models
+    useEffect(() => {
+        if (!chat) return;
+        setrouterOpen(chat.provider === "openrouter");
+
+        if (chat.provider === "openrouter" && chat.modelID) {
+            const model = models.find(
+                model => model.id === chat.modelID
+        );
+            setSelectedModel(model ?? null);
+        } else {
+            setSelectedModel(null);
+        }
+    }, [chat, models])
+    //textarea
+    useEffect(() => {
         resizeTexture();
-    }, [prompt], [chat?.provider]);
+    }, [prompt])
 
     async function handleOpenRouter() {
         const apikeys = await LoadAPIKeys();
@@ -110,7 +121,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         } 
         let modelID = "";
         if (selected === "openrouter") {
-            modelID = selectedModel?.id ?? chat?.modelID ?? "";
+            modelID = selectedModel?.id ?? "";
             if (!modelID) {
                 showToast("Please select an OpenRouter model first!")
                 return;
@@ -181,6 +192,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                             models={models}
                             selectedModel={selectedModel}
                             onSelectModel={setSelectedModel}
+                            onOpenChange={setrouterOpen}
                             />
                     )}
                     </div>
