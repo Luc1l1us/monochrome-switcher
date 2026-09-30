@@ -1,0 +1,185 @@
+#user-input {
+  border: 4px solid var(--border-color);
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.input-box textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  max-height: 200px;
+  box-sizing: border-box;
+  resize: none;
+  overflow-y: auto;
+  padding: 10px 58px 10px 12px;
+  margin: 0;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--primary-color-darker);
+  color: var(--text-color);
+  line-height: 24px;
+}
+
+.input-box {
+  min-width: 0;
+}
+
+.input-box textarea:focus {
+  outline: transparent;
+}
+
+.input-box .icon {
+  height: 18px;
+  width: 18px;
+}
+
+.input-box .btn {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: var(--border-color);
+}
+
+/* If state is still loading */
+.input-box .btn.loading {
+  background-color: var(--red-color);
+}
+
+.input-box .btn:hover {
+  background-color: var(--accent-hover-color);
+}
+
+.input-box .input {
+  flex-grow: 2;
+  margin-left: 5px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  height: 30px;
+  line-height: 30px;
+  background-color: var(--primary-color-darker);
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-color);
+}
+
+.input-box .input:focus {
+  border: none;
+  background-color: var(--primary-color-darker);
+}
+
+.inputcombo {
+  position: relative;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.TabsList {
+  border-inline: 4px solid var(--border-color);
+  display: flex;
+}
+
+.TabsTrigger {
+  color: var(--text-color);
+  background-color: var(--primary-color-darker);
+  outline: none;
+  border: 1px solid var(--border-color);
+}
+
+.TabsTrigger:hover,
+.TabsTrigger:focus,
+.TabsTrigger[data-state="active"] {
+  background-color: var(--accent-hover-color);
+}
+
+.input-box,
+.inputcombo,
+.markdown-display {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.markdown-display {
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  max-height: 200px;
+  box-sizing: border-box;
+
+  padding: 10px 58px 10px 12px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  background-color: var(--primary-color-darker);
+  color: var(--text-color);
+}
+
+.markdown-display .text > * {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.markdown-display > * {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.markdown-display p,
+.markdown-display h1,
+.markdown-display h2,
+.markdown-display h3,
+.markdown-display h4,
+.markdown-display h5,
+.markdown-display h6 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.markdown-display pre {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.markdown-display pre code {
+  white-space: pre;
+}
+
+.markdown-display code {
+  font-family: monospace;
+}
+
+.markdown-display :not(pre) > code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
