@@ -1,7 +1,8 @@
 import {useEffect, useState, useRef} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
-import {ArrowUpIcon, PauseIcon} from "@radix-ui/react-icons";
+import PromptInput from './markdown-preview/PromptInput';
+import PromptComposer from './markdown-preview/PromptComposer';
 import {CreateChat, LoadAPIKeys, LoadOneChat, SendPrompt, GetOpenRouterModels} from "../../wailsjs/go/main/App";
 import OpenrouterModelPicker from './OR-model-picker/ORModelPicker';
 import Toast from './Toast';
@@ -24,8 +25,6 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
     const { toast, toastVisible, showToast } = useToast();
     const [isLoading, setIsLoading] = useState(false)
 
-    const textareaRef = useRef(null);
-
     // OpenRouter models here
     const [models, setModels] = useState([]);
     const [selectedModel, setSelectedModel] = useState(null);
@@ -42,14 +41,6 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             e.preventDefault();
             sendPromptnAgent();
         }  
-    }
-
-    function resizeTexture() {
-        const textarea = textareaRef.current;
-        if (!textarea) return;
-
-        textarea.style.height = "auto"
-        textarea.style.height = `${textarea.scrollHeight}px`
     }
 
     //load models
@@ -81,10 +72,6 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             setSelectedModel(null);
         }
     }, [chat, models]);
-    //textarea
-    useEffect(() => {
-        resizeTexture();
-    }, [prompt])
 
     async function handleOpenRouter() {
         const apikeys = await LoadAPIKeys();
@@ -151,10 +138,6 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
             const updatedChat = await LoadOneChat(activeChat.id)
             onChatUpdated(updatedChat)
                 setPrompt("");
-
-            if (textareaRef.current) {
-                textareaRef.current.style.height = "30px";
-            }
         } catch (error) {
             showToast(`Failed to send prompt: error: ${error}`)
             console.error(
@@ -198,10 +181,6 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                     )}
                     </div>
                 </div>
-                <Toast 
-                    message={toast}
-                    visible={toastVisible}
-                />
                 <MessengerContainer 
                     conversation={conversation}
                     provider={selected}
@@ -211,24 +190,13 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                         event.preventDefault();
                         sendPromptnAgent()
                     }}>
-                        <div id="user-input" className="input-box">
-                            <div className='inputcombo'>
-                                <textarea
-                                    ref={textareaRef}
-                                    value={prompt} 
-                                    placeholder={`Message ${selected}`} 
-                                    onChange={updatePrompt}
-                                    onKeyDown={handleKeyDown}
-                                />
-                                <button className={`btn ${isLoading ? "loading" : ""}`} type="submit">
-                                    {isLoading ? (
-                                        <PauseIcon className='icon' />
-                                    ) : (
-                                        <ArrowUpIcon className='icon'/>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
+                        <PromptComposer
+                            prompt={prompt}
+                            selected={selected}
+                            updatePrompt={updatePrompt}
+                            handleKeyDown={handleKeyDown}
+                            isLoading={isLoading}
+                        />
                         <Toast 
                             message={toast}
                             visible={toastVisible}
