@@ -124,15 +124,11 @@
   min-height: 44px;
   max-height: 200px;
   box-sizing: border-box;
-
-  padding: 10px 58px 10px 12px;
-
+  padding: 3px 58px 10px 12px;
   overflow-x: hidden;
   overflow-y: auto;
-
   overflow-wrap: anywhere;
   word-break: break-word;
-
   background-color: var(--primary-color-darker);
   color: var(--text-color);
 }
