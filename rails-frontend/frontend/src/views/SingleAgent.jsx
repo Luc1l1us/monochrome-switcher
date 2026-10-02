@@ -15,7 +15,7 @@ export default function SingleAgent({setSelectedPanel, chat, onChatUpdated}) {
                 chat={chat}
                 onChatUpdated={onChatUpdated}
                 showInput={true}
-                state={"single"}
+                agentMode={"single"}
             />
         </div>
     )

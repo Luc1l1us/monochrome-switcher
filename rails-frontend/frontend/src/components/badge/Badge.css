@@ -7,10 +7,9 @@
   line-height: 1.25;
 }
 
-.gray {
-  background-color: #f1f3f5;
-  color: #495057;
-  border-color: #e9ecef;
+.red {
+  background-color: var(--red-color);
+  color: var(--light-red-color);
 }
 .blue {
   background-color: var(--blue-color);

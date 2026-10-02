@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import SelectDemo from '../components/aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
 import {LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import ChatPanel from '../components/ChatPanel';
@@ -9,7 +8,7 @@ import { useToast } from '../components/useToast';
 export default function MultiAgent({chat, onChatUpdated}) {
     //Toast function here
     const { toast, toastVisible, showToast } = useToast();
-
+    const [sessionID] = useState(() => crypto.randomUUID());
     const [panels, setPanels] = useState([
         {
             id: crypto.randomUUID(),
@@ -120,6 +119,8 @@ export default function MultiAgent({chat, onChatUpdated}) {
                         onChatUpdated={
                             (updatedChat) => updatePanel(panel.id, updatedChat)
                         }
+                        agentMode={"multi"}
+                        sessionID={sessionID}
                     />
                 ))}
             </div>
