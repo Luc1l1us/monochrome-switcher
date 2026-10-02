@@ -1,0 +1,27 @@
+.badge {
+  display: inline-flex;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  line-height: 1.25;
+}
+
+.gray {
+  background-color: #f1f3f5;
+  color: #495057;
+  border-color: #e9ecef;
+}
+.blue {
+  background-color: var(--blue-color);
+  color: var(--light-blue-color);
+}
+.green {
+  background-color: #ebfcf2;
+  color: #007f5f;
+  border-color: #c9f0d7;
+}
+.brown {
+  background-color: var(--light-brown-color);
+  color: var(--brown-color);
+}

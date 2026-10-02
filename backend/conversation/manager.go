@@ -50,14 +50,16 @@ func (m *ConvoManager) LoadChat(chat *core.Chat) {
 	m.Chats[chat.ID] = chat
 }
 
-func (m *ConvoManager) CreateChat(chatID, provider string, modelID string) *core.Chat {
+func (m *ConvoManager) CreateChat(chatID, provider string, modelID string, state string) *core.Chat {
+	fmt.Print("Create Chat got state:", state)
 	chat := &core.Chat{
-		ID:        chatID,
-		Provider:  provider,
-		Title:     "New Chat",
-		CreatedAt: time.Now().Format(time.RFC3339),
-		Messages:  []core.Message{},
-		ModelID:   modelID,
+		ID:         chatID,
+		Provider:   provider,
+		Title:      "New Chat",
+		CreatedAt:  time.Now().Format(time.RFC3339),
+		Messages:   []core.Message{},
+		AgentState: state,
+		ModelID:    modelID,
 	}
 
 	m.Chats[chatID] = chat
@@ -171,11 +173,12 @@ func ListChats() ([]core.ChatSummary, error) {
 		readableTime := parsedTime.Format("January 2, 2006 at 3:04 PM")
 
 		chats = append(chats, core.ChatSummary{
-			ID:        chat.ID,
-			Provider:  chat.Provider,
-			Title:     chat.Title,
-			CreatedAt: readableTime,
-			ModelID:   chat.ModelID,
+			ID:         chat.ID,
+			Provider:   chat.Provider,
+			Title:      chat.Title,
+			CreatedAt:  readableTime,
+			ModelID:    chat.ModelID,
+			AgentState: chat.AgentState,
 		})
 	}
 	return chats, nil

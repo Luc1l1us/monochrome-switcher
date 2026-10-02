@@ -1,6 +1,3 @@
-import {useEffect, useState} from 'react';
-import SelectDemo from '../components/aiselection';
-import MessengerContainer from '../components/MSC';
 import ChatPanel from '../components/ChatPanel';
 
 export default function SingleAgent({setSelectedPanel, chat, onChatUpdated}) {    
@@ -18,6 +15,7 @@ export default function SingleAgent({setSelectedPanel, chat, onChatUpdated}) {
                 chat={chat}
                 onChatUpdated={onChatUpdated}
                 showInput={true}
+                state={"single"}
             />
         </div>
     )

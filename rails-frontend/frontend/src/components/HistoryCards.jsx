@@ -1,11 +1,19 @@
 import * as icons from "../../../../icons"
+import ColoredBadge from "./badge/ColoredBadge"
 
 export default function HistoryCards({ chat, onClick, DeleteChat }) {
+    console.log(chat.state)
     return (
         <div className="card" id="historycard-id" onClick={() => {
             console.log("Clicked chat:", chat.id, "Chat Title:",chat.title, chat.provider)
             onClick(chat.id, chat.modelID)
             }}>
+            <div className="state-badge">
+                <ColoredBadge 
+                    color="blue" 
+                    children={chat.state}
+                    state={chat.state}/>
+            </div>
             <h3 className="history-smol">{chat.title}</h3>
             <p className="history-smol">{chat.provider}</p>
             <p className="history-smol">{chat.modelID}</p>

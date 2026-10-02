@@ -16,6 +16,10 @@
   --vert-bar: rgba(169, 170, 169, 1);
   --lighter-text-color: rgba(189, 189, 189, 1);
   --red-color: rgba(224, 32, 32, 1);
+  --blue-color: rgba(13, 39, 71, 1);
+  --light-blue-color: rgba(67, 163, 247, 1);
+  --brown-color: rgba(50, 30, 16, 1);
+  --light-brown-color: rgba(185, 61, 16, 1);
 }
 
 html {

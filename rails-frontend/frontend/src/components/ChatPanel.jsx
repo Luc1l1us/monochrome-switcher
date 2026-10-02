@@ -8,7 +8,7 @@ import OpenrouterModelPicker from './OR-model-picker/ORModelPicker';
 import Toast from './Toast';
 import { useToast } from './useToast';
 
-export default function ChatPanel({chat, onChatUpdated, showInput}) {
+export default function ChatPanel({chat, onChatUpdated, showInput, state}) {
 
     const [chatID, setChatID] = useState("");
     const [prompt, setPrompt] = useState('');
@@ -124,7 +124,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
         try {
             let activeChat = chat;
             if (!activeChat) {
-                const id = await CreateChat(selected, modelID);
+                const id = await CreateChat(selected, modelID, state);
                 activeChat = await LoadOneChat(id)
                 console.log("Created chat:", activeChat)
             }
@@ -133,7 +133,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput}) {
                 activeChat.id, 
                 selected, 
                 prompt,
-                modelID
+                modelID,
             )
             const updatedChat = await LoadOneChat(activeChat.id)
             onChatUpdated(updatedChat)

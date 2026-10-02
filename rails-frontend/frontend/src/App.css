@@ -241,8 +241,13 @@ input:checked + .slider:before {
 
 #historycard-id {
   display: flex;
-  flex-flow: column;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.state-badge {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .delete-button {
@@ -578,8 +583,9 @@ a:visited:hover {
 }
 
 /*Skeleton loader stuff here*/
-
 #ai-response.loading .avatar {
+  height: 50px;
+  width: 50px;
   flex-shrink: 0;
   animation: skeleton-loading 1.2s ease-in-out infinite;
 }

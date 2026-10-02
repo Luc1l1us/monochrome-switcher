@@ -37,10 +37,10 @@ export namespace core {
 	    id: string;
 	    provider: string;
 	    title: string;
-	    state: string;
 	    created_at: string;
 	    messages: Message[];
 	    modelID: string;
+	    state: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Chat(source);
@@ -51,10 +51,10 @@ export namespace core {
 	        this.id = source["id"];
 	        this.provider = source["provider"];
 	        this.title = source["title"];
-	        this.state = source["state"];
 	        this.created_at = source["created_at"];
 	        this.messages = this.convertValues(source["messages"], Message);
 	        this.modelID = source["modelID"];
+	        this.state = source["state"];
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {

@@ -17,10 +17,10 @@ type Chat struct {
 	ID         string    `json:"id"`
 	Provider   string    `json:"provider"`
 	Title      string    `json:"title"`
-	AgentState string    `json:"state"`
 	CreatedAt  string    `json:"created_at"`
 	Messages   []Message `json:"messages"`
 	ModelID    string    `json:"modelID"`
+	AgentState string    `json:"state"`
 }
 
 type ChatSummary struct {

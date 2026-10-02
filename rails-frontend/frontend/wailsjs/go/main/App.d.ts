@@ -4,7 +4,7 @@ import {Cloud} from '../models';
 import {core} from '../models';
 import {services} from '../models';
 
-export function CreateChat(arg1:string,arg2:string):Promise<string>;
+export function CreateChat(arg1:string,arg2:string,arg3:string):Promise<string>;
 
 export function DeleteOneChat(arg1:string):Promise<void>;
 
