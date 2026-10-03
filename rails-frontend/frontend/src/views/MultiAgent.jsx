@@ -5,43 +5,15 @@ import ChatPanel from '../components/ChatPanel';
 import Toast from '../components/Toast';
 import { useToast } from '../components/useToast';
 
-export default function MultiAgent({chat, onChatUpdated}) {
+export default function MultiAgent({panels, addPanel, updatePanel}) {
     //Toast function here
     const { toast, toastVisible, showToast } = useToast();
     const [sessionID] = useState(() => crypto.randomUUID());
-    const [panels, setPanels] = useState([
-        {
-            id: crypto.randomUUID(),
-            chat: null,
-        }
-    ])
-
     const [sharedInputMode, setSharedInputMode] = useState(false);
     const [sharedPrompt, setSharedPrompt] = useState("")
 
     function update() {
         setSharedInputMode(prev => !prev);
-    }
-
-    function addPanel() {
-        setPanels(prev => [
-            ...prev, 
-            {
-                id: crypto.randomUUID()
-            }
-        ])
-    }
-
-    function updatePanel(panelID, updatedChat) {
-        setPanels(prev =>
-            prev.map(panel =>
-                panel.id === panelID
-                ? {
-                    ...panel, 
-                    chat: updatedChat,
-                } : panel
-            )
-        );
     }
 
     async function sendSharedPrompt() {

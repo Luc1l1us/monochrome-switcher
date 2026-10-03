@@ -41,6 +41,7 @@ type ChatSummary struct {
 	CreatedAt  string     `json:"created_at"`
 	AgentState AgentState `json:"agent_state"`
 	ModelID    string     `json:"modelID"`
+	SessionID  string     `json:"session_id"`
 }
 
 func BuildPrompt(messages []Message) string {

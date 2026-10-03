@@ -125,6 +125,14 @@ func (a *App) LoadOneChat(chatID string, modelID string) (*core.Chat, error) {
 	return chat, nil
 }
 
+func (a *App) LoadChatsBySession(sessionID string) ([]core.Chat, error) {
+	chat, err := conversation.LoadChatBySession(sessionID)
+	if err != nil {
+		return nil, err
+	}
+	return chat, nil
+}
+
 func (a *App) DeleteOneChat(chatID string) {
 	conversation.DeleteChat(chatID)
 }

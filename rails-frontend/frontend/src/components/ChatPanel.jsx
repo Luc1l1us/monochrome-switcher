@@ -134,6 +134,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
                 selected, 
                 prompt,
                 modelID,
+                sessionID,
             )
             const updatedChat = await LoadOneChat(activeChat.id)
             onChatUpdated(updatedChat)

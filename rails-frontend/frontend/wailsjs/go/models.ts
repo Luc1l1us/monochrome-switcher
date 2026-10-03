@@ -96,6 +96,7 @@ export namespace core {
 	    created_at: string;
 	    agent_state: AgentState;
 	    modelID: string;
+	    session_id: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new ChatSummary(source);
@@ -109,6 +110,7 @@ export namespace core {
 	        this.created_at = source["created_at"];
 	        this.agent_state = this.convertValues(source["agent_state"], AgentState);
 	        this.modelID = source["modelID"];
+	        this.session_id = source["session_id"];
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {

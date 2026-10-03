@@ -26,6 +26,10 @@ export function LoadAPIKeys() {
   return window['go']['main']['App']['LoadAPIKeys']();
 }
 
+export function LoadChatsBySession(arg1) {
+  return window['go']['main']['App']['LoadChatsBySession'](arg1);
+}
+
 export function LoadOneChat(arg1, arg2) {
   return window['go']['main']['App']['LoadOneChat'](arg1, arg2);
 }
