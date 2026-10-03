@@ -50,14 +50,19 @@ func (m *ConvoManager) LoadChat(chat *core.Chat) {
 	m.Chats[chat.ID] = chat
 }
 
-func (m *ConvoManager) CreateChat(chatID, provider string, modelID string) *core.Chat {
+func (m *ConvoManager) CreateChat(chatID, provider string, modelID string, agentMode string, sessionID string) *core.Chat {
+	fmt.Print("Create Chat got state:", agentMode)
 	chat := &core.Chat{
 		ID:        chatID,
 		Provider:  provider,
 		Title:     "New Chat",
 		CreatedAt: time.Now().Format(time.RFC3339),
 		Messages:  []core.Message{},
+		AgentState: core.AgentState{
+			Mode: core.AgentMode(agentMode),
+		},
 		ModelID:   modelID,
+		SessionID: sessionID,
 	}
 
 	m.Chats[chatID] = chat
@@ -130,6 +135,42 @@ func LoadChat(chatID string) (*core.Chat, error) {
 	return &chat, nil
 }
 
+// Load chats by SessionID
+func LoadChatBySession(sessionID string) ([]core.Chat, error) {
+	if sessionID == "" {
+		return nil, fmt.Errorf("SessionID is empty!")
+	}
+	entries, err := os.ReadDir(GetConvoPath(""))
+	if err != nil {
+		return nil, err
+	}
+	var chats []core.Chat
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+		if filepath.Ext(entry.Name()) != ".json" {
+			continue
+		}
+		data, err := os.ReadFile(
+			GetConvoPath(entry.Name()),
+		)
+		if err != nil {
+			continue
+		}
+		var chat core.Chat
+		err = json.Unmarshal(data, &chat)
+		if err != nil {
+			continue
+		}
+		if chat.SessionID == sessionID {
+			chats = append(chats, chat)
+		}
+
+	}
+	return chats, nil
+}
+
 // Load All chats
 func ListChats() ([]core.ChatSummary, error) {
 	entries, err := os.ReadDir(GetConvoDir())
@@ -176,6 +217,10 @@ func ListChats() ([]core.ChatSummary, error) {
 			Title:     chat.Title,
 			CreatedAt: readableTime,
 			ModelID:   chat.ModelID,
+			AgentState: core.AgentState{
+				Mode: chat.AgentState.Mode,
+			},
+			SessionID: chat.SessionID,
 		})
 	}
 	return chats, nil

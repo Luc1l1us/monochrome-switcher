@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import HistoryCards from "../components/HistoryCards"
-import { DeleteOneChat, ListChats, LoadOneChat } from "../../wailsjs/go/main/App"
+import { DeleteOneChat, ListChats, LoadOneChat, LoadChatsBySession } from "../../wailsjs/go/main/App"
 import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
 
-export default function History({onChatSelected}) {
+export default function History({handleChatSelected}) {
     const [chats, setChats] = useState([])
     const { toast, toastVisible, showToast } = useToast();
     
@@ -37,8 +37,21 @@ export default function History({onChatSelected}) {
                 console.error("No chat returned!")
                 return;
             }
+
+            //check agentState mode (single)
+/*             if (chat.agent_state?.mode === "single") {
+                onChatSelected(chat)
+                return;
+            } */
+
+            if (chat.agent_state?.mode === "multi") {
+                const chats = await LoadChatsBySession(chat.session_id)
+                handleChatSelected(chats)
+                return;
+            }
+            //single
+            handleChatSelected(chat)
             console.log("Calling onChatSelected with:", chat)
-            onChatSelected(chat)
         } catch(error) {
             console.error("Failed to load chat:", error)
             showToast(`Failed to load chat! Error: ${error}`)

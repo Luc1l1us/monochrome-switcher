@@ -19,6 +19,18 @@ export namespace Cloud {
 
 export namespace core {
 	
+	export class AgentState {
+	    mode: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new AgentState(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.mode = source["mode"];
+	    }
+	}
 	export class Message {
 	    role: string;
 	    content: string;
@@ -37,10 +49,11 @@ export namespace core {
 	    id: string;
 	    provider: string;
 	    title: string;
-	    state: string;
 	    created_at: string;
 	    messages: Message[];
 	    modelID: string;
+	    agent_state: AgentState;
+	    session_id: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Chat(source);
@@ -51,10 +64,11 @@ export namespace core {
 	        this.id = source["id"];
 	        this.provider = source["provider"];
 	        this.title = source["title"];
-	        this.state = source["state"];
 	        this.created_at = source["created_at"];
 	        this.messages = this.convertValues(source["messages"], Message);
 	        this.modelID = source["modelID"];
+	        this.agent_state = this.convertValues(source["agent_state"], AgentState);
+	        this.session_id = source["session_id"];
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
@@ -80,8 +94,9 @@ export namespace core {
 	    provider: string;
 	    title: string;
 	    created_at: string;
-	    state: string;
+	    agent_state: AgentState;
 	    modelID: string;
+	    session_id: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new ChatSummary(source);
@@ -93,9 +108,28 @@ export namespace core {
 	        this.provider = source["provider"];
 	        this.title = source["title"];
 	        this.created_at = source["created_at"];
-	        this.state = source["state"];
+	        this.agent_state = this.convertValues(source["agent_state"], AgentState);
 	        this.modelID = source["modelID"];
+	        this.session_id = source["session_id"];
 	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
 	}
 
 }

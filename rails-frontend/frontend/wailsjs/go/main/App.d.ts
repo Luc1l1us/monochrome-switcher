@@ -4,7 +4,7 @@ import {Cloud} from '../models';
 import {core} from '../models';
 import {services} from '../models';
 
-export function CreateChat(arg1:string,arg2:string):Promise<string>;
+export function CreateChat(arg1:string,arg2:string,arg3:string,arg4:string):Promise<string>;
 
 export function DeleteOneChat(arg1:string):Promise<void>;
 
@@ -15,6 +15,8 @@ export function Greet(arg1:string):Promise<string>;
 export function ListChats():Promise<Array<core.ChatSummary>>;
 
 export function LoadAPIKeys():Promise<services.APIKeys>;
+
+export function LoadChatsBySession(arg1:string):Promise<Array<core.Chat>>;
 
 export function LoadOneChat(arg1:string,arg2:string):Promise<core.Chat>;
 

@@ -1,48 +1,19 @@
 import {useState} from 'react';
-import SelectDemo from '../components/aiselection';
 import {EnterIcon} from "@radix-ui/react-icons";
 import {LoadOneChat, SendPrompt} from "../../wailsjs/go/main/App";
 import ChatPanel from '../components/ChatPanel';
 import Toast from '../components/Toast';
 import { useToast } from '../components/useToast';
 
-export default function MultiAgent({chat, onChatUpdated}) {
+export default function MultiAgent({panels, addPanel, updatePanel}) {
     //Toast function here
     const { toast, toastVisible, showToast } = useToast();
-
-    const [panels, setPanels] = useState([
-        {
-            id: crypto.randomUUID(),
-            chat: null,
-        }
-    ])
-
+    const [sessionID] = useState(() => crypto.randomUUID());
     const [sharedInputMode, setSharedInputMode] = useState(false);
     const [sharedPrompt, setSharedPrompt] = useState("")
 
     function update() {
         setSharedInputMode(prev => !prev);
-    }
-
-    function addPanel() {
-        setPanels(prev => [
-            ...prev, 
-            {
-                id: crypto.randomUUID()
-            }
-        ])
-    }
-
-    function updatePanel(panelID, updatedChat) {
-        setPanels(prev =>
-            prev.map(panel =>
-                panel.id === panelID
-                ? {
-                    ...panel, 
-                    chat: updatedChat,
-                } : panel
-            )
-        );
     }
 
     async function sendSharedPrompt() {
@@ -120,6 +91,8 @@ export default function MultiAgent({chat, onChatUpdated}) {
                         onChatUpdated={
                             (updatedChat) => updatePanel(panel.id, updatedChat)
                         }
+                        agentMode={"multi"}
+                        sessionID={sessionID}
                     />
                 ))}
             </div>
