@@ -1,4 +1,5 @@
 import * as icons from "../../../../icons"
+import { CaretDownIcon } from "@radix-ui/react-icons";
 
 export default function NavBar({setSelectedPanel}) {
     return (
