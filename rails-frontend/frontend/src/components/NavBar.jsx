@@ -1,4 +1,5 @@
 import * as icons from "../../../../icons"
+import { CaretDownIcon } from "@radix-ui/react-icons";
 
 export default function NavBar({setSelectedPanel}) {
     return (
@@ -13,7 +14,7 @@ export default function NavBar({setSelectedPanel}) {
                     <button className="nav-button" onClick={
                             () => setSelectedPanel("singleagent")
                         }>
-                        AI Selection
+                        AI Selection <CaretDownIcon/>
                     </button>
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
