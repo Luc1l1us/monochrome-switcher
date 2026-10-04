@@ -14,7 +14,7 @@ export default function NavBar({setSelectedPanel}) {
                     <button className="nav-button" onClick={
                             () => setSelectedPanel("singleagent")
                         }>
-                        AI Selection
+                        AI Selection <CaretDownIcon/>
                     </button>
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
