@@ -89,6 +89,44 @@ export namespace core {
 		    return a;
 		}
 	}
+	export class MultiChatSummary {
+	    session_id: string;
+	    title: string;
+	    created_at: string;
+	    agent_state: AgentState;
+	    chats: ChatSummary[];
+	
+	    static createFrom(source: any = {}) {
+	        return new MultiChatSummary(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.session_id = source["session_id"];
+	        this.title = source["title"];
+	        this.created_at = source["created_at"];
+	        this.agent_state = this.convertValues(source["agent_state"], AgentState);
+	        this.chats = this.convertValues(source["chats"], ChatSummary);
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
 	export class ChatSummary {
 	    id: string;
 	    provider: string;
@@ -131,6 +169,40 @@ export namespace core {
 		    return a;
 		}
 	}
+	export class ChatList {
+	    chats: ChatSummary[];
+	    multiChats: MultiChatSummary[];
+	
+	    static createFrom(source: any = {}) {
+	        return new ChatList(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.chats = this.convertValues(source["chats"], ChatSummary);
+	        this.multiChats = this.convertValues(source["multiChats"], MultiChatSummary);
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
+	
+	
 
 }
 

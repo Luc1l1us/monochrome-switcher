@@ -111,7 +111,7 @@ func (a *App) CreateChat(provider string, modelID string, state string, sessionI
 	return id, nil
 }
 
-func (a *App) ListChats() ([]core.ChatSummary, error) {
+func (a *App) ListChats() (*core.ChatList, error) {
 	return conversation.ListChats()
 }
 

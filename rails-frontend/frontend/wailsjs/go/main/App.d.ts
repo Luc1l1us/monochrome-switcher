@@ -12,7 +12,7 @@ export function GetOpenRouterModels():Promise<Array<Cloud.ModelInfo>>;
 
 export function Greet(arg1:string):Promise<string>;
 
-export function ListChats():Promise<Array<core.ChatSummary>>;
+export function ListChats():Promise<core.ChatList>;
 
 export function LoadAPIKeys():Promise<services.APIKeys>;
 

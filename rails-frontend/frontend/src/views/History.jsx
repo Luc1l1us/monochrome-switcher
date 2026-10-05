@@ -5,21 +5,31 @@ import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
 
 export default function History({handleChatSelected}) {
-    const [chats, setChats] = useState([])
+    const [chats, setChats] = useState([]);
+    const [multiChats, setMultiChats] = useState([]);
     const { toast, toastVisible, showToast } = useToast();
     
+    const historyItems = [
+    ...chats,
+    ...multiChats,
+    ];
+
     useEffect(() => {
         ListChats()
             .then(data => {
-                console.log(data);
-                setChats(data || []);
+                console.log("ListChats returned:", data);
+                console.log("Is array?", Array.isArray(data));
+                console.log("ListChats", data);
+                setChats(data?.chats ?? []);
+                setMultiChats(data?.multiChats ?? []);
         })
             .catch(error => {
                 console.error("Failed to list chats: ", error)
                 showToast(`Failed to list chats, error: ${error}`)
                 setChats([])
+                setMultiChats([])
             })
-    }, []);
+        }, []);
 
     async function switchChat(chatID) {
         if (!chatID) {
@@ -73,7 +83,6 @@ export default function History({handleChatSelected}) {
             showToast(`Failed to delete chat! Error: ${error}`)
         }
     }
-
     return (
         <div id="home">
             <div id='Title'>
@@ -98,9 +107,13 @@ export default function History({handleChatSelected}) {
                         </div>
                     ) : (
                         <div className="History-container">
-                        {chats.map(chat => (
+                        {historyItems.map(chat => (
                             <HistoryCards
-                                key={chat.id}
+                                key={
+                                    chat.agent_state?.mode === "multi"
+                                        ? chat.session_id
+                                        : chat.id
+                                }
                                 chat={chat}
                                 onClick={switchChat}
                                 DeleteChat={deleteChat}
