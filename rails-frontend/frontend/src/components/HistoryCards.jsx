@@ -3,15 +3,13 @@ import ColoredBadge from "./badge/ColoredBadge"
 
 export default function HistoryCards({ chat, onClick, DeleteChat }) {
     const isMulti = chat.agent_state?.mode != "single";
-    console.log(chat.chats[0].id) 
-
+    const multiproviders = isMulti
+        ? [...new Set(chat.chats.map(c => c.provider))]
+        : [chat.provider]
+        console.log(chat.chats)
     return (
         <div className="card" id="historycard-id" onClick={() => {
-            if (isMulti) {
-                onClick(chat.chats[0].id) 
-            } else {
-                onClick(chat.id)
-            }
+            onClick(chat)
             console.log("Clicked chat:", chat.id, "Chat Title:",chat.title, chat.provider)
             }}>
             <div className="state-badge">
@@ -21,7 +19,19 @@ export default function HistoryCards({ chat, onClick, DeleteChat }) {
             </div>
             <h3 className="history-smol">{chat.title}</h3>
             {isMulti ? (
-                <p className="history-smol">{chat.chats.length} AI Models</p>
+                <div className="history-providers">
+                    {multiproviders.map(provider => (
+                        <div className="text">
+                            <img
+                                key={provider}
+                                src={icons[provider]}
+                                alt={provider}
+                                className="history-provider-icon"
+                            />
+                            <span>{provider}</span>
+                        </div>
+                    ))}
+                </div>
             ) : (
                 <>
                     <p className="history-smol">{chat.provider}</p>
@@ -30,7 +40,10 @@ export default function HistoryCards({ chat, onClick, DeleteChat }) {
             )}
             <small className="history-smol">{chat.created_at}</small>
             {isMulti ? (
-                <small className="history-smol">{isMulti ? chat.session_id : chat.id}</small>
+                <div className="history-smol">
+                    <p> {chat.session_id} </p>
+                    <p> {chat.chats[0].id} </p>
+                </div>
             ) : (
                 <small className="history-smol">{chat.id}</small>
             )}

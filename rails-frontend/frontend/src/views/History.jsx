@@ -31,40 +31,28 @@ export default function History({handleChatSelected}) {
             })
         }, []);
 
-    async function switchChat(chatID) {
-        if (!chatID) {
-            console.error("No chatID supplied!")
-            showToast("No chatID supplied!")
-            return;
-        }
-        console.log("switchChat received:", chatID);
+    async function switchChat(chat) {
         try {
-            const chat = await LoadOneChat(chatID)
-
-            console.log("Loaded Chat:", chat);
-
-            if (!chat) {
-                console.error("No chat returned!")
-                return;
-            }
-
-            //check agentState mode (single)
-/*             if (chat.agent_state?.mode === "single") {
-                onChatSelected(chat)
-                return;
-            } */
-
-            if (chat.agent_state?.mode === "multi") {
+            const isMulti = chat.agent_state?.mode != "single";
+            if (isMulti) {
+                console.log("Multi-chat selected", chat);
                 const chats = await LoadChatsBySession(chat.session_id)
+                if (!chats || chats.length === 0) {
+                    console.error("No chats found for this session!", chat.session_id);
+                    return;
+                }
                 handleChatSelected(chats)
                 return;
             }
-            //single
-            handleChatSelected(chat)
-            console.log("Calling onChatSelected with:", chat)
-        } catch(error) {
-            console.error("Failed to load chat:", error)
-            showToast(`Failed to load chat! Error: ${error}`)
+            const fullChat = await LoadOneChat(chat.id)
+            if (!fullChat) {
+                console.error("No chat returned!");
+                return;
+            }
+            handleChatSelected(fullChat)
+        } catch (error) {
+            console.error("Failed to load chat: ", error)
+            showToast(`Failed to load chat: ${error}`)
         }
     }
 
