@@ -172,25 +172,24 @@ func LoadChatBySession(sessionID string) ([]core.Chat, error) {
 }
 
 // Load All chats
-func ListChats() ([]core.ChatSummary, error) {
+func ListChats() (*core.ChatList, error) {
 	entries, err := os.ReadDir(GetConvoDir())
 	if err != nil {
 		return nil, err
 	}
 
 	chats := make([]core.ChatSummary, 0)
-	//var chats []core.ChatSummary
+
+	//create one for multi-chats
+	multichatsGroups := make(map[string]*core.MultiChatSummary)
 
 	for _, entry := range entries {
-
 		if entry.IsDir() {
 			continue
 		}
-
 		if filepath.Ext(entry.Name()) != ".json" {
 			continue
 		}
-
 		data, err := os.ReadFile(
 			filepath.Join(GetConvoDir(), entry.Name()),
 		)
@@ -211,7 +210,7 @@ func ListChats() ([]core.ChatSummary, error) {
 
 		readableTime := parsedTime.Format("January 2, 2006 at 3:04 PM")
 
-		chats = append(chats, core.ChatSummary{
+		summary := core.ChatSummary{
 			ID:        chat.ID,
 			Provider:  chat.Provider,
 			Title:     chat.Title,
@@ -221,9 +220,33 @@ func ListChats() ([]core.ChatSummary, error) {
 				Mode: chat.AgentState.Mode,
 			},
 			SessionID: chat.SessionID,
-		})
+		}
+		if chat.SessionID != "" {
+			if existing, ok := multichatsGroups[chat.SessionID]; ok {
+				existing.Chats = append(existing.Chats, summary)
+			} else {
+				multichatsGroups[chat.SessionID] = &core.MultiChatSummary{
+					SessionID: chat.SessionID,
+					Title:     chat.Title,
+					CreatedAt: readableTime,
+					AgentState: core.AgentState{
+						Mode: chat.AgentState.Mode,
+					},
+					Chats: []core.ChatSummary{summary},
+				}
+			}
+		} else {
+			chats = append(chats, summary)
+		}
 	}
-	return chats, nil
+	multiChats := make([]core.MultiChatSummary, 0)
+	for _, multiChat := range multichatsGroups {
+		multiChats = append(multiChats, *multiChat)
+	}
+	return &core.ChatList{
+		Chats:      chats,
+		MultiChats: multiChats,
+	}, nil
 }
 
 func DeleteChat(chatID string) {

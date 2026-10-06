@@ -44,6 +44,19 @@ type ChatSummary struct {
 	SessionID  string     `json:"session_id"`
 }
 
+type MultiChatSummary struct {
+	SessionID  string        `json:"session_id"`
+	Title      string        `json:"title"`
+	CreatedAt  string        `json:"created_at"`
+	AgentState AgentState    `json:"agent_state"`
+	Chats      []ChatSummary `json:"chats"`
+}
+
+type ChatList struct {
+	Chats      []ChatSummary      `json:"chats"`
+	MultiChats []MultiChatSummary `json:"multiChats"`
+}
+
 func BuildPrompt(messages []Message) string {
 	var builder strings.Builder
 

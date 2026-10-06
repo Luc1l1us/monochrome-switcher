@@ -233,10 +233,24 @@ input:checked + .slider:before {
   height: 65vh;
 }
 
+.history-providers {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.history-providers span {
+  font-size: 12px;
+}
+
 .history-smol {
   font-size: 15px;
   display: flex;
   justify-content: flex-start;
+}
+
+.history-provider-icon {
+  height: 50px;
+  width: 50px;
 }
 
 #historycard-id {

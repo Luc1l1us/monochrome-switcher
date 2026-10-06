@@ -5,56 +5,54 @@ import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
 
 export default function History({handleChatSelected}) {
-    const [chats, setChats] = useState([])
+    const [chats, setChats] = useState([]);
+    const [multiChats, setMultiChats] = useState([]);
     const { toast, toastVisible, showToast } = useToast();
     
+    const historyItems = [
+    ...chats,
+    ...multiChats,
+    ];
+
     useEffect(() => {
         ListChats()
             .then(data => {
-                console.log(data);
-                setChats(data || []);
+                console.log("ListChats returned:", data);
+                console.log("Is array?", Array.isArray(data));
+                console.log("ListChats", data);
+                setChats(data?.chats ?? []);
+                setMultiChats(data?.multiChats ?? []);
         })
             .catch(error => {
                 console.error("Failed to list chats: ", error)
                 showToast(`Failed to list chats, error: ${error}`)
                 setChats([])
+                setMultiChats([])
             })
-    }, []);
+        }, []);
 
-    async function switchChat(chatID) {
-        if (!chatID) {
-            console.error("No chatID supplied!")
-            showToast("No chatID supplied!")
-            return;
-        }
-        console.log("switchChat received:", chatID);
+    async function switchChat(chat) {
         try {
-            const chat = await LoadOneChat(chatID)
-
-            console.log("Loaded Chat:", chat);
-
-            if (!chat) {
-                console.error("No chat returned!")
-                return;
-            }
-
-            //check agentState mode (single)
-/*             if (chat.agent_state?.mode === "single") {
-                onChatSelected(chat)
-                return;
-            } */
-
-            if (chat.agent_state?.mode === "multi") {
+            const isMulti = chat.agent_state?.mode != "single";
+            if (isMulti) {
+                console.log("Multi-chat selected", chat);
                 const chats = await LoadChatsBySession(chat.session_id)
+                if (!chats || chats.length === 0) {
+                    console.error("No chats found for this session!", chat.session_id);
+                    return;
+                }
                 handleChatSelected(chats)
                 return;
             }
-            //single
-            handleChatSelected(chat)
-            console.log("Calling onChatSelected with:", chat)
-        } catch(error) {
-            console.error("Failed to load chat:", error)
-            showToast(`Failed to load chat! Error: ${error}`)
+            const fullChat = await LoadOneChat(chat.id)
+            if (!fullChat) {
+                console.error("No chat returned!");
+                return;
+            }
+            handleChatSelected(fullChat)
+        } catch (error) {
+            console.error("Failed to load chat: ", error)
+            showToast(`Failed to load chat: ${error}`)
         }
     }
 
@@ -73,7 +71,6 @@ export default function History({handleChatSelected}) {
             showToast(`Failed to delete chat! Error: ${error}`)
         }
     }
-
     return (
         <div id="home">
             <div id='Title'>
@@ -98,9 +95,13 @@ export default function History({handleChatSelected}) {
                         </div>
                     ) : (
                         <div className="History-container">
-                        {chats.map(chat => (
+                        {historyItems.map(chat => (
                             <HistoryCards
-                                key={chat.id}
+                                key={
+                                    chat.agent_state?.mode === "multi"
+                                        ? chat.session_id
+                                        : chat.id
+                                }
                                 chat={chat}
                                 onClick={switchChat}
                                 DeleteChat={deleteChat}
