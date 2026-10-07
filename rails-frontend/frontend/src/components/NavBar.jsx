@@ -1,5 +1,6 @@
 import * as icons from "../../../../icons"
 import { CaretDownIcon } from "@radix-ui/react-icons";
+import RecentChats from "./ai-selection-chats/recentchats";
 
 export default function NavBar({setSelectedPanel}) {
     return (
@@ -15,6 +16,7 @@ export default function NavBar({setSelectedPanel}) {
                             () => setSelectedPanel("singleagent")
                         }>
                         AI Selection <CaretDownIcon/>
+                        <RecentChats />
                     </button>
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
@@ -27,11 +29,6 @@ export default function NavBar({setSelectedPanel}) {
                     </button>
                 </div>
             </div>
-            {/* uncomment if avatar is to be implemented
-            <div id='avatar'>
-                TEST
-            </div> 
-            */}
         </div>
     );
 }
