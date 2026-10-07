@@ -1,3 +1,32 @@
 .ai-selection-chats {
-  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-flow: column;
+  background-color: inherit;
+}
+
+.recent-chats {
+  display: flex;
+  color: var(--text-color);
+  background-color: inherit;
+  justify-content: space-between;
+}
+
+.recent-chats-provider,
+.recent-chats-name {
+  margin-left: 5px;
+}
+
+.recent-chats-name {
+  margin-left: 5px;
+  display: flex;
+}
+
+.recent-chats-badge {
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+  height: auto;
+  width: auto;
 }

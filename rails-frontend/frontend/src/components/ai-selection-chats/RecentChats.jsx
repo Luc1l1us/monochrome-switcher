@@ -1,48 +1,40 @@
-import * as icons from "../../../../../icons"
-import { ListChats } from "../../../wailsjs/go/main/App"
-import Toast from "../Toast";
-import { useToast } from "../useToast";
 import "./aiselectionchats.css"
 import ColoredBadge from "../badge/ColoredBadge";
-import { useState, useEffect } from "react";
 
-
-export default function RecentChats() {
-    const [chats, setChats] = useState([]);
-    const [multiChats, setMultiChats] = useState([]);
-    const { toast, toastVisible, showToast } = useToast();
-    
-    const chatItems = [
-        ...chats,
-        ...multiChats,
-    ]
-    
-    //listchats here
-    useEffect(() => {
-        ListChats()
-            .then(data => {
-                console.log("ListChats returned:", data);
-                setChats(data?.chats ?? []);
-                setMultiChats(data?.multiChats ?? []);
-            })
-            .catch(error => {
-                console.error("Failed to list chats: ", error)
-                showToast(`Failed to list chats, error: ${error}`)
-                setChats([])
-                setMultiChats([])
-            })
-    }, []);
-    console.log("Data is here: ", data)
+export default function Recentchats({chat}) {
+    const isMulti = chat.agent_state?.mode != "single";
+    const multiproviders = isMulti
+        ? [...new Set(chat.chats.map(c => c.provider))]
+        : [chat.provider]
+    console.log("chat:", chat)
     return (
         <div className="ai-selection-chats">
-            <ColoredBadge
-                children={chats.agent_state?.mode}
-                state={chats.agent_state?.mode}
-                />
-            <Toast 
-                message={toast}
-                visible={toastVisible}
-            />
+            <div className="recent-chats">
+                <div className="chat-provider-container">
+                    <div className="recent-chats-name">
+                        {chat.title}
+                    </div>
+                    <div className="recent-chats-provider">
+                        {isMulti ? (
+                            <div>
+                                {multiproviders.map(provider => (
+                                    <span>{provider}</span>
+                                ))}
+                            </div>
+                        ) : (
+                            <span>
+                                {chat.provider}
+                            </span>
+                        )}
+                    </div>
+                </div>
+                    <div className="recent-chats-badge">
+                        <ColoredBadge
+                            children={chat.agent_state?.mode}
+                            state={chat.agent_state?.mode}
+                        />
+                    </div>
+            </div>
         </div>
     )
 }

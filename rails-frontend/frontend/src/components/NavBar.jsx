@@ -1,8 +1,34 @@
 import * as icons from "../../../../icons"
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import RecentChats from "./ai-selection-chats/recentchats";
+import Recentchats from "./ai-selection-chats/Recentchats";
+import { useState, useEffect } from "react";
+import { ListChats } from "../../wailsjs/go/main/App";
+
 
 export default function NavBar({setSelectedPanel}) {
+    const [chats, setChats] = useState([]);
+    const [multiChats, setMultiChats] = useState([]);
+    
+    const chatItems = [
+        ...chats,
+        ...multiChats,
+    ]
+
+    //listchats here
+    useEffect(() => {
+        ListChats()
+            .then(data => {
+                console.log("ListChats returned:", data);
+                setChats(data?.chats ?? []);
+                setMultiChats(data?.multiChats ?? []);
+            })
+            .catch(error => {
+                console.error("Failed to list chats: ", error)
+                showToast(`Failed to list chats, error: ${error}`)
+                setChats([])
+                setMultiChats([])
+            })
+    }, []);
     return (
         <div id="firstcolumn-container">
             <div id='navi'>
@@ -16,7 +42,16 @@ export default function NavBar({setSelectedPanel}) {
                             () => setSelectedPanel("singleagent")
                         }>
                         AI Selection <CaretDownIcon/>
-                        <RecentChats />
+                        {chatItems.map(chat => (
+                            <Recentchats
+                                key={
+                                    chat.agent_state?.mode === "multi"
+                                        ? chat.session_id
+                                        : chat.id
+                                }
+                                chat={chat}/>
+                            ))
+                        }
                     </button>
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
