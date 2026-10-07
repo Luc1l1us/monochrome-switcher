@@ -1,9 +1,7 @@
 import * as icons from "../../../../icons"
-import { CaretDownIcon } from "@radix-ui/react-icons";
-import Recentchats from "./ai-selection-chats/Recentchats";
 import { useState, useEffect } from "react";
 import { ListChats } from "../../wailsjs/go/main/App";
-
+import Accordionaiselection from "./ai-selection-chats/AccordionAISelection";
 
 export default function NavBar({setSelectedPanel}) {
     const [chats, setChats] = useState([]);
@@ -38,21 +36,9 @@ export default function NavBar({setSelectedPanel}) {
                         Home
                     </button>
                     {/* AI Selection should be renamed with the previous AI Agent convo */}
-                    <button className="nav-button" onClick={
-                            () => setSelectedPanel("singleagent")
-                        }>
-                        AI Selection <CaretDownIcon/>
-                        {chatItems.map(chat => (
-                            <Recentchats
-                                key={
-                                    chat.agent_state?.mode === "multi"
-                                        ? chat.session_id
-                                        : chat.id
-                                }
-                                chat={chat}/>
-                            ))
-                        }
-                    </button>
+                    <Accordionaiselection 
+                        recentChats={chatItems}
+                    />
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
                     </button>

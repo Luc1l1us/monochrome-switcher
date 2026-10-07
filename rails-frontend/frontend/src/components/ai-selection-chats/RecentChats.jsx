@@ -1,8 +1,8 @@
 import "./aiselectionchats.css"
 import ColoredBadge from "../badge/ColoredBadge";
 
-export default function Recentchats({chat}) {
-    const isMulti = chat.agent_state?.mode != "single";
+export default function Recentchats({chat, onClick}) {
+    const isMulti = chat.agent_state?.mode === "multi";
     const multiproviders = isMulti
         ? [...new Set(chat.chats.map(c => c.provider))]
         : [chat.provider]
@@ -18,7 +18,7 @@ export default function Recentchats({chat}) {
                         {isMulti ? (
                             <div>
                                 {multiproviders.map(provider => (
-                                    <span>{provider}</span>
+                                    <span key={provider}>{provider}</span>
                                 ))}
                             </div>
                         ) : (
