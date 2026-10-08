@@ -5,6 +5,7 @@
   font-weight: 500;
   border: 1px solid transparent;
   line-height: 1.25;
+  align-self: center;
 }
 
 .red {

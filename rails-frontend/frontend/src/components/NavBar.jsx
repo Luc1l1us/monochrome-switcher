@@ -1,7 +1,32 @@
 import * as icons from "../../../../icons"
-import { CaretDownIcon } from "@radix-ui/react-icons";
+import { useState, useEffect } from "react";
+import { ListChats } from "../../wailsjs/go/main/App";
+import Accordionaiselection from "./ai-selection-chats/AccordionAISelection";
 
 export default function NavBar({setSelectedPanel}) {
+    const [chats, setChats] = useState([]);
+    const [multiChats, setMultiChats] = useState([]);
+    
+    const chatItems = [
+        ...chats,
+        ...multiChats,
+    ]
+
+    //listchats here
+    useEffect(() => {
+        ListChats()
+            .then(data => {
+                console.log("ListChats returned:", data);
+                setChats(data?.chats ?? []);
+                setMultiChats(data?.multiChats ?? []);
+            })
+            .catch(error => {
+                console.error("Failed to list chats: ", error)
+                showToast(`Failed to list chats, error: ${error}`)
+                setChats([])
+                setMultiChats([])
+            })
+    }, []);
     return (
         <div id="firstcolumn-container">
             <div id='navi'>
@@ -11,11 +36,9 @@ export default function NavBar({setSelectedPanel}) {
                         Home
                     </button>
                     {/* AI Selection should be renamed with the previous AI Agent convo */}
-                    <button className="nav-button" onClick={
-                            () => setSelectedPanel("singleagent")
-                        }>
-                        AI Selection <CaretDownIcon/>
-                    </button>
+                    <Accordionaiselection 
+                        recentChats={chatItems}
+                    />
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
                     </button>
@@ -27,11 +50,6 @@ export default function NavBar({setSelectedPanel}) {
                     </button>
                 </div>
             </div>
-            {/* uncomment if avatar is to be implemented
-            <div id='avatar'>
-                TEST
-            </div> 
-            */}
         </div>
     );
 }

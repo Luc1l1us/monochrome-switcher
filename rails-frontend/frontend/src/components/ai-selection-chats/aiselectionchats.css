@@ -1,0 +1,70 @@
+.ai-selection-chats {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-flow: column;
+  background-color: inherit;
+}
+
+.recent-chats {
+  display: flex;
+  color: var(--text-color);
+  background-color: inherit;
+  justify-content: space-between;
+}
+
+.recent-chats-provider,
+.recent-chats-name {
+  margin-left: 5px;
+}
+
+.recent-chats-name {
+  margin-left: 5px;
+  display: flex;
+}
+
+.recent-chats-badge {
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+  height: auto;
+  width: auto;
+}
+
+.nav-ai-selection {
+  color: var(--text-color);
+  background-color: inherit;
+  border: none;
+}
+
+.recent-chats-container {
+  overflow: hidden;
+}
+
+.recent-chats-container[data-state="open"] {
+  animation: slideDown 200ms ease-out;
+}
+
+.recent-chats-container[data-state="closed"] {
+  animation: slideUp 200ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+
+  to {
+    height: 0;
+  }
+}
