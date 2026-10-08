@@ -13,7 +13,7 @@ export default function Recentchats({chat, onClick}) {
     return (
         <div 
             className="ai-selection-chats"
-            onClick={() => onClick(console.log("Clicked"))}>
+            onClick={() => onClick(chat)}>
             <div className="recent-chats">
                 <div className="chat-provider-container">
                     <div className="recent-chats-name">

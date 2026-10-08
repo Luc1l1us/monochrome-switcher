@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import HistoryCards from "../components/HistoryCards"
-import { DeleteOneChat, ListChats, LoadOneChat, LoadChatsBySession } from "../../wailsjs/go/main/App"
+import { DeleteOneChat, ListChats } from "../../wailsjs/go/main/App"
 import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
 
@@ -30,31 +30,6 @@ export default function History({handleChatSelected}) {
                 setMultiChats([])
             })
         }, []);
-
-    async function switchChat(chat) {
-        try {
-            const isMulti = chat.agent_state?.mode != "single";
-            if (isMulti) {
-                console.log("Multi-chat selected", chat);
-                const chats = await LoadChatsBySession(chat.session_id)
-                if (!chats || chats.length === 0) {
-                    console.error("No chats found for this session!", chat.session_id);
-                    return;
-                }
-                handleChatSelected(chats)
-                return;
-            }
-            const fullChat = await LoadOneChat(chat.id)
-            if (!fullChat) {
-                console.error("No chat returned!");
-                return;
-            }
-            handleChatSelected(fullChat)
-        } catch (error) {
-            console.error("Failed to load chat: ", error)
-            showToast(`Failed to load chat: ${error}`)
-        }
-    }
 
     function deleteChat(chatID) {
         if (!chatID) {
@@ -103,7 +78,7 @@ export default function History({handleChatSelected}) {
                                         : chat.id
                                 }
                                 chat={chat}
-                                onClick={switchChat}
+                                onClick={handleChatSelected}
                                 DeleteChat={deleteChat}
                             />
                         ))}
