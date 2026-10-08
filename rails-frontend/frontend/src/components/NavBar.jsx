@@ -38,6 +38,7 @@ export default function NavBar({setSelectedPanel}) {
                     {/* AI Selection should be renamed with the previous AI Agent convo */}
                     <Accordionaiselection 
                         recentChats={chatItems}
+                        
                     />
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History

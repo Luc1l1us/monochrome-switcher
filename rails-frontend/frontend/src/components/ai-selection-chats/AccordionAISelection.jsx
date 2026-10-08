@@ -1,5 +1,5 @@
 import { Accordion } from "radix-ui";
-import Recentchats from "./recentchats";
+import Recentchats from "./Recentchats";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 
 export default function Accordionaiselection({recentChats, onClick}) {

@@ -8,6 +8,10 @@
   align-self: center;
 }
 
+.numofagents {
+  margin-right: 5px;
+}
+
 .red {
   background-color: var(--red-color);
   color: var(--light-red-color);
@@ -15,6 +19,10 @@
 .blue {
   background-color: var(--blue-color);
   color: var(--light-blue-color);
+}
+.inverse-blue {
+  background-color: var(--light-blue-color);
+  color: var(--blue-color);
 }
 .green {
   background-color: #ebfcf2;
@@ -24,4 +32,8 @@
 .brown {
   background-color: var(--light-brown-color);
   color: var(--brown-color);
+}
+.inverse-brown {
+  background-color: var(--brown-color);
+  color: var(--light-brown-color);
 }

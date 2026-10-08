@@ -6,9 +6,14 @@ export default function Recentchats({chat, onClick}) {
     const multiproviders = isMulti
         ? [...new Set(chat.chats.map(c => c.provider))]
         : [chat.provider]
-    console.log("chat:", chat)
+    const agentCount = isMulti
+        ? chat.chats.length
+        : 1;
+    console.log("chat length:", chat)
     return (
-        <div className="ai-selection-chats">
+        <div 
+            className="ai-selection-chats"
+            onClick={() => onClick(console.log("Clicked"))}>
             <div className="recent-chats">
                 <div className="chat-provider-container">
                     <div className="recent-chats-name">
@@ -32,6 +37,7 @@ export default function Recentchats({chat, onClick}) {
                         <ColoredBadge
                             children={chat.agent_state?.mode}
                             state={chat.agent_state?.mode}
+                            numofagents={agentCount}
                         />
                     </div>
             </div>
