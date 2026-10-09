@@ -66,6 +66,7 @@
 }
 
 .recent-chats-container {
+  margin-bottom: 10px;
   overflow: hidden;
 }
 
@@ -85,6 +86,19 @@
   to {
     height: var(--radix-accordion-content-height);
   }
+}
+
+.AccordionChevron {
+  margin-left: 5px;
+  color: var(--text-color);
+  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.AccordionTrigger[data-state="open"] > .AccordionChevron {
+  transform: rotate(180deg);
+}
+
+.AccordionHeader {
+  margin: 0;
 }
 
 @keyframes slideUp {
