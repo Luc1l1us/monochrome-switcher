@@ -6,7 +6,10 @@ export default function HistoryCards({ chat, onClick, DeleteChat }) {
     const multiproviders = isMulti
         ? [...new Set(chat.chats.map(c => c.provider))]
         : [chat.provider]
-        console.log(chat.chats)
+        console.log("chatlength",chat.length)
+    const agentCount = isMulti
+        ? chat.chats.length
+        : 1;
     return (
         <div className="card" id="historycard-id" onClick={() => {
             onClick(chat)
@@ -15,9 +18,12 @@ export default function HistoryCards({ chat, onClick, DeleteChat }) {
             <div className="state-badge">
                 <ColoredBadge 
                     children={chat.agent_state?.mode}
-                    state={chat.agent_state?.mode}/>
+                    state={chat.agent_state?.mode}
+                    numofagents={agentCount}
+                />
             </div>
             <h3 className="history-smol">{chat.title}</h3>
+            <h3 className="history-smol">{chat.length}</h3>
             {isMulti ? (
                 <div className="history-providers">
                     {multiproviders.map(provider => (

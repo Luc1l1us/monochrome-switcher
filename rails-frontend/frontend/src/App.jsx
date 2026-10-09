@@ -1,8 +1,8 @@
-import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
+import {useState, useEffect} from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
 import { About, SingleAgent, MultiAgent, FAQ, History, Home, Settings } from './views';
+import { LoadOneChat, LoadChatsBySession, ListChats } from '../wailsjs/go/main/App';
 
 function App() {
     //switching views
@@ -45,6 +45,30 @@ function App() {
             )
         );
     }
+    
+    async function switchChat(chat) {
+        try {
+            const isMulti = chat.agent_state?.mode != "single";
+            if (isMulti) {
+                console.log("Multi-chat selected", chat);
+                const chats = await LoadChatsBySession(chat.session_id)
+                if (!chats || chats.length === 0) {
+                    console.error("No chats found for this session!", chat.session_id);
+                    return;
+                }
+                handleChatSelected(chats)
+                return;
+            }
+            const fullChat = await LoadOneChat(chat.id)
+            if (!fullChat) {
+                console.error("No chat returned!");
+                return;
+            }
+            handleChatSelected(fullChat)
+        } catch (error) {
+            console.error("Failed to load chat: ", error)
+        }
+    }
 
     function handleChatSelected(selection) {
         console.log("=== HANDLE CHAT SELECTED ===");
@@ -73,7 +97,10 @@ function App() {
     return (
         <div id="App">
             <div className='container'>
-                <NavBar setSelectedPanel={setSelectedPanel} />
+                <NavBar 
+                    setSelectedPanel={setSelectedPanel}
+                    onClick={switchChat}
+                />
                 <div id="secondcolumn">
                     <div id='content'>
                         {selectedPanel === "home" && <Home setSelectedPanel={setSelectedPanel}/>}
@@ -87,7 +114,7 @@ function App() {
                             addPanel={addPanel}
                             updatePanel={updatePanel}/>}
                         {selectedPanel === "history" &&  <History 
-                            handleChatSelected={handleChatSelected}
+                            handleChatSelected={switchChat}
                         />}
                         {selectedPanel === "about" &&  <About />}
                         {selectedPanel === "faq" &&  <FAQ />}

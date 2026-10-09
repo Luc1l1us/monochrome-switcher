@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ListChats } from "../../wailsjs/go/main/App";
 import Accordionaiselection from "./ai-selection-chats/AccordionAISelection";
 
-export default function NavBar({setSelectedPanel}) {
+export default function NavBar({setSelectedPanel, onClick}) {
     const [chats, setChats] = useState([]);
     const [multiChats, setMultiChats] = useState([]);
     
@@ -38,6 +38,7 @@ export default function NavBar({setSelectedPanel}) {
                     {/* AI Selection should be renamed with the previous AI Agent convo */}
                     <Accordionaiselection 
                         recentChats={chatItems}
+                        onClick={onClick}
                     />
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         History
