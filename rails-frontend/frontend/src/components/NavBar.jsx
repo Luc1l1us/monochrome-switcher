@@ -2,7 +2,7 @@ import * as icons from "../../../../icons"
 import { useState, useEffect } from "react";
 import { ListChats } from "../../wailsjs/go/main/App";
 import Accordionaiselection from "./ai-selection-chats/AccordionAISelection";
-
+import { HomeIcon, CountdownTimerIcon } from "@radix-ui/react-icons";
 export default function NavBar({setSelectedPanel, onClick}) {
     const [chats, setChats] = useState([]);
     const [multiChats, setMultiChats] = useState([]);
@@ -33,7 +33,7 @@ export default function NavBar({setSelectedPanel, onClick}) {
                 MonoSwitch
                 <div className='top-nav'>
                     <button className="nav-button" onClick={() => setSelectedPanel("home")}>
-                        Home
+                        <HomeIcon/> Home
                     </button>
                     {/* AI Selection should be renamed with the previous AI Agent convo */}
                     <Accordionaiselection 
@@ -41,7 +41,7 @@ export default function NavBar({setSelectedPanel, onClick}) {
                         onClick={onClick}
                     />
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
-                        History
+                        <CountdownTimerIcon/> History
                     </button>
                 </div>
                 <div className='bottom-nav'>

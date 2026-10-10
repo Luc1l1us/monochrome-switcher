@@ -1,6 +1,7 @@
 import { Accordion } from "radix-ui";
 import AccordionTrigger from "./AccordionTrigger";
 import Recentchats from "./Recentchats";
+import { PersonIcon } from "@radix-ui/react-icons";
 
 export default function Accordionaiselection({recentChats, onClick}) {
     return (
@@ -12,7 +13,7 @@ export default function Accordionaiselection({recentChats, onClick}) {
             <Accordion.Item value="ai-selection">
                 <Accordion.Header>
                     <AccordionTrigger>
-                        AI Selection
+                        <PersonIcon/> AI Selection
                     </AccordionTrigger>
                 </Accordion.Header>
                 <Accordion.Content className="recent-chats-container">

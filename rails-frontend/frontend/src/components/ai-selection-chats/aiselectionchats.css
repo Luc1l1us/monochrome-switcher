@@ -34,11 +34,14 @@
 }
 
 .recent-chats {
+  /*border-radius: 5px;*/
+  padding: 5px;
   font-size: 14px;
   display: flex;
   color: var(--text-color);
   background-color: inherit;
   justify-content: space-between;
+  border: 1px solid var(--border-color);
 }
 
 .recent-chats-provider,
@@ -99,6 +102,10 @@
 
 .AccordionHeader {
   margin: 0;
+}
+
+.AccordionTrigger[data-state="open"] {
+  background-color: var(--accent-hover-color);
 }
 
 @keyframes slideUp {
