@@ -22,8 +22,10 @@ export default function Recentchats({chat, onClick}) {
                     <div className="recent-chats-provider">
                         {isMulti ? (
                             <div>
-                                {multiproviders.map(provider => (
-                                    <span key={provider}>{provider}</span>
+                                {multiproviders.map((provider, index) => (
+                                    <span key={provider}>
+                                        {provider}{index < multiproviders.length - 1 ? " + ": ""}
+                                        </span>
                                 ))}
                             </div>
                         ) : (
