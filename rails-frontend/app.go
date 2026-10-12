@@ -76,12 +76,12 @@ func (a *App) GetOpenRouterModels() ([]Cloud.ModelInfo, error) {
 }
 
 func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string, ModelID string) (string, error) {
-	//fmt.Printf("ChatID: %q\n", ChatID)
-	//fmt.Printf("ProviderName: %q\n", ProviderName)
-	//fmt.Printf("Prompt: %q\n", Prompt)
-	//fmt.Printf("Manager: %q\n", a.manager)
-	//fmt.Printf("Provider: %q\n", a.providers)
-	//fmt.Printf("SendPrompt got: %q\n", Prompt)
+	chat, ok := a.manager.Chats[ChatID]
+	if !ok || chat == nil {
+		return "", fmt.Errorf("chat with this chatID %q is not found", ChatID)
+	}
+	//store old title
+	oldTitle := chat.Title
 	result, err := services.HandlePrompt(
 		a.manager,
 		a.providers,
@@ -94,7 +94,23 @@ func (a *App) SendPrompt(ChatID string, ProviderName string, Prompt string, Mode
 		fmt.Println("SendPrompt returning error: ", err)
 		return "", err
 	}
+	//debugging
+	chat = a.manager.Chats[ChatID]
+	if chat == nil {
+		fmt.Printf("Chat %q not found after HandlePrompt:", ChatID)
+	} else {
+		fmt.Printf("Before Title : %q, after title: %q/n", oldTitle, chat.Title)
 
+		if chat.Title != oldTitle {
+			fmt.Println("Emitting chat:title-updated event")
+			runtime.EventsEmit(a.ctx, "chat:title-updated", map[string]string{
+				"chatID": ChatID,
+				"title":  chat.Title,
+			})
+		} else {
+			fmt.Println("Title did not change; event not emitted")
+		}
+	}
 	return result, nil
 }
 

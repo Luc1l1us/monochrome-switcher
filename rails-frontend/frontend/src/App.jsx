@@ -1,10 +1,37 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import {EventsOn} from "../wailsjs/runtime/runtime"
 import './App.css';
 import NavBar from './components/NavBar';
 import { About, SingleAgent, MultiAgent, FAQ, History, Home, Settings } from './views';
-import { LoadOneChat, LoadChatsBySession, ListChats } from '../wailsjs/go/main/App';
+import { LoadOneChat, LoadChatsBySession } from '../wailsjs/go/main/App';
 
 function App() {
+    //listen for events
+    useEffect(() => {
+        const cancel = EventsOn("chat:title-updated", ({chatID, title}) => {
+            console.log("Chat title updated!", chatID, title);
+            setActiveChat(prev =>
+                prev?.id === chatID
+                    ? { ...prev, title }
+                    : prev
+            );
+            setPanels(prev =>
+                prev.map(panel =>
+                    panel.chat?.id === chatID
+                        ? {
+                            ...panel,
+                            chat: {
+                                ...panel.chat,
+                                title,
+                            },
+                        }
+                    : panel
+                )
+            )
+        })
+        return () => cancel();
+    }, []);
+
     //switching views
     const [selectedPanel, setSelectedPanel] = useState("home")
     const [activeChat, setActiveChat] = useState(null);

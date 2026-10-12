@@ -1,8 +1,9 @@
 import * as icons from "../../../../icons"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ListChats } from "../../wailsjs/go/main/App";
 import Accordionaiselection from "./ai-selection-chats/AccordionAISelection";
 import { HomeIcon, CountdownTimerIcon } from "@radix-ui/react-icons";
+import { EventsOn } from "../../wailsjs/runtime/runtime";
 export default function NavBar({setSelectedPanel, onClick}) {
     const [chats, setChats] = useState([]);
     const [multiChats, setMultiChats] = useState([]);
@@ -13,20 +14,29 @@ export default function NavBar({setSelectedPanel, onClick}) {
     ]
 
     //listchats here
-    useEffect(() => {
+    const refreshChats = useCallback(() => {
         ListChats()
             .then(data => {
-                console.log("ListChats returned:", data);
-                setChats(data?.chats ?? []);
-                setMultiChats(data?.multiChats ?? []);
-            })
+            console.log("ListChats returned:", data);
+            setChats(data?.chats ?? []);
+            setMultiChats(data?.multiChats ?? []);
+        })
             .catch(error => {
-                console.error("Failed to list chats: ", error)
-                showToast(`Failed to list chats, error: ${error}`)
-                setChats([])
-                setMultiChats([])
-            })
-    }, []);
+            console.error("Failed to list chats: ", error)
+            showToast(`Failed to list chats, error: ${error}`)
+            setChats([])
+            setMultiChats([])
+        })
+    }, [])
+    useEffect(() => {
+        refreshChats();
+        const cancel = EventsOn("chat:title-updated", (data) => {
+            console.log("Refreshing chats after title update:", data);
+            refreshChats();
+        })
+        return () => cancel();
+    }, [refreshChats]);
+
     return (
         <div id="firstcolumn-container">
             <div id='navi'>
@@ -39,6 +49,7 @@ export default function NavBar({setSelectedPanel, onClick}) {
                     <Accordionaiselection 
                         recentChats={chatItems}
                         onClick={onClick}
+                        setSelectedPanel={setSelectedPanel}
                     />
                     <button className="nav-button" onClick={() => setSelectedPanel("history")}>
                         <CountdownTimerIcon/> History

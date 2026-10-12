@@ -27,6 +27,11 @@ export default function Home({setSelectedPanel}) {
                 </div>
                 <div id='content-cards'>
                     <button className='card' onClick={() => {
+                        setSelectedPanel("singleagent")
+                        }}>
+                        Start a new single-agent chat
+                    </button>
+                    <button className='card' onClick={() => {
                         setSelectedPanel("multiagent")
                         addAgentPanel()
                         }}>
