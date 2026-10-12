@@ -3,7 +3,7 @@ import AccordionTrigger from "./AccordionTrigger";
 import Recentchats from "./Recentchats";
 import { PersonIcon } from "@radix-ui/react-icons";
 
-export default function Accordionaiselection({recentChats, onClick}) {
+export default function Accordionaiselection({recentChats, onClick, setSelectedPanel}) {
     return (
         <Accordion.Root
             type="single"
@@ -12,7 +12,9 @@ export default function Accordionaiselection({recentChats, onClick}) {
         >
             <Accordion.Item value="ai-selection">
                 <Accordion.Header>
-                    <AccordionTrigger>
+                    <AccordionTrigger
+                        onClick={() => setSelectedPanel("singleagent")}
+                    >
                         <PersonIcon/> AI Selection
                     </AccordionTrigger>
                 </Accordion.Header>

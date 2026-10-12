@@ -8,13 +8,28 @@ import { LoadOneChat, LoadChatsBySession } from '../wailsjs/go/main/App';
 function App() {
     //listen for events
     useEffect(() => {
-        const cancel = EventsOn("chat:title-updated", (data) => {
-            const {chatID, title} = data;
+        const cancel = EventsOn("chat:title-updated", ({chatID, title}) => {
             console.log("Chat title updated!", chatID, title);
-        });
-        return () => {
-            cancel();
-        }
+            setActiveChat(prev =>
+                prev?.id === chatID
+                    ? { ...prev, title }
+                    : prev
+            );
+            setPanels(prev =>
+                prev.map(panel =>
+                    panel.chat?.id === chatID
+                        ? {
+                            ...panel,
+                            chat: {
+                                ...panel.chat,
+                                title,
+                            },
+                        }
+                    : panel
+                )
+            )
+        })
+        return () => cancel();
     }, []);
 
     //switching views
