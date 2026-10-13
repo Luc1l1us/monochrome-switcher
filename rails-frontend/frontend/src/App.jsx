@@ -74,6 +74,7 @@ function App() {
     }
     
     async function switchChat(chat) {
+        console.log("Switch Chat triggered, here is the chat %q", chat)
         try {
             const isMulti = chat.agent_state?.mode != "single";
             if (isMulti) {
@@ -109,6 +110,7 @@ function App() {
         if (Array.isArray(selection)) {
             const mode = selection[0]?.agent_state?.mode;
             console.log("MultiAgent is present and here are the chats", selection);
+            console.log("App.jsx selection model", selection?.modelID)
             if (mode === "multi") {
                 restoreMultiChatSession(selection)
                 setSelectedPanel("multiagent")
