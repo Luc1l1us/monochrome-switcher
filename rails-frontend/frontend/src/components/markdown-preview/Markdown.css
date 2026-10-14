@@ -60,6 +60,10 @@
   background-color: var(--red-color);
 }
 
+.input-box .btn.loading:hover {
+  background-color: rgb(214, 61, 61);
+}
+
 .input-box .btn:hover {
   background-color: var(--accent-hover-color);
 }

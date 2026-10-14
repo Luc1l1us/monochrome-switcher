@@ -30,6 +30,14 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
     const [selectedModel, setSelectedModel] = useState(
         chat?.modelID || ""
     );
+    const selectedModelExists = models.some(
+        model => model.id === selectedModel
+    );
+    const modelUnavailable =
+        selected === "openrouter" &&
+        modelsLoaded &&
+        Boolean(selectedModel) &&
+        !selectedModelExists;
     function updatePrompt(e) {
         const textarea = e.target
         setPrompt(textarea.value);
@@ -209,6 +217,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
                             updatePrompt={updatePrompt}
                             handleKeyDown={handleKeyDown}
                             isLoading={isLoading}
+                            disabled={modelUnavailable}
                         />
                         <Toast 
                             message={toast}
