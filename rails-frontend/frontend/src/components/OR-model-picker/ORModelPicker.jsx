@@ -21,11 +21,15 @@ export default function ORModelPicker({
             .slice(0,15)
     }, [models, query])
 
+    const selectedModelObject = models.find(
+        model => model.id === selectedModel
+    )
+
     return (
         <Popover.Root open={open} onOpenChange={setOpen}>
             <Popover.Trigger asChild>
                 <button type="button" className="model-picker-trigger">
-                    {selectedModel?.name ?? "Choose a model"}
+                    {selectedModelObject?.name ?? selectedModel ?? "Choose a model"}
                 </button>
             </Popover.Trigger>
 

@@ -9,7 +9,6 @@ import Toast from './Toast';
 import { useToast } from './useToast';
 
 export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, sessionID}) {
-
     const [chatID, setChatID] = useState("");
     const [prompt, setPrompt] = useState('');
     const [selected, setSelected] = useState(
@@ -27,8 +26,18 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
 
     // OpenRouter models here
     const [models, setModels] = useState([]);
-    const [selectedModel, setSelectedModel] = useState(null);
-
+    const [modelsLoaded, setModelsLoaded] = useState(false)
+    const [selectedModel, setSelectedModel] = useState(
+        chat?.modelID || ""
+    );
+    const selectedModelExists = models.some(
+        model => model.id === selectedModel
+    );
+    const modelUnavailable =
+        selected === "openrouter" &&
+        modelsLoaded &&
+        Boolean(selectedModel) &&
+        !selectedModelExists;
     function updatePrompt(e) {
         const textarea = e.target
         setPrompt(textarea.value);
@@ -42,6 +51,10 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
             sendPromptnAgent();
         }  
     }
+    //sync provider and models to the ones from chat if there is chat
+    useEffect(() => {
+        setSelected(chat?.provider || "")
+    }, [chat?.provider])
 
     //load models
     useEffect(() => {
@@ -52,26 +65,33 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
             } catch (error) {
                 console.error("Failed to load OpenRouter models:", error)
                 showToast("Failed to load OpenRouter models!")
+            } finally {
+                setModelsLoaded(true)
             }
         }
         loadModels();
     },[]);
+
     //restore openrouter models
     useEffect(() => {
-        if (!chat) return;
+        if (!chat || !modelsLoaded) return;
+        const modelID = chat.modelID || "";
 
-        setrouterOpen(chat.provider === "openrouter");
-
-        if (chat.provider === "openrouter" && chat.modelID) {
-            const selected = models.find(
-                model => model.id === chat.modelID
+        setSelectedModel(modelID)
+        setrouterOpen(chat?.provider === "openrouter");
+        
+        if (chat?.provider === "openrouter" && chat.modelID) {
+            const modelExists = models.some(
+                model => model.id === modelID
             );
-
-            setSelectedModel(selected ?? null);
+            if (!modelExists) {
+                console.log("Selected Model does not exist anymore!")
+                showToast("Selected Model does not exist anymore!")
+            }
         } else {
-            setSelectedModel(null);
+            setSelectedModel("");
         }
-    }, [chat, models]);
+    }, [chat?.id, chat?.provider, chat?.modelID, models, modelsLoaded]);
 
     async function handleOpenRouter() {
         const apikeys = await LoadAPIKeys();
@@ -109,8 +129,9 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
             return
         } 
         let modelID = "";
+        console.log(selectedModel)
         if (selected === "openrouter") {
-            modelID = selectedModel?.id ?? "";
+            modelID = selectedModel ?? "";
             if (!modelID) {
                 showToast("Please select an OpenRouter model first!")
                 return;
@@ -165,7 +186,6 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
             console.error("Failed to create chat:", error)
         }
     }
-
     return (
             <div id='aiselection-content'>
                 <div id='selection-row'>
@@ -197,6 +217,7 @@ export default function ChatPanel({chat, onChatUpdated, showInput, agentMode, se
                             updatePrompt={updatePrompt}
                             handleKeyDown={handleKeyDown}
                             isLoading={isLoading}
+                            disabled={modelUnavailable}
                         />
                         <Toast 
                             message={toast}

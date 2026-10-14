@@ -1,0 +1,22 @@
+.TooltipContent {
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  user-select: none;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.TooltipArrow {
+  fill: var(--primary-color);
+}
+
+.TooltipButton {
+  border: none;
+  background-color: inherit;
+  color: var(--text-color);
+}

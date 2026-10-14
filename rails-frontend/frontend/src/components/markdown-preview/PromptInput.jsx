@@ -1,8 +1,9 @@
-import { ArrowUpIcon, PauseIcon } from "@radix-ui/react-icons";
+import { ArrowUpIcon, PauseIcon, CircleBackslashIcon } from "@radix-ui/react-icons";
 import {useEffect, useRef} from 'react';
+import Tip from "../tooltip/Tooltip";
 import "./Markdown.css"
 
-export default function PromptInput({prompt, selected, updatePrompt, handleKeyDown, isLoading}) {
+export default function PromptInput({prompt, selected, updatePrompt, handleKeyDown, isLoading, disabled}) {
     const textareaRef = useRef(null);
     function resizeTexture() {
         const textarea = textareaRef.current;
@@ -25,19 +26,46 @@ export default function PromptInput({prompt, selected, updatePrompt, handleKeyDo
                     <textarea
                         ref={textareaRef}
                         value={prompt}
-                        placeholder={`Message ${selected}`}
+                        placeholder={disabled ? `Select an available model to continue...` : `Message ${selected}`}
                         onChange={updatePrompt}
                         onKeyDown={handleKeyDown}
+                        disabled={disabled}
                     />
                     <button
-                        className={`btn ${isLoading ? "loading" : ""}`}
+                        className={`btn ${isLoading ? "loading" : disabled ? "loading" : ""}`}
                         type="submit"
                     >
-                        {isLoading ? (
-                            <PauseIcon className="icon"/>
-                        ) : (
-                            <ArrowUpIcon className="icon"/>
-                        )}
+                    {isLoading ? (
+                        <Tip 
+                            text={`Pause AI`}
+                        >
+                            <span>
+                                <button aria-label="Unavailable Model" disabled className="TooltipButton">
+                                    <PauseIcon className="icon"/>
+                                </button>
+                            </span>
+                        </Tip>
+                    ) : disabled ? (
+                        <Tip 
+                            text={`Unavailable Model`}
+                        >
+                            <span>
+                                <button aria-label="Unavailable Model" disabled className="TooltipButton">
+                                    <CircleBackslashIcon className="icon"/>
+                                </button>
+                            </span>
+                        </Tip>
+                    ) : (
+                        <Tip 
+                            text={`Send Prompt`}
+                        >
+                            <span>
+                                <button aria-label="Send Prompt" className="TooltipButton">
+                                    <ArrowUpIcon className="icon"/>
+                                </button>
+                            </span>
+                        </Tip>
+                    )}
                     </button>
                 </div>
         </div>

@@ -4,7 +4,7 @@ import PromptInput from "./PromptInput";
 import MarkdownDisplay from "./MarkdownDisplay";
 import "./Markdown.css"
 
-export default function PromptComposer({prompt, selected, updatePrompt, handleKeyDown, isLoading}) {
+export default function PromptComposer({prompt, selected, updatePrompt, handleKeyDown, isLoading, disabled}) {
     return (
         <Tabs.Root className="TabsRoot" defaultValue="tab1">
             <Tabs.List className="TabsList" aria-label="Manage your account">
@@ -22,6 +22,7 @@ export default function PromptComposer({prompt, selected, updatePrompt, handleKe
                     updatePrompt={updatePrompt}
                     handleKeyDown={handleKeyDown}
                     isLoading={isLoading}
+                    disabled={disabled}
                 />
             </Tabs.Content>
             <Tabs.Content className="TabsContent" value="tab2">
