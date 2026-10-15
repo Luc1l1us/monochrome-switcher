@@ -41,16 +41,16 @@ func NewApp() *App {
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 
-	width := 1024
-	height := 768
-
-	screens, _ := runtime.ScreenGetAll(a.ctx)
-	primary := screens[0]
-
-	x := primary.Size.Width - width
-	y := primary.Size.Height - height
-
-	runtime.WindowSetPosition(a.ctx, x, y)
+	w, h := runtime.WindowGetSize(ctx)
+	screens, _ := runtime.ScreenGetAll(ctx)
+	screen := screens[0]
+	for _, s := range screens {
+		if s.IsPrimary {
+			screen = s
+			break
+		}
+	}
+	runtime.WindowSetPosition(ctx, screen.Size.Width-w, screen.Size.Height-h)
 
 	//Get or Fetch models from OpenRouter at startup
 	//Primitive, will need to revamp this soon
@@ -61,6 +61,16 @@ func (a *App) startup(ctx context.Context) {
 	if err := openRouter.FetchModels(); err != nil {
 		log.Printf("Failed to fetch OpenRouter models %v", err)
 	}
+}
+
+func (a *App) SetWidthAnchoredBottomRight(newWidth, newHeight int) {
+	x, y := runtime.WindowGetPosition(a.ctx)
+	w, h := runtime.WindowGetSize(a.ctx)
+	rightEdge := x + w
+	bottomEdge := y + h
+
+	runtime.WindowSetPosition(a.ctx, rightEdge-newWidth, bottomEdge-newHeight)
+	runtime.WindowSetSize(a.ctx, newWidth, newHeight)
 }
 
 func (a *App) GetOpenRouterModels() ([]Cloud.ModelInfo, error) {

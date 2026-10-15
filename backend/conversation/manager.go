@@ -207,7 +207,6 @@ func ListChats() (*core.ChatList, error) {
 		//fmt.Printf("DEBUG: Chat struct from JSON: %+v\n", chat)
 
 		parsedTime, err := time.Parse(time.RFC3339, chat.CreatedAt)
-
 		readableTime := parsedTime.Format("January 2, 2006 at 3:04 PM")
 
 		summary := core.ChatSummary{

@@ -29,3 +29,5 @@ export function SaveAPIKeys(arg1:services.APIKeys):Promise<void>;
 export function SaveSettings(arg1:services.Settings):Promise<void>;
 
 export function SendPrompt(arg1:string,arg2:string,arg3:string,arg4:string):Promise<string>;
+
+export function SetWidthAnchoredBottomRight(arg1:number,arg2:number):Promise<void>;

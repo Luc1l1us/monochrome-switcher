@@ -39,31 +39,20 @@ export default function PromptInput({prompt, selected, updatePrompt, handleKeyDo
                         <Tip 
                             text={`Pause AI`}
                         >
-                            <span>
-                                <button aria-label="Unavailable Model" disabled className="TooltipButton">
-                                    <PauseIcon className="icon"/>
-                                </button>
-                            </span>
+                            <PauseIcon className="icon"/>
                         </Tip>
                     ) : disabled ? (
                         <Tip 
                             text={`Unavailable Model`}
+                            disabled={disabled}
                         >
-                            <span>
-                                <button aria-label="Unavailable Model" disabled className="TooltipButton">
-                                    <CircleBackslashIcon className="icon"/>
-                                </button>
-                            </span>
+                            <CircleBackslashIcon className="icon"/>
                         </Tip>
                     ) : (
                         <Tip 
                             text={`Send Prompt`}
                         >
-                            <span>
-                                <button aria-label="Send Prompt" className="TooltipButton">
-                                    <ArrowUpIcon className="icon"/>
-                                </button>
-                            </span>
+                            <ArrowUpIcon className="icon"/>
                         </Tip>
                     )}
                     </button>

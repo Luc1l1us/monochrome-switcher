@@ -34,8 +34,8 @@ func main() {
 	err := wails.Run(&options.App{
 		Title:         "rails-frontend",
 		Frameless:     true,
-		Width:         1280,
-		Height:        800,
+		Width:         900,
+		Height:        900,
 		DisableResize: !settings.Resizable,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
