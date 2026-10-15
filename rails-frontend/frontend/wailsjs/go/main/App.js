@@ -53,3 +53,7 @@ export function SaveSettings(arg1) {
 export function SendPrompt(arg1, arg2, arg3, arg4) {
   return window['go']['main']['App']['SendPrompt'](arg1, arg2, arg3, arg4);
 }
+
+export function SetWidthAnchoredBottomRight(arg1, arg2) {
+  return window['go']['main']['App']['SetWidthAnchoredBottomRight'](arg1, arg2);
+}

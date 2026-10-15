@@ -3,7 +3,7 @@ import {EventsOn} from "../wailsjs/runtime/runtime"
 import './App.css';
 import NavBar from './components/NavBar';
 import { About, SingleAgent, MultiAgent, FAQ, History, Home, Settings } from './views';
-import { LoadOneChat, LoadChatsBySession } from '../wailsjs/go/main/App';
+import { LoadOneChat, LoadChatsBySession, SetWidthAnchoredBottomRight } from '../wailsjs/go/main/App';
 
 function App() {
     //listen for events
@@ -31,7 +31,16 @@ function App() {
         })
         return () => cancel();
     }, []);
-
+    const [expanded, setExpanded] = useState(false)
+    const toggleExpanded = async () => {
+        const next = !expanded
+        if (next) {
+            await SetWidthAnchoredBottomRight(1400,1000)
+        } else {
+            await SetWidthAnchoredBottomRight(900,800)
+        }
+        setExpanded(next);
+    }
     //switching views
     const [selectedPanel, setSelectedPanel] = useState("home")
     const [activeChat, setActiveChat] = useState(null);
@@ -74,6 +83,7 @@ function App() {
     }
     
     async function switchChat(chat) {
+        toggleExpanded();
         console.log("Switch Chat triggered, here is the chat %q", chat)
         try {
             const isMulti = chat.agent_state?.mode != "single";

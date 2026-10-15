@@ -58,6 +58,7 @@
 /* If state is still loading */
 .input-box .btn.loading {
   background-color: var(--red-color);
+  color: var(--light-red-color);
 }
 
 .input-box .btn.loading:hover {
