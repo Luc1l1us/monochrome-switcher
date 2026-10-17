@@ -34,6 +34,7 @@ h3 {
   display: flex;
   flex-flow: column;
   padding: 20px 50px 0 50px;
+  height: 100%;
 }
 
 #avatar {
@@ -86,10 +87,15 @@ h3 {
 
 /* SETTINGS STUFF HERE*/
 
+#settings {
+  height: 100%;
+}
+
 #settings-content {
   padding: 0 50px 20px 50px;
   display: flex;
   flex-flow: column nowrap;
+  height: 100%;
 }
 
 .settings-section-title,
@@ -183,6 +189,10 @@ input:checked + .slider:before {
 .bottom-nav {
   margin-top: 30px;
   text-align: left;
+}
+
+.bottom-nav {
+  justify-content: flex-end;
 }
 
 .nav-button {
@@ -349,6 +359,10 @@ input:checked + .slider:before {
   align-items: flex-start;
   flex-grow: 4;
   gap: 10px;
+}
+
+#secondcolumn {
+  height: auto;
 }
 
 .agent {

@@ -26,6 +26,8 @@ for the symbols, please refer to the [AI/LLMs section](#aillms)
 
 #### Settings
 
+![Settings](docs/images/Settings.jpg)
+
 ### Demo
 
 ### Installation
