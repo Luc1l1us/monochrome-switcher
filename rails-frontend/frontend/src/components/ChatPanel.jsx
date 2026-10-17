@@ -1,7 +1,6 @@
 import {useEffect, useState, useRef} from 'react';
 import SelectDemo from '../components/aiselection';
 import MessengerContainer from '../components/MSC';
-import PromptInput from './markdown-preview/PromptInput';
 import PromptComposer from './markdown-preview/PromptComposer';
 import {CreateChat, LoadAPIKeys, LoadOneChat, SendPrompt, GetOpenRouterModels} from "../../wailsjs/go/main/App";
 import OpenrouterModelPicker from './OR-model-picker/ORModelPicker';

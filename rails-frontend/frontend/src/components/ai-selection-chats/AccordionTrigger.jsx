@@ -2,7 +2,7 @@ import * as React from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons"
 import * as Accordion from "@radix-ui/react-accordion";
 import classNames from "classnames";
-export default function AccordionTrigger({children, className, ...props}) {
+export default function AccordionTrigger({children, className, recentChats, ...props}) {
     return (
         <Accordion.Header className="AccordionHeader">
             <Accordion.Trigger
@@ -14,10 +14,12 @@ export default function AccordionTrigger({children, className, ...props}) {
                 >
                     <span>{children}</span>
                     
-                    <ChevronDownIcon
-                        className="AccordionChevron"
-                        aria-hidden
-                    />
+                    {recentChats != 0 && (
+                        <ChevronDownIcon
+                            className="AccordionChevron"
+                            aria-hidden
+                        />
+                    )}
             </Accordion.Trigger>
         </Accordion.Header>
     );
