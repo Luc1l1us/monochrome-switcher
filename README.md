@@ -2,11 +2,11 @@
 
 ### Monochrome-switcher
 
-<p> An app that lets the users mix-and-match different kinds of agents/AI either local or Cloud AIs. These agents/AIs are integrated into a panel to which it can support up to 5 agents/AIs at once. </p>
+<p> An app that lets the users mix-and-match different kinds of LLMs/AI either local or Cloud AIs. These LLMs/AIs are integrated into a panel to which it can support up to 5 LLMs/AIs at once. </p>
 
 ### Features
 
-- Switch between multiple AI or Agents seamlessly
+- Switch between multiple AI or LLMs seamlessly
 - API Based Authentication
 - Cross-platform
 - OpenRouter integration
@@ -18,11 +18,15 @@
 
 ![AI Selection](docs/images/AI-Selection.jpg)
 
-for the symbols, please refer to the [AI/Agents section](#aiagents)
+for the symbols, please refer to the [AI/LLMs section](#aillms)
 
-#### Multi-Agent Chat
+#### Multi-LLM Chat
+
+![Multi LLM Chat](docs/images/Multi-LLM-Selection.jpg)
 
 #### Settings
+
+![Settings](docs/images/Settings.jpg)
 
 ### Demo
 
@@ -110,12 +114,12 @@ C:\Users\[UserName]\AppData\Roaming\monochrome-switcher\settings.json
 
 <p> replace [UserName] with your own desktop's username </p>
 
-### AI/Agents
+### AI/LLMs
 
 ```
-(✓) mark for AI Agents that are implemented
-(!) mark for AI Agents that require a subscription to access
-(x) mark for AI Agents that haven't been implemented yet
+(✓) mark for AI LLMs that are implemented
+(!) mark for AI LLMs that require a subscription to access
+(x) mark for AI LLMs that haven't been implemented yet
 
 (✓) Gemini
 (✓) ChatGPT

@@ -13,6 +13,7 @@ export default function Accordionaiselection({recentChats, onClick, setSelectedP
             <Accordion.Item value="ai-selection">
                 <Accordion.Header>
                     <AccordionTrigger
+                        recentChats={recentChats}
                         onClick={() => setSelectedPanel("singleagent")}
                     >
                         <PersonIcon/> AI Selection

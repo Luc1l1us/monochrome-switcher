@@ -9,11 +9,6 @@ export default defineConfig({
       usePolling: true
     }
   },
-  build: {
-    rollupOptions: {
-      external: ['@radix-ui/react-slot', '@radix-ui/react-icons'],
-    },
-  },
   plugins: [react()],
   resolve: {
   alias: {

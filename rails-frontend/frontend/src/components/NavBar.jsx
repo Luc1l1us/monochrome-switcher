@@ -2,7 +2,7 @@ import * as icons from "../../../../icons"
 import { useState, useEffect, useCallback } from "react";
 import { ListChats } from "../../wailsjs/go/main/App";
 import Accordionaiselection from "./ai-selection-chats/AccordionAISelection";
-import { HomeIcon, CountdownTimerIcon } from "@radix-ui/react-icons";
+import { HomeIcon, CountdownTimerIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { EventsOn } from "../../wailsjs/runtime/runtime";
 export default function NavBar({setSelectedPanel, onClick}) {
     const [chats, setChats] = useState([]);
@@ -57,8 +57,8 @@ export default function NavBar({setSelectedPanel, onClick}) {
                 </div>
                 <div className='bottom-nav'>
                     <button className="nav-button" onClick={() => setSelectedPanel("settings")}>
-                        {/* Settings */}
-                        <img id="nav-settings" src={icons.settingsicon}></img>
+                        <MixerHorizontalIcon/> Settings
+                        {/* <img id="nav-settings" src={icons.settingsicon}></img> */}
                     </button>
                 </div>
             </div>
