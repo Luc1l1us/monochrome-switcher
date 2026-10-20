@@ -138,6 +138,8 @@ C:\Users\[UserName]\AppData\Roaming\monochrome-switcher\settings.json
 Concurrency
 Add RAG functionality
 ```
+### Issues
+ - Conflict issues with both YASB and GlazeWM
 
 ### Tech Stack
 
