@@ -24,12 +24,14 @@ export default function ORModelPicker({
     const selectedModelObject = models.find(
         model => model.id === selectedModel
     )
-
+    console.log("selectedModel:", selectedModel, typeof selectedModel);
+    console.log("selectedModelObject:", selectedModelObject);
     return (
         <Popover.Root open={open} onOpenChange={setOpen}>
             <Popover.Trigger asChild>
                 <button type="button" className="model-picker-trigger">
-                    {selectedModelObject?.name ?? selectedModel ?? "Choose a model"}
+                    {selectedModelObject?.name || (
+                        typeof selectedModel === "string" && selectedModel) || "Choose a model"}
                 </button>
             </Popover.Trigger>
 
@@ -71,7 +73,7 @@ export default function ORModelPicker({
                                     key={model.id}
                                     className="model-result"
                                     onClick={() => {
-                                        onSelectModel(model);
+                                        onSelectModel(model.id);
                                         setQuery("")
                                         setOpen(false)
                                     }}
