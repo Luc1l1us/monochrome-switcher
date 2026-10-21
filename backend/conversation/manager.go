@@ -172,6 +172,7 @@ func LoadChatBySession(sessionID string) ([]core.Chat, error) {
 }
 
 // Load All chats
+// TODO
 func ListChats() (*core.ChatList, error) {
 	entries, err := os.ReadDir(GetConvoDir())
 	if err != nil {
