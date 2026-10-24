@@ -30,6 +30,8 @@ for the symbols, please refer to the [AI/LLMs section](#aillms)
 
 ### Demo
 
+https://github.com/user-attachments/assets/c0ce71df-cd03-4acb-a967-a61a285a256c
+
 ### Installation
 
 <p> Clone the repository: </p>
