@@ -2,6 +2,7 @@ package core
 
 import (
 	"strings"
+	"time"
 )
 
 type Message struct {
@@ -28,6 +29,7 @@ type Chat struct {
 	Provider   string     `json:"provider"`
 	Title      string     `json:"title"`
 	CreatedAt  string     `json:"created_at"`
+	ModifiedAt time.Time  `json:"modified_at"`
 	Messages   []Message  `json:"messages"`
 	ModelID    string     `json:"modelID"`
 	AgentState AgentState `json:"agent_state"`

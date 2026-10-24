@@ -114,6 +114,14 @@ func SaveChat(chat *core.Chat) error {
 	historyid := chat.ID + ".json"
 	ChatPath := GetConvoPath(historyid)
 
+	//condition if modifiedat is not present
+	parsedTime, err := time.Parse(time.RFC3339, chat.CreatedAt)
+
+	if chat.ModifiedAt.IsZero() {
+		chat.ModifiedAt = parsedTime
+	}
+	chat.ModifiedAt = time.Now()
+
 	return os.WriteFile(ChatPath, data, 0644)
 }
 
@@ -172,7 +180,6 @@ func LoadChatBySession(sessionID string) ([]core.Chat, error) {
 }
 
 // Load All chats
-// TODO
 func ListChats() (*core.ChatList, error) {
 	entries, err := os.ReadDir(GetConvoDir())
 	if err != nil {
@@ -239,6 +246,47 @@ func ListChats() (*core.ChatList, error) {
 			chats = append(chats, summary)
 		}
 	}
+	multiChats := make([]core.MultiChatSummary, 0)
+	for _, multiChat := range multichatsGroups {
+		multiChats = append(multiChats, *multiChat)
+	}
+	return &core.ChatList{
+		Chats:      chats,
+		MultiChats: multiChats,
+	}, nil
+}
+
+// TODO
+func LimitChat(limit int) (*core.ChatList, error) {
+	entries, err := os.ReadDir(GetConvoPath(""))
+	if err != nil {
+		return nil, err
+	}
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+		if filepath.Ext(entry.Name()) != ".json" {
+			continue
+		}
+		data, err := os.ReadFile(
+			GetConvoPath(entry.Name()),
+		)
+		if err != nil {
+			continue
+		}
+		var chat core.Chat
+		err = json.Unmarshal(data, &chat)
+		if err != nil {
+			continue
+		}
+
+		//add these into array
+		//and sort them and get the 5 most recent ones
+	}
+	chats := make([]core.ChatSummary, 0)
+	multichatsGroups := make(map[string]*core.MultiChatSummary)
+
 	multiChats := make([]core.MultiChatSummary, 0)
 	for _, multiChat := range multichatsGroups {
 		multiChats = append(multiChats, *multiChat)
