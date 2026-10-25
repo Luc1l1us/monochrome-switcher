@@ -41,6 +41,7 @@ type ChatSummary struct {
 	Provider   string     `json:"provider"`
 	Title      string     `json:"title"`
 	CreatedAt  string     `json:"created_at"`
+	ModifiedAt time.Time  `json:"modified_at"`
 	AgentState AgentState `json:"agent_state"`
 	ModelID    string     `json:"modelID"`
 	SessionID  string     `json:"session_id"`
@@ -50,6 +51,7 @@ type MultiChatSummary struct {
 	SessionID  string        `json:"session_id"`
 	Title      string        `json:"title"`
 	CreatedAt  string        `json:"created_at"`
+	ModifiedAt time.Time     `json:"modified_at"`
 	AgentState AgentState    `json:"agent_state"`
 	Chats      []ChatSummary `json:"chats"`
 }

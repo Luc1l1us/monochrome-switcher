@@ -159,6 +159,10 @@ func (a *App) LoadChatsBySession(sessionID string) ([]core.Chat, error) {
 	return chat, nil
 }
 
+func (a *App) ListRecentChats(limit int) (*core.ChatList, error) {
+	return conversation.LimitChat(limit)
+}
+
 func (a *App) DeleteOneChat(chatID string) {
 	conversation.DeleteChat(chatID)
 }
