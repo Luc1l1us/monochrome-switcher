@@ -6,6 +6,7 @@ import (
 	"monochrome-switcher/backend/core"
 	"os"
 	"path/filepath"
+	"sort"
 	"time"
 )
 
@@ -258,43 +259,68 @@ func ListChats() (*core.ChatList, error) {
 
 // TODO
 func LimitChat(limit int) (*core.ChatList, error) {
-	entries, err := os.ReadDir(GetConvoPath(""))
+	chats, err := ListChats()
 	if err != nil {
 		return nil, err
 	}
+	if chats == nil {
+		return &core.ChatList{}, nil
+	}
+	if limit <= 0 {
+		return &core.ChatList{}, nil
+	}
+	type recentEntry struct {
+		modifiedAt time.Time
+		isMulti    bool
+		index      int
+	}
+	entries := make([]recentEntry, 0, len(chats.Chats)+len(chats.MultiChats))
+	//single
+	for i, chat := range chats.Chats {
+		entries = append(entries, recentEntry{
+			modifiedAt: chat.ModifiedAt,
+			isMulti:    false,
+			index:      i,
+		})
+	}
+	//multi
+	for i, chat := range chats.MultiChats {
+		entries = append(entries, recentEntry{
+			modifiedAt: chat.ModifiedAt,
+			isMulti:    true,
+			index:      i,
+		})
+	}
+
+	sort.SliceStable(entries, func(i, j int) bool {
+		return entries[i].modifiedAt.After(entries[j].modifiedAt)
+	})
+
+	if len(entries) > limit {
+		entries = entries[:limit]
+	}
+
+	//declare arrays
+	recent := &core.ChatList{
+		Chats:      make([]core.ChatSummary, 0),
+		MultiChats: make([]core.MultiChatSummary, 0),
+	}
+
 	for _, entry := range entries {
-		if entry.IsDir() {
-			continue
+		if entry.isMulti {
+			recent.MultiChats = append(
+				recent.MultiChats,
+				chats.MultiChats[entry.index],
+			)
+		} else {
+			recent.Chats = append(
+				recent.Chats,
+				chats.Chats[entry.index],
+			)
 		}
-		if filepath.Ext(entry.Name()) != ".json" {
-			continue
-		}
-		data, err := os.ReadFile(
-			GetConvoPath(entry.Name()),
-		)
-		if err != nil {
-			continue
-		}
-		var chat core.Chat
-		err = json.Unmarshal(data, &chat)
-		if err != nil {
-			continue
-		}
-
-		//add these into array
-		//and sort them and get the 5 most recent ones
 	}
-	chats := make([]core.ChatSummary, 0)
-	multichatsGroups := make(map[string]*core.MultiChatSummary)
 
-	multiChats := make([]core.MultiChatSummary, 0)
-	for _, multiChat := range multichatsGroups {
-		multiChats = append(multiChats, *multiChat)
-	}
-	return &core.ChatList{
-		Chats:      chats,
-		MultiChats: multiChats,
-	}, nil
+	return recent, nil
 }
 
 func DeleteChat(chatID string) {
