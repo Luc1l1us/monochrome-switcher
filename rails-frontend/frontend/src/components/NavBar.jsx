@@ -1,6 +1,6 @@
 import * as icons from "../../../../icons"
 import { useState, useEffect, useCallback } from "react";
-import { ListChats } from "../../wailsjs/go/main/App";
+import { ListChats, ListRecentChats } from "../../wailsjs/go/main/App";
 import Accordionaiselection from "./ai-selection-chats/AccordionAISelection";
 import { HomeIcon, CountdownTimerIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { EventsOn } from "../../wailsjs/runtime/runtime";
@@ -15,7 +15,8 @@ export default function NavBar({setSelectedPanel, onClick}) {
 
     //listchats here
     const refreshChats = useCallback(() => {
-        ListChats()
+        //ListChats()
+        ListRecentChats(5)
             .then(data => {
             console.log("ListChats returned:", data);
             setChats(data?.chats ?? []);

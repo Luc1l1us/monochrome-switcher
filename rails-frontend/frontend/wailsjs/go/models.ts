@@ -50,6 +50,8 @@ export namespace core {
 	    provider: string;
 	    title: string;
 	    created_at: string;
+	    // Go type: time
+	    modified_at: any;
 	    messages: Message[];
 	    modelID: string;
 	    agent_state: AgentState;
@@ -65,6 +67,7 @@ export namespace core {
 	        this.provider = source["provider"];
 	        this.title = source["title"];
 	        this.created_at = source["created_at"];
+	        this.modified_at = this.convertValues(source["modified_at"], null);
 	        this.messages = this.convertValues(source["messages"], Message);
 	        this.modelID = source["modelID"];
 	        this.agent_state = this.convertValues(source["agent_state"], AgentState);
@@ -93,6 +96,8 @@ export namespace core {
 	    session_id: string;
 	    title: string;
 	    created_at: string;
+	    // Go type: time
+	    modified_at: any;
 	    agent_state: AgentState;
 	    chats: ChatSummary[];
 	
@@ -105,6 +110,7 @@ export namespace core {
 	        this.session_id = source["session_id"];
 	        this.title = source["title"];
 	        this.created_at = source["created_at"];
+	        this.modified_at = this.convertValues(source["modified_at"], null);
 	        this.agent_state = this.convertValues(source["agent_state"], AgentState);
 	        this.chats = this.convertValues(source["chats"], ChatSummary);
 	    }
@@ -132,6 +138,8 @@ export namespace core {
 	    provider: string;
 	    title: string;
 	    created_at: string;
+	    // Go type: time
+	    modified_at: any;
 	    agent_state: AgentState;
 	    modelID: string;
 	    session_id: string;
@@ -146,6 +154,7 @@ export namespace core {
 	        this.provider = source["provider"];
 	        this.title = source["title"];
 	        this.created_at = source["created_at"];
+	        this.modified_at = this.convertValues(source["modified_at"], null);
 	        this.agent_state = this.convertValues(source["agent_state"], AgentState);
 	        this.modelID = source["modelID"];
 	        this.session_id = source["session_id"];

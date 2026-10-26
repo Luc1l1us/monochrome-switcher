@@ -22,6 +22,10 @@ export function ListChats() {
   return window['go']['main']['App']['ListChats']();
 }
 
+export function ListRecentChats(arg1) {
+  return window['go']['main']['App']['ListRecentChats'](arg1);
+}
+
 export function LoadAPIKeys() {
   return window['go']['main']['App']['LoadAPIKeys']();
 }
