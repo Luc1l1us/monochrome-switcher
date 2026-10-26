@@ -14,6 +14,8 @@ export function Greet(arg1:string):Promise<string>;
 
 export function ListChats():Promise<core.ChatList>;
 
+export function ListRecentChats(arg1:number):Promise<core.ChatList>;
+
 export function LoadAPIKeys():Promise<services.APIKeys>;
 
 export function LoadChatsBySession(arg1:string):Promise<Array<core.Chat>>;

@@ -54,11 +54,12 @@ func (m *ConvoManager) LoadChat(chat *core.Chat) {
 func (m *ConvoManager) CreateChat(chatID, provider string, modelID string, agentMode string, sessionID string) *core.Chat {
 	fmt.Print("Create Chat got state:", agentMode)
 	chat := &core.Chat{
-		ID:        chatID,
-		Provider:  provider,
-		Title:     "New Chat",
-		CreatedAt: time.Now().Format(time.RFC3339),
-		Messages:  []core.Message{},
+		ID:         chatID,
+		Provider:   provider,
+		Title:      "New Chat",
+		CreatedAt:  time.Now().Format(time.RFC3339),
+		ModifiedAt: time.Now(),
+		Messages:   []core.Message{},
 		AgentState: core.AgentState{
 			Mode: core.AgentMode(agentMode),
 		},
@@ -106,6 +107,9 @@ func GetConvoDir() string {
 
 // func SaveChat(chat Chat) error { use this in the future
 func SaveChat(chat *core.Chat) error {
+	//condition if modifiedat is not present
+	chat.ModifiedAt = time.Now()
+
 	data, err := json.MarshalIndent(chat, "", "   ")
 	if err != nil {
 		return err
@@ -114,14 +118,6 @@ func SaveChat(chat *core.Chat) error {
 	//historyid := "history - " + chat.ID + ".json"
 	historyid := chat.ID + ".json"
 	ChatPath := GetConvoPath(historyid)
-
-	//condition if modifiedat is not present
-	parsedTime, err := time.Parse(time.RFC3339, chat.CreatedAt)
-
-	if chat.ModifiedAt.IsZero() {
-		chat.ModifiedAt = parsedTime
-	}
-	chat.ModifiedAt = time.Now()
 
 	return os.WriteFile(ChatPath, data, 0644)
 }
