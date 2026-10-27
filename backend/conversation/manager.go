@@ -53,12 +53,13 @@ func (m *ConvoManager) LoadChat(chat *core.Chat) {
 
 func (m *ConvoManager) CreateChat(chatID, provider string, modelID string, agentMode string, sessionID string) *core.Chat {
 	fmt.Print("Create Chat got state:", agentMode)
+	timeNow := time.Now().Format(time.RFC3339)
 	chat := &core.Chat{
 		ID:         chatID,
 		Provider:   provider,
 		Title:      "New Chat",
-		CreatedAt:  time.Now().Format(time.RFC3339),
-		ModifiedAt: time.Now(),
+		CreatedAt:  timeNow,
+		ModifiedAt: timeNow,
 		Messages:   []core.Message{},
 		AgentState: core.AgentState{
 			Mode: core.AgentMode(agentMode),
@@ -108,7 +109,8 @@ func GetConvoDir() string {
 // func SaveChat(chat Chat) error { use this in the future
 func SaveChat(chat *core.Chat) error {
 	//condition if modifiedat is not present
-	chat.ModifiedAt = time.Now()
+	chat.ModifiedAt = time.Now().Format(time.RFC3339)
+	fmt.Println("ModfTime is now:", chat.ModifiedAt)
 
 	data, err := json.MarshalIndent(chat, "", "   ")
 	if err != nil {
@@ -213,13 +215,16 @@ func ListChats() (*core.ChatList, error) {
 
 		parsedTime, err := time.Parse(time.RFC3339, chat.CreatedAt)
 		readableTime := parsedTime.Format("January 2, 2006 at 3:04 PM")
+		//parsedModfTime, err := time.Parse(time.RFC3339, chat.ModifiedAt)
+		//readableModfTime := parsedModfTime.Format("January 2, 2006 at 3:04 PM")
 
 		summary := core.ChatSummary{
-			ID:        chat.ID,
-			Provider:  chat.Provider,
-			Title:     chat.Title,
-			CreatedAt: readableTime,
-			ModelID:   chat.ModelID,
+			ID:         chat.ID,
+			Provider:   chat.Provider,
+			Title:      chat.Title,
+			CreatedAt:  readableTime,
+			ModifiedAt: chat.ModifiedAt,
+			ModelID:    chat.ModelID,
 			AgentState: core.AgentState{
 				Mode: chat.AgentState.Mode,
 			},
@@ -230,9 +235,10 @@ func ListChats() (*core.ChatList, error) {
 				existing.Chats = append(existing.Chats, summary)
 			} else {
 				multichatsGroups[chat.SessionID] = &core.MultiChatSummary{
-					SessionID: chat.SessionID,
-					Title:     chat.Title,
-					CreatedAt: readableTime,
+					SessionID:  chat.SessionID,
+					Title:      chat.Title,
+					CreatedAt:  readableTime,
+					ModifiedAt: chat.ModifiedAt,
 					AgentState: core.AgentState{
 						Mode: chat.AgentState.Mode,
 					},
@@ -266,13 +272,14 @@ func LimitChat(limit int) (*core.ChatList, error) {
 		return &core.ChatList{}, nil
 	}
 	type recentEntry struct {
-		modifiedAt time.Time
+		modifiedAt string
 		isMulti    bool
 		index      int
 	}
 	entries := make([]recentEntry, 0, len(chats.Chats)+len(chats.MultiChats))
 	//single
 	for i, chat := range chats.Chats {
+		fmt.Println("Before appending: ", chat.ModifiedAt)
 		entries = append(entries, recentEntry{
 			modifiedAt: chat.ModifiedAt,
 			isMulti:    false,
@@ -289,7 +296,17 @@ func LimitChat(limit int) (*core.ChatList, error) {
 	}
 
 	sort.SliceStable(entries, func(i, j int) bool {
-		return entries[i].modifiedAt.After(entries[j].modifiedAt)
+		//get Modftime of arrays
+		timeI, errI := time.Parse(time.RFC3339, entries[i].modifiedAt)
+		timeJ, errJ := time.Parse(time.RFC3339, entries[j].modifiedAt)
+		fmt.Println("from sorting: ", timeI, "and", timeJ)
+		if errI != nil {
+			return false
+		}
+		if errJ != nil {
+			return false
+		}
+		return timeI.After(timeJ)
 	})
 
 	if len(entries) > limit {
