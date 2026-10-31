@@ -1,9 +1,11 @@
 import { SaveSettings, LoadSettings, SaveAPIKeys, LoadAPIKeys } from "../../wailsjs/go/main/App"
 import AgentAPIField from "../components/settings/AgentAPIField";
+import PreferencesField from "../components/settings/PreferencesField";
 import { useEffect, useState } from "react";
 import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
-import { providers } from "../components/config/providers";
+import {providers} from "../components/config/providers"
+import {preferences} from "../components/config/preferences"
 
 export default function Settings() {
     const [settings, setSettings] = useState({
@@ -113,78 +115,23 @@ export default function Settings() {
                 </div>
                 <div id="preferences">
                     <div className="preferences-container">
-                        <div className="resize" id="pref">
-                            <div className="pref-text">
-                                Resizable?
-                            </div>
-                            <label className="switch">
-                                <input 
-                                    type="checkbox"
-                                    checked={settings.resizable}
-                                    onChange={(e) => {
-                                        setSettings(prev => ({
-                                            ...prev,
-                                            resizable: e.target.checked
-                                        }))
-                                    }}
-                                ></input>
-                                <span className="slider round"></span>
-                            </label>
-                        </div>
-                        <div className="minimizetray" id="pref">
-                            <div className="pref-text">
-                                Minimize to Tray?
-                            </div>
-                            <label className="switch">
-                            <input 
-                                    type="checkbox"
-                                    checked={settings.minimizetotray}
-                                    onChange={(e) => {
-                                        setSettings(prev => ({
-                                            ...prev,
-                                            minimizetotray: e.target.checked
-                                        }))
-                                    }}
-                                ></input>
-                                <span className="slider round"></span>
-                            </label>
-                        </div>                        
-                        <div className="launchonstartup" id="pref">
-                            <div className="pref-text">
-                                Launch on Startup?
-                            </div>
-                            <label className="switch">
-                            <input 
-                                    type="checkbox"
-                                    checked={settings.launchonstartup}
-                                    onChange={(e) => {
-                                        setSettings(prev => ({
-                                            ...prev,
-                                            launchonstartup: e.target.checked
-                                        }))
-                                    }}
-                                ></input>
-                                <span className="slider round"></span>
-                            </label>
-                        </div>                        
-                        <div className="transparency" id="pref">
-                            <div className="pref-text">
-                                Enable Transparency?
-                            </div>
-                            <label className="switch">
-                            <input 
-                                    type="checkbox"
-                                    checked={settings.transparency}
-                                    onChange={(e) => {
-                                        setSettings(prev => ({
-                                            ...prev,
-                                            transparency: e.target.checked
-                                        }))
-                                    }}
-                                ></input>
-                                <span className="slider round"></span>
-                            </label>
-                        </div>
+                        {/* To add new preferences: 
+                            add preference to preferences.js
+                            edit settings struct in settings.go
+                        */}
+                        {preferences.map((pref) => (
+                            <PreferencesField
+                                key={pref.id}
+                                className={pref.id}
+                                name={pref.name}
+                                checked={settings[pref.settingsname]}
+                                onChange={(e) => {
+                                    setSettings((prev) => ({
+                                        ...prev,
+                                        [pref.settingsname]: e.target.checked
+                                }))}}
+                            />
+                        ))}
                     </div>
                 </div>
                 {/* SAVE BUTTON TO SAVE CHANGES */}
@@ -192,8 +139,9 @@ export default function Settings() {
                     <button
                         onClick={async () => {
                             console.log(settings)
+                            console.log(settings.resizable)
                             SaveSettings(settings);
-                            console.log(apikeys);
+                            //console.log(apikeys);
                             SaveAPIKeys(apikeys);
                             showToast("Restart is required to apply changes")
                             //ReloadApp();
