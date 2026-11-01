@@ -55,3 +55,8 @@
   background-color: skyblue;
   color: var(--text-color);
 }
+
+.recordkeystroke {
+  display: flex;
+  flex-flow: column;
+}

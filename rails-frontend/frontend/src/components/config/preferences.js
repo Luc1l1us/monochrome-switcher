@@ -19,4 +19,9 @@ export const preferences = [
         name: "Enable Transparency?",
         settingsname: "transparency"
     },
+    {
+        id: "recordkeystroke",
+        name: "Keyboard shortcut to launch app",
+        settingsname: "recordkeystroke"
+    },
 ]

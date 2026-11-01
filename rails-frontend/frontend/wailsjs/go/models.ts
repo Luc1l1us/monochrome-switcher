@@ -243,6 +243,7 @@ export namespace services {
 	    minimizetotray: boolean;
 	    launchonstartup: boolean;
 	    transparency: boolean;
+	    recordkeystroke: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Settings(source);
@@ -254,6 +255,7 @@ export namespace services {
 	        this.minimizetotray = source["minimizetotray"];
 	        this.launchonstartup = source["launchonstartup"];
 	        this.transparency = source["transparency"];
+	        this.recordkeystroke = source["recordkeystroke"];
 	    }
 	}
 
