@@ -13,6 +13,7 @@ export default function Settings() {
         minimizetotray: false,
         launchonstartup: false,
         transparency: false,
+        recordkeystroke: false,
     });
 
     const [apikeys, setapikeys] = useState({
@@ -119,6 +120,8 @@ export default function Settings() {
                             add preference to preferences.js
                             edit settings struct in settings.go
                         */}
+                        {/* create a condition for the 
+                        classname recordkeystroke here */}
                         {preferences.map((pref) => (
                             <PreferencesField
                                 key={pref.id}
@@ -139,7 +142,7 @@ export default function Settings() {
                     <button
                         onClick={async () => {
                             console.log(settings)
-                            console.log(settings.resizable)
+                            console.log(settings.recordkeystroke)
                             SaveSettings(settings);
                             //console.log(apikeys);
                             SaveAPIKeys(apikeys);

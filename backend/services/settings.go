@@ -8,10 +8,11 @@ import (
 )
 
 type Settings struct {
-	Resizable       bool `json:"resizable"`
-	MinimizeToTray  bool `json:"minimizetotray"`
-	LaunchOnStartup bool `json:"launchonstartup"`
-	Transparency    bool `json:"transparency"`
+	Resizable       bool   `json:"resizable"`
+	MinimizeToTray  bool   `json:"minimizetotray"`
+	LaunchOnStartup bool   `json:"launchonstartup"`
+	Transparency    bool   `json:"transparency"`
+	RecordKeyStroke string `json:"recordkeystroke"`
 }
 
 type APIKeys struct {
