@@ -4,7 +4,10 @@ const RecordKeystroke = ({name, value, onChange, placeholder}) => (
     <PasswordToggleField.Root
         visible="true"
     >
-        <div className="Root">
+        <div className="pref-text">
+            {name}
+        </div>
+        <div className="Root-keystroke">
             <PasswordToggleField.Input 
                 className="Input" 
                 name={name}
