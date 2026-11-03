@@ -6,6 +6,7 @@ import Toast from "../components/Toast";
 import { useToast } from "../components/useToast";
 import {providers} from "../components/config/providers"
 import {preferences} from "../components/config/preferences"
+import RecordKeystroke from "../components/settings/RecordKeystroke";
 
 export default function Settings() {
     const [settings, setSettings] = useState({
@@ -13,7 +14,7 @@ export default function Settings() {
         minimizetotray: false,
         launchonstartup: false,
         transparency: false,
-        recordkeystroke: false,
+        recordkeystroke: "",
     });
 
     const [apikeys, setapikeys] = useState({
@@ -116,13 +117,19 @@ export default function Settings() {
                 </div>
                 <div id="preferences">
                     <div className="preferences-container">
-                        {/* To add new preferences: 
-                            add preference to preferences.js
-                            edit settings struct in settings.go
-                        */}
-                        {/* create a condition for the 
-                        classname recordkeystroke here */}
-                        {preferences.map((pref) => (
+                        {preferences.map((pref) => {
+                            if (pref.type === "shortcut") {
+                                return (
+                                    <RecordKeystroke
+                                        key={pref.settingsname}
+                                        name={pref.name}
+                                        placeholder={"Please enter a key"}
+                                        value={""}
+                                        onChange={""}
+                                    />
+                                )
+                            } 
+                            return (
                             <PreferencesField
                                 key={pref.id}
                                 className={pref.id}
@@ -134,7 +141,7 @@ export default function Settings() {
                                         [pref.settingsname]: e.target.checked
                                 }))}}
                             />
-                        ))}
+                        )})}
                     </div>
                 </div>
                 {/* SAVE BUTTON TO SAVE CHANGES */}
@@ -142,7 +149,7 @@ export default function Settings() {
                     <button
                         onClick={async () => {
                             console.log(settings)
-                            console.log(settings.recordkeystroke)
+                            //console.log(settings.recordkeystroke)
                             SaveSettings(settings);
                             //console.log(apikeys);
                             SaveAPIKeys(apikeys);

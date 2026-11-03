@@ -1,4 +1,5 @@
-.Root {
+.Root,
+.Root-keystroke {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -13,11 +14,17 @@
   gap: 8px;
 }
 
-.Root:hover {
+.Root-keystroke {
+  margin-bottom: 10px;
+}
+
+.Root:hover,
+.Root-keystroke:hover {
   box-shadow: 0 0 0 1px var(--text-color);
 }
 
-.Root:focus-within {
+.Root:focus-within,
+.Root-keystroke:focus-within {
   box-shadow: 0 0 0 2px var(--text-color);
 }
 
@@ -59,4 +66,10 @@
 .recordkeystroke {
   display: flex;
   flex-flow: column;
+}
+
+.pref-text {
+  display: flex;
+  flex-flow: row;
+  align-self: flex-start;
 }
