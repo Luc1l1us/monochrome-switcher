@@ -18,6 +18,12 @@
   margin-bottom: 10px;
 }
 
+.Root-keystroke:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
 .Root:hover,
 .Root-keystroke:hover {
   box-shadow: 0 0 0 1px var(--text-color);

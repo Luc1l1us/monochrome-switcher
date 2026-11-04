@@ -79,7 +79,7 @@ export default function Settings() {
         }));
     }
 
-
+    console.log("settings here: ", settings)
     return (
         <div id="settings">
             <div id='Title'>
@@ -123,9 +123,13 @@ export default function Settings() {
                                     <RecordKeystroke
                                         key={pref.settingsname}
                                         name={pref.name}
-                                        placeholder={"Please enter a key"}
-                                        value={""}
-                                        onChange={""}
+                                        shortcut={settings.recordkeystroke}
+                                        onChange={(recordedShortcut) => {
+                                            setSettings((prev) => ({
+                                                ...prev,
+                                                recordkeystroke: recordedShortcut
+                                            }))
+                                        }}
                                     />
                                 )
                             } 
